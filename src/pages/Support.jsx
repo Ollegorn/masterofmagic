@@ -1,7 +1,7 @@
 function Support() {
   return (
     <>
-      <div>Support</div>
+      <div>Support Page</div>
     </>
   );
 }
