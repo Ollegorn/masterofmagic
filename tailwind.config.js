@@ -80,8 +80,8 @@ export default {
         ],
       },
       backgroundImage: {
-        "hero-pattern": "url('/public/bg-02-darkened.svg')",
-        "home-pattern": "url('/public/Home.svg')",
+        "hero-pattern": "url('/bg-02-darkened.svg')",
+        "home-pattern": "url('/Home.svg')",
       },
     },
   },

@@ -53,7 +53,7 @@ function Appbar() {
   const isSmallScreen = screen.width < breakPoint.md;
   return (
     <>
-      <nav className="fixed z-50 flex w-full items-center justify-between border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 shadow shadow-Neutral-900 backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
+      <nav className="fixed z-50 flex w-full items-center justify-between border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 drop-shadow-md backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
         <Link to="/">
           <img
             src={logo}
@@ -97,7 +97,7 @@ function Appbar() {
         )}
         {!isSmallScreen && <Button variant="secondary">Log In</Button>}
       </nav>
-      <div className="bg-home-pattern flex min-h-svh w-svw flex-col items-start justify-start gap-4 bg-cover bg-center bg-no-repeat lg:gap-6">
+      <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-cover bg-center bg-no-repeat lg:gap-6">
         <Outlet />
       </div>
     </>
