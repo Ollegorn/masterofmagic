@@ -17,7 +17,7 @@ function TextCard({
             src={icon}
           />
         </div>
-        <div className="flex self-stretch flex-col items-start justify-center gap-2 p-4 lg:items-start lg:p-6">
+        <div className="flex flex-col items-start justify-center gap-2 self-stretch p-4 lg:items-start lg:p-6">
           <h3 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-2xl text-transparent sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
             {title}
           </h3>

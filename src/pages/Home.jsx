@@ -7,7 +7,7 @@ import SectionRules from "../components/SectionRules";
 function Home() {
   return (
     <>
-      <div className="flex w-full flex-col gap-16">
+      <div className="flex w-full flex-col gap-16 lg:gap-32">
         <Header
           heading={`Step Into The Arena Of Magic`}
           description={`Welcome to MasterOfMagic, the ultimate platform for duelling

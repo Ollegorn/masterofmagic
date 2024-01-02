@@ -14,7 +14,7 @@ function SectionHeader({
     <>
       <div className="flex w-full flex-col gap-4">
         <div className="flex w-full items-center justify-between gap-4 overflow-hidden lg:gap-6">
-          <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-4xl text-transparent sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+          <h2 className="inline-block md:w-1/2 bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-4xl text-transparent sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             {heading}
           </h2>
           {isActionable && (
