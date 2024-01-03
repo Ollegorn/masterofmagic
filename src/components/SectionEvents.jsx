@@ -19,6 +19,7 @@ function SectionEvents() {
         <div className="no-scrollbar flex gap-4 overflow-x-scroll py-4 md:py-8 lg:gap-6 lg:py-16">
           {events.map((event) => (
             <EventCard
+              key={event.id}
               bgID={event.bgID}
               title={event.title}
               startDate={event.startDate}
