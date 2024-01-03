@@ -3,12 +3,19 @@ import TextCard from "./TextCard";
 import Hat from "../assets/mdi_wizard-hat.svg";
 import Tournament from "../assets/tabler_tournament.svg";
 import Reward from "../assets/material-symbols_rewarded-ads.svg";
+import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 
 function SectionRules() {
+  const screen = useScreenSize();
   return (
     <>
       <section className="w-full px-4 md:px-8 lg:px-6">
-        <SectionHeader heading="How It Works" />
+        <SectionHeader
+          heading="How It Works"
+          isActionable={screen.width > breakPoint.md ? true : false}
+          includeSecondaryAction
+          labelSeconary="Join A Tournament"
+        />
         <div className="flex flex-col gap-4 py-4 md:flex-row md:py-8 lg:gap-6 lg:py-16">
           <TextCard
             icon={Hat}

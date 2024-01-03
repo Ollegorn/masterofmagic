@@ -6,41 +6,11 @@ import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import Button from "./Button";
+import useNavigationLinks from "../hooks/useNavigationLinks";
 
 function Appbar() {
   let location = useLocation();
-  const navItems = [
-    {
-      id: "01",
-      page: "Home",
-      path: "/",
-      isVisible: false,
-    },
-    {
-      id: "02",
-      page: "Tournament Hub",
-      path: "/tournament_hub",
-      isVisible: true,
-    },
-    {
-      id: "03",
-      page: "Duelist Zone",
-      path: "/duelist_zone",
-      isVisible: false,
-    }, //!REPLACE THIS BOOLEAN EXPRESSION 'false' BY LOGIC THAT CHECKS IF USER IS LOGGED IN
-    {
-      id: "04",
-      page: "Leaderboard",
-      path: "/leaderboard",
-      isVisible: true,
-    },
-    {
-      id: "05",
-      page: "Rules",
-      path: "/rules",
-      isVisible: true,
-    },
-  ];
+  const navItems = useNavigationLinks();
   const screen = useScreenSize();
   const logo =
     screen.width > breakPoint.md
