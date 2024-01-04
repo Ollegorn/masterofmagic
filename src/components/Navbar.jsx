@@ -6,9 +6,9 @@ import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import Button from "./Button";
-import usePrimaryLinks from "../hooks/useNavigationLinks";
+import { usePrimaryLinks } from "../hooks/useNavigationLinks";
 
-function Appbar() {
+function Navbar() {
   let location = useLocation();
   const navItems = usePrimaryLinks();
   const screen = useScreenSize();
@@ -74,4 +74,4 @@ function Appbar() {
   );
 }
 
-export default Appbar;
+export default Navbar;

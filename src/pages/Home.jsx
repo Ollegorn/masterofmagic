@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SectionEvents from "../components/SectionEvents";
 import SectionFeatured from "../components/SectionFeatured";
@@ -72,6 +73,7 @@ function Home() {
             </svg>
           </div>
         </section>
+        <Footer />
       </div>
     </>
   );
