@@ -1,4 +1,4 @@
-function useNavigationLinks() {
+export function usePrimaryLinks() {
   return [
     {
       id: "01",
@@ -33,4 +33,25 @@ function useNavigationLinks() {
   ];
 }
 
-export default useNavigationLinks;
+export function useSecondaryLinks() {
+  return [
+    {
+      id: "01",
+      page: "FAQ",
+      path: "/faq",
+      isVisible: true,
+    },
+    {
+      id: "02",
+      page: "Support",
+      path: "/support",
+      isVisible: true,
+    },
+    {
+      id: "03",
+      page: "Account",
+      path: "/account",
+      isVisible: false,
+    }, //!REPLACE THIS BOOLEAN EXPRESSION 'false' BY LOGIC THAT CHECKS IF USER IS LOGGED IN
+  ];
+}

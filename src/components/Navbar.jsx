@@ -6,11 +6,11 @@ import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import Button from "./Button";
-import useNavigationLinks from "../hooks/useNavigationLinks";
+import usePrimaryLinks from "../hooks/useNavigationLinks";
 
 function Appbar() {
   let location = useLocation();
-  const navItems = useNavigationLinks();
+  const navItems = usePrimaryLinks();
   const screen = useScreenSize();
   const logo =
     screen.width > breakPoint.md

@@ -22,9 +22,9 @@ const router = createBrowserRouter(
       <Route path="duelist_zone" element={<DuelistZone />} />
       <Route path="leaderboard" element={<Leaderboard />} />
       <Route path="rules" element={<Rules />} />
-      <Route path="account" element={<Account />} />
       <Route path="faq" element={<FAQ />} />
       <Route path="support" element={<Support />} />
+      <Route path="account" element={<Account />} />
     </Route>,
   ),
 );
