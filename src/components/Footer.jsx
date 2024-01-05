@@ -28,7 +28,7 @@ function Footer() {
           <img
             src={logo}
             alt="Master of Magic logo"
-            className="cursor-pointer"
+            className="cursor-pointer scale-150 p-4"
           />
         </Link>
 
@@ -40,7 +40,7 @@ function Footer() {
               id={item.id}
               className={
                 item.isVisible
-                  ? `text-md font-body font-semibold text-Neutral-300 hover:text-Neutral-100 lg:text-lg xl:text-xl`
+                  ? `text-md font-body font-semibold text-primary04-500 hover:text-primary04-400 lg:text-lg xl:text-xl`
                   : `hidden`
               }
             >
@@ -57,7 +57,7 @@ function Footer() {
               id={item.id}
               className={
                 item.isVisible
-                  ? `lg:text-md font-body text-base font-semibold text-Neutral-400 hover:text-Neutral-200 xl:text-lg`
+                  ? `lg:text-md font-body text-base font-semibold text-primary04-600 hover:text-primary04-500 xl:text-lg`
                   : `hidden`
               }
             >

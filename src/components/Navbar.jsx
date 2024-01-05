@@ -67,7 +67,7 @@ function Navbar() {
         )}
         {!isSmallScreen && <Button variant="secondary">Log In</Button>}
       </nav>
-      <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-cover bg-center bg-no-repeat lg:gap-6">
+      <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-fixed bg-cover bg-center bg-no-repeat lg:gap-6">
         <Outlet />
       </div>
     </>

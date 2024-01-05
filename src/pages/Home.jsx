@@ -1,3 +1,4 @@
+import Button from "../components/Button";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SectionEvents from "../components/SectionEvents";
@@ -20,9 +21,9 @@ function Home() {
         <SectionEvents />
         <SectionHighlights />
         <SectionRules />
-        <section className="flex w-full flex-col gap-4 bg-hero-pattern bg-cover bg-fixed bg-center bg-no-repeat px-4 py-24 md:px-8 lg:gap-6 lg:px-6 lg:py-40">
+        <section className="flex w-full flex-col items-start justify-center gap-4 bg-hero-pattern bg-cover bg-fixed bg-center bg-no-repeat px-4 py-24 md:px-8 lg:gap-6 lg:px-6 lg:py-40">
           <div className=" flex flex-1 flex-col items-center justify-center gap-4 self-stretch lg:gap-6">
-            <svg viewBox="0 0 50 16" className="w-full">
+            <svg viewBox="0 0 80 16" className="w-full">
               <text
                 className="font-body"
                 x="0"
@@ -47,7 +48,7 @@ function Home() {
               </defs>
             </svg>
 
-            <svg viewBox="0 0 73 19" className="w-full">
+            <svg viewBox="0 0 103 19" className="w-full">
               <text
                 className="font-body"
                 x="0"
@@ -72,6 +73,7 @@ function Home() {
               </defs>
             </svg>
           </div>
+          <Button variant="cta">Begin Your Magical Journey</Button>
         </section>
         <Footer />
       </div>

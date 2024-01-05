@@ -13,8 +13,10 @@ function SectionRules() {
         <SectionHeader
           heading="How It Works"
           isActionable={screen.width > breakPoint.md ? true : false}
-          includeSecondaryAction
+          includeSecondaryAction={screen.width > breakPoint.lg ? true : false}
           labelSeconary="Join A Tournament"
+          includePrimaryAction
+          labelPrimary="Create A Profile"
         />
         <div className="flex flex-col gap-4 py-4 md:flex-row md:py-8 lg:gap-6 lg:py-16">
           <TextCard
