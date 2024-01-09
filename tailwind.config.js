@@ -82,6 +82,7 @@ export default {
       backgroundImage: {
         "hero-pattern": "url('/bg-02-darkened.svg')",
         "home-pattern": "url('/Home.svg')",
+        "duellistZone-pattern": "url('/DuellistZone.svg')",
         event01: "url('/event_01.jpg')",
         event02: "url('/event_02.jpg')",
         event03: "url('/event_03.jpg')",

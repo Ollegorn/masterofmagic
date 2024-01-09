@@ -5,30 +5,35 @@ export function usePrimaryLinks() {
       page: "Home",
       path: "/",
       isVisible: false,
+      bg: "bg-home-pattern",
     },
     {
       id: "02",
       page: "Tournament Hub",
       path: "/tournament_hub",
       isVisible: true,
+      bg: "bg-home-pattern",
     },
     {
       id: "03",
       page: "Duelist Zone",
       path: "/duelist_zone",
-      isVisible: false,
-    }, //!REPLACE THIS BOOLEAN EXPRESSION 'false' BY LOGIC THAT CHECKS IF USER IS LOGGED IN
+      isVisible: true,
+      bg: "bg-duellistZone-pattern",
+    }, //!REPLACE THIS BOOLEAN EXPRESSION BY LOGIC THAT CHECKS IF USER IS LOGGED IN
     {
       id: "04",
       page: "Leaderboard",
       path: "/leaderboard",
       isVisible: true,
+      bg: "bg-home-pattern",
     },
     {
       id: "05",
       page: "Rules",
       path: "/rules",
       isVisible: true,
+      bg: "bg-home-pattern",
     },
   ];
 }

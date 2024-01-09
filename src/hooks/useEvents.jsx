@@ -1,8 +1,8 @@
 function useEvents() {
-  const events = [
+  return [
     {
       id: 1,
-      bgID: 2,
+      bgID: 4,
       title: "Crazy Solo Tournament",
       startDate: "03.01.2024",
       endDate: "17.01.2024",
@@ -43,7 +43,31 @@ function useEvents() {
       isParticipant: true, //! PLACEHOLDER FOR DEVELOPMENT, NEEDS TO BE REPLACED BY ARRAY OF PARTICIPANT IDs
     },
   ];
-  return events;
+}
+
+export function useStats(eventId, userId) {
+  const stats = [
+    {
+      eventId: 1,
+      userId: 1,
+      played: 10,
+      points: 20,
+      rank: 25,
+      wins: 5,
+      losses: 5,
+    },
+    {
+      eventId: 1,
+      userId: 2,
+      played: 0,
+      points: 0,
+      rank: 0,
+      wins: 0,
+      losses: 0,
+    },
+  ];
+
+  return stats.filter((s) => s.eventId === eventId && s.userId === userId);
 }
 
 export default useEvents;

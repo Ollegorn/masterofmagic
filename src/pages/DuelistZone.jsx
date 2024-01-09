@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SectionJoinedEvents from "../components/SectionJoinedEvents";
 
@@ -10,6 +11,7 @@ function DuelistZone() {
           description={`This is your space to strategize, reflect, and prepare for your next magical challenge.`}
         />
         <SectionJoinedEvents />
+        <Footer />
       </div>
     </>
   );

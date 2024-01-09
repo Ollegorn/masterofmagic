@@ -16,6 +16,7 @@ function Home() {
             enthusiasts in the Harry Potter Magic Awakened community.`}
           buttonLabel={`Begin Your Magical Journey`}
           isActionable
+          hasHeroImage
         />
         <SectionFeatured />
         <SectionEvents />

@@ -30,12 +30,18 @@ function ImageCard({
                             : `bg-event10`
         } ${
           isClickable
-            ? `md:min-w-80 lg:min-w-96 w-full cursor-pointer transition-all duration-300 hover:scale-95 hover:shadow-glow focus:scale-95 focus:shadow-glow`
-            : `min-h-64 md:min-h-72 lg:min-h-80 xl:min-h-96`
-        } flex aspect-video flex-col items-start justify-end overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat`}
+            ? `h-56 w-full cursor-pointer bg-cover sm:h-80 md:h-96 lg:h-svh lg:bg-fixed`
+            : `aspect-video min-h-64 bg-cover md:min-h-72 lg:min-h-80 xl:min-h-96`
+        } flex flex-col items-start justify-end overflow-hidden rounded-lg bg-center bg-no-repeat`}
       >
-        <div className="flex flex-col items-start gap-1 self-stretch bg-gradient-to-b from-primary04-500/5 to-primary04-300/35 p-4 backdrop-blur-md">
-          <h3 className="text-md font-body font-medium text-primary04-50 md:text-lg lg:text-xl xl:text-2xl">
+        <div className="flex flex-col items-start gap-1 self-stretch bg-gradient-to-b from-primary04-900/25 to-primary04-900/35 p-4 backdrop-blur-md">
+          <h3
+            className={`${
+              isClickable
+                ? `text-lg md:text-2xl lg:text-3xl xl:text-4xl`
+                : `text-md md:text-lg lg:text-xl xl:text-2xl`
+            } font-body font-bold text-primary04-50`}
+          >
             {title}
           </h3>
           <p className="font-body text-sm font-medium text-primary04-100 md:text-base lg:text-lg xl:text-xl">{`${startDate} - ${endDate}`}</p>

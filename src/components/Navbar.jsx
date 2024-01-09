@@ -1,5 +1,4 @@
 import logosm from "/logosm.svg";
-import logomd from "../assets/logomd.svg";
 import logolg from "../assets/logolg.svg";
 import logoxl from "../assets/logoxl.svg";
 import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
@@ -65,9 +64,15 @@ function Navbar() {
         )}
         {!isSmallScreen && <Button variant="secondary">Log In</Button>}
       </nav>
-      <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-cover bg-fixed bg-center bg-no-repeat lg:gap-6">
-        <Outlet />
-      </div>
+      {navItems
+        .filter((i) => i.path === location.pathname)
+        .map((item) => (
+          <div
+            className={`flex min-h-svh w-full flex-col items-start justify-start gap-4 ${item.bg} bg-cover bg-fixed bg-center bg-no-repeat lg:gap-6`}
+          >
+            <Outlet />
+          </div>
+        ))}
     </>
   );
 }
