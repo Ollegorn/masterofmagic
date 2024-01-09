@@ -12,6 +12,7 @@ function useEvents() {
       team: "Solo",
       isFeatured: true,
       status: "Current",
+      isParticipant: true, //! PLACEHOLDER FOR DEVELOPMENT, NEEDS TO BE REPLACED BY ARRAY OF PARTICIPANT IDs
     },
     {
       id: 2,
@@ -25,6 +26,21 @@ function useEvents() {
       team: "Solo",
       isFeatured: true,
       status: "Upcoming",
+      isParticipant: true, //! PLACEHOLDER FOR DEVELOPMENT, NEEDS TO BE REPLACED BY ARRAY OF PARTICIPANT IDs
+    },
+    {
+      id: 3,
+      bgID: 1,
+      title: "Europe Duo Tournament",
+      startDate: "13.02.2024",
+      endDate: "27.02.2024",
+      description:
+        "In this event, duellers team up in pairs to showcase their magical prowess. Navigate through challenging rounds, strategize with your partner, and aim for the win to receive special rewards.",
+      type: "Round Robin",
+      team: "Solo",
+      isFeatured: false,
+      status: "Upcoming",
+      isParticipant: true, //! PLACEHOLDER FOR DEVELOPMENT, NEEDS TO BE REPLACED BY ARRAY OF PARTICIPANT IDs
     },
   ];
   return events;

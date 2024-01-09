@@ -3,6 +3,7 @@ function ImageCard({
   title = "Event Name",
   startDate = "01.01.2024",
   endDate = "14.01.2024",
+  isClickable = false,
 }) {
   return (
     <>
@@ -27,7 +28,11 @@ function ImageCard({
                           : bgID === 9
                             ? `bg-event09`
                             : `bg-event10`
-        } flex aspect-video min-h-64 flex-col items-start justify-end overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat md:min-h-72 lg:min-h-80 xl:min-h-96`}
+        } ${
+          isClickable
+            ? `md:min-w-80 lg:min-w-96 w-full cursor-pointer transition-all duration-300 hover:scale-95 hover:shadow-glow focus:scale-95 focus:shadow-glow`
+            : `min-h-64 md:min-h-72 lg:min-h-80 xl:min-h-96`
+        } flex aspect-video flex-col items-start justify-end overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat`}
       >
         <div className="flex flex-col items-start gap-1 self-stretch bg-gradient-to-b from-primary04-500/5 to-primary04-300/35 p-4 backdrop-blur-md">
           <h3 className="text-md font-body font-medium text-primary04-50 md:text-lg lg:text-xl xl:text-2xl">
