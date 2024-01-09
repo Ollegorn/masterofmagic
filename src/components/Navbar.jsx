@@ -13,14 +13,12 @@ function Navbar() {
   const navItems = usePrimaryLinks();
   const screen = useScreenSize();
   const logo =
-    screen.width > breakPoint.md
-      ? logomd
-      : screen.width > breakPoint.lg
-        ? logolg
-        : screen.width > breakPoint.xl
-          ? logoxl
-          : logosm;
-  const isSmallScreen = screen.width < breakPoint.md;
+    screen.width > breakPoint.lg
+      ? logolg
+      : screen.width > breakPoint.xl
+        ? logoxl
+        : logosm;
+  const isSmallScreen = screen.width < breakPoint.lg;
   return (
     <>
       <nav className="fixed z-50 flex w-full items-center justify-between border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 drop-shadow-md backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
@@ -67,7 +65,7 @@ function Navbar() {
         )}
         {!isSmallScreen && <Button variant="secondary">Log In</Button>}
       </nav>
-      <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-fixed bg-cover bg-center bg-no-repeat lg:gap-6">
+      <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-cover bg-fixed bg-center bg-no-repeat lg:gap-6">
         <Outlet />
       </div>
     </>
