@@ -3,7 +3,7 @@ function useEvents() {
     {
       id: 1,
       bgID: 4,
-      title: "Crazy Solo Tournament",
+      title: "Epic Solo Tournament",
       startDate: "03.01.2024",
       endDate: "17.01.2024",
       description:
@@ -31,7 +31,7 @@ function useEvents() {
     {
       id: 3,
       bgID: 1,
-      title: "Europe Duo Tournament",
+      title: "Crazy Duo Tournament",
       startDate: "13.02.2024",
       endDate: "27.02.2024",
       description:
