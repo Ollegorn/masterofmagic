@@ -4,10 +4,12 @@ function ImageCard({
   startDate = "01.01.2024",
   endDate = "14.01.2024",
   isClickable = false,
+  onClick,
 }) {
   return (
     <>
       <div
+        onClick={onClick}
         className={`${
           bgID === 1
             ? `bg-event01`
@@ -30,14 +32,14 @@ function ImageCard({
                             : `bg-event10`
         } ${
           isClickable
-            ? `h-[17rem] w-full bg-cover sm:h-[22rem] md:h-[28rem] lg:h-[42rem] xl:h-[54rem] rounded-2xl`
-            : `aspect-video min-h-64 bg-cover md:min-h-72 lg:min-h-80 xl:min-h-96 rounded-lg`
+            ? `h-[17rem] w-full cursor-pointer rounded-2xl bg-cover sm:h-[22rem] md:h-[28rem] lg:h-[42rem] xl:h-[54rem]`
+            : `aspect-video min-h-64 rounded-lg bg-cover md:min-h-72 lg:min-h-80 xl:min-h-96`
         } flex flex-col items-start justify-end overflow-hidden bg-center bg-no-repeat`}
       >
         <div
           className={`${
             isClickable
-              ? `cursor-pointer px-4 py-4 backdrop-blur transition-all duration-300 hover:pt-8 hover:backdrop-blur-md md:py-6 md:hover:pt-12 lg:px-6 lg:py-8 lg:backdrop-blur-none lg:hover:pt-16 xl:py-16 xl:hover:pt-32`
+              ? `px-4 py-4 backdrop-blur transition-all duration-300 hover:pt-8 hover:backdrop-blur-md md:py-6 md:hover:pt-12 lg:px-6 lg:py-8 lg:backdrop-blur-none lg:hover:pt-16 xl:py-16 xl:hover:pt-32`
               : `p-4 backdrop-blur-md`
           } flex flex-col items-start gap-1 self-stretch bg-gradient-to-b from-primary04-900/5 to-primary04-900/95`}
         >

@@ -3,9 +3,14 @@ import ImageCard from "./ImageCard";
 import SectionHeader from "./SectionHeader";
 import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 import Statistics from "./Statistics";
+import DuellingHistory from "./DuellingHistory";
+import UnchallengedOpponents from "./UnchallengedOpponents";
 
 function SectionJoinedEvents() {
-  const events = useEvents();
+  const userId = 1; //! ADD LOGIC TO GET USERID OF CURRENT USER
+  const events = useEvents().filter((e) =>
+    e.participants.some((u) => u.userId === userId),
+  );
   const screen = useScreenSize();
 
   return (
@@ -35,7 +40,19 @@ function SectionJoinedEvents() {
                   </p>
                 ) : null}
                 {event.status === "Current" ? (
-                  <Statistics eventId={event.id} />
+                  <div className="flex flex-col gap-4 self-stretch py-4 md:gap-8 md:py-8 lg:gap-16 lg:py-16">
+                    <Statistics key={event.id} eventId={event.id} />
+                    <DuellingHistory
+                      key={event.id}
+                      evenId={event.id}
+                      userId={userId}
+                    />
+                    <UnchallengedOpponents
+                      key={event.id}
+                      evenId={event.id}
+                      userId={userId}
+                    />
+                  </div>
                 ) : null}
               </div>
             </>

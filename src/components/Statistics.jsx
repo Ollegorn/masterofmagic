@@ -11,16 +11,18 @@ function Statistics({ eventId }) {
   const stats = useStats(eventId, 1);
   return (
     <>
-      <Title>Performance Statistics</Title>
-      {stats.map((s) => (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <Tile icon={Played} label="Played" value={s.played} stretch />
-          <Tile icon={Wins} label="Wins" value={s.wins}/>
-          <Tile icon={Losses} label="Losses" value={s.losses} />
-          <Tile icon={Points} label="Points" value={s.points} stretch />
-          <Tile icon={Rank} label="Rank" value={s.rank} stretch />
-        </div>
-      ))}
+      <div className="flex flex-col gap-4 lg:gap-6">
+        <Title>Performance Statistics</Title>
+        {stats.map((s) => (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <Tile icon={Played} label="Played" value={s.played} stretch />
+            <Tile icon={Wins} label="Wins" value={s.wins} />
+            <Tile icon={Losses} label="Losses" value={s.losses} />
+            <Tile icon={Points} label="Points" value={s.points} stretch />
+            <Tile icon={Rank} label="Rank" value={s.rank} stretch />
+          </div>
+        ))}
+      </div>
     </>
   );
 }
