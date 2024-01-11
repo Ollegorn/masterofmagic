@@ -18,13 +18,20 @@ function Navbar() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   const screen = useScreenSize();
+
   const logo =
     screen.width > breakPoint.lg
       ? logolg
       : screen.width > breakPoint.xl
         ? logoxl
         : logosm;
+
   const isSmallScreen = screen.width < breakPoint.lg;
+
+  const handleLogin = () =>{
+    setLoggedIn(!isLoggedIn)
+    openPopup();
+  }
   return (
     <>
       <nav className="fixed z-50 flex w-full items-center justify-center border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 drop-shadow-md backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
@@ -72,9 +79,13 @@ function Navbar() {
             </ul>
           )}
 
-          {!isSmallScreen && <Button variant="secondary">Log In</Button>}
+          {!isSmallScreen && <Button variant="secondary" onClick={handleLogin}>Log In</Button>}
         </div>
       </nav>
+
+      <Popup title="Log In" show={isPopupOpen} onClose={closePopup}>
+        <Login />
+      </Popup>
       {navItems
         .filter((i) => i.path === location.pathname)
         .map((item) => (
