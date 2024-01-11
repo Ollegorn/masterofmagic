@@ -32,7 +32,7 @@ function ImageCard({
                             : `bg-event10`
         } ${
           isClickable
-            ? `h-[17rem] w-full cursor-pointer rounded-2xl bg-cover sm:h-[22rem] md:h-[28rem] lg:h-[42rem] xl:h-[54rem]`
+            ? `h-[14rem] w-full cursor-pointer rounded-2xl bg-cover sm:h-[16rem] md:h-[18rem] lg:h-[20rem] xl:h-[22rem]`
             : `aspect-video min-h-64 rounded-lg bg-cover md:min-h-72 lg:min-h-80 xl:min-h-96`
         } flex flex-col items-start justify-end overflow-hidden bg-center bg-no-repeat`}
       >

@@ -22,10 +22,10 @@ function DuellingHistory({ evenId = 1, userId = 1 }) {
 
         <Tab.Group>
           <Tab.List
-            className={`flex items-center justify-center self-stretch rounded-3xl bg-primary01-800 p-2 backdrop-blur-lg`}
+            className={`flex items-center justify-center self-stretch rounded-3xl bg-primary01-800 p-2 backdrop-blur-lg lg:p-3`}
           >
             <Tab
-              className={`ui-selected:bg-primary01-400 flex h-12 flex-1 items-center justify-center gap-1 rounded-3xl`}
+              className={`ui-selected:bg-primary01-400 flex h-12 flex-1 items-center justify-center gap-1 rounded-3xl sm:py-7 md:py-8 lg:py-9`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ function DuellingHistory({ evenId = 1, userId = 1 }) {
               </p>
             </Tab>
             <Tab
-              className={`ui-selected:bg-primary01-400 flex h-12 flex-1 items-center justify-center gap-1 rounded-3xl`}
+              className={`ui-selected:bg-primary01-400 flex h-12 flex-1 items-center justify-center gap-1 rounded-3xl sm:py-7 md:py-8 lg:py-9`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ function DuellingHistory({ evenId = 1, userId = 1 }) {
               </p>
             </Tab>
             <Tab
-              className={`ui-selected:bg-primary01-400 flex h-12 flex-1 items-center justify-center gap-1 rounded-3xl`}
+              className={`ui-selected:bg-primary01-400 flex h-12 flex-1 items-center justify-center gap-1 rounded-3xl sm:py-7 md:py-8 lg:py-9`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
