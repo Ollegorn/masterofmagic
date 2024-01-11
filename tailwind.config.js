@@ -7,6 +7,12 @@ export default {
       body: ["Syne", "sans-serif"],
     },
     extend: {
+      width: {
+        "180": "45rem"
+      },
+      maxWidth: {
+        "180": "45rem"
+      },
       colors: {
         Neutral: {
           50: "#F4F5F5",

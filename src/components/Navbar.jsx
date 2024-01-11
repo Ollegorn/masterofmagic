@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import logosm from "/logosm.svg";
 import logomd from "../assets/logomd.svg";
 import logolg from "../assets/logolg.svg";
@@ -7,39 +8,45 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import Button from "./Button";
 import { usePrimaryLinks } from "../hooks/useNavigationLinks";
+import Popup from "./Popup";
+import { usePopup } from "../hooks/usePopup";
+import Login from './Login';
 
 function Navbar() {
   let location = useLocation();
   const navItems = usePrimaryLinks();
+  const { isPopupOpen, openPopup, closePopup } = usePopup();
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
   const screen = useScreenSize();
   const logo =
     screen.width > breakPoint.md
       ? logomd
       : screen.width > breakPoint.lg
-        ? logolg
-        : screen.width > breakPoint.xl
-          ? logoxl
-          : logosm;
+      ? logolg
+      : screen.width > breakPoint.xl
+      ? logoxl
+      : logosm;
+
   const isSmallScreen = screen.width < breakPoint.md;
+
+  const handleLogin = () => {
+    setLoggedIn(!isLoggedIn);
+    openPopup();
+  };
+
   return (
     <>
       <nav className="fixed z-50 flex w-full items-center justify-between border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 drop-shadow-md backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
         <Link to="/">
-          <img
-            src={logo}
-            alt="Master of Magic logo"
-            className="cursor-pointer"
-          />
+          <img src={logo} alt="Master of Magic logo" className="cursor-pointer" />
         </Link>
 
         {isSmallScreen &&
           navItems
             .filter((item) => item.path === location.pathname)
             .map((i) => (
-              <p
-                className="text-body text-lg font-semibold text-Neutral-50 sm:text-xl"
-                id={i.id}
-              >
+              <p className="text-body text-lg font-semibold text-Neutral-50 sm:text-xl" id={i.id}>
                 {i.page}
               </p>
             ))}
@@ -65,8 +72,18 @@ function Navbar() {
             ))}
           </ul>
         )}
-        {!isSmallScreen && <Button variant="secondary">Log In</Button>}
+
+        {!isSmallScreen && (
+          <Button variant="secondary" onClick={handleLogin}>
+            {isLoggedIn ? 'Log Out' : 'Log In'}
+          </Button>
+        )}
       </nav>
+
+      <Popup title="Log In" show={isPopupOpen} onClose={closePopup}>
+        <Login />
+      </Popup>
+
       <div className="flex min-h-svh w-full flex-col items-start justify-start gap-4 bg-home-pattern bg-fixed bg-cover bg-center bg-no-repeat lg:gap-6">
         <Outlet />
       </div>
