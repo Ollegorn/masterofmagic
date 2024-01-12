@@ -37,11 +37,11 @@ function Popup({ title, show, onClose, children }) {
         onClick={handleClose}
       ></div>
       <div
-        className="relative rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/50 to-Neutral-900/75 p-6 text-center text-white shadow-2xl backdrop-blur-lg"
+        className="relative rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/30 to-Neutral-900/75 p-6 text-center text-Neutral-50 shadow-2xl backdrop-blur-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute right-4 top-0 cursor-pointer border-none bg-none text-6xl text-gray-500"
+          className="absolute right-4 top-4 inline-flex cursor-pointer items-center justify-center rounded-lg px-3 text-4xl text-Neutral-100 transition-all duration-300 focus:outline-Neutral-400"
           onClick={handleClose}
         >
           &times;

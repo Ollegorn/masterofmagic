@@ -60,11 +60,8 @@ function Login({ onSignupClick, onButtonClick }) {
         </Button>
       </div>
       <div className="flex items-center justify-center self-center">
-        <button className="transform transition-transform duration-300 hover:translate-y-[-3px] hover:shadow-glow">
-          Don't have an account?{" "}
-          <span className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-body text-transparent">
-            Sign Up
-          </span>
+        <button className="font-body text-primary04-300 transition-all duration-300 hover:-translate-y-1 hover:text-primary04-50">
+          Don't have an account? Sign Up.
         </button>
       </div>
     </div>

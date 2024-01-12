@@ -19,7 +19,7 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
   return (
     <div className="flex flex-col items-start justify-center gap-3 self-stretch">
       {label && (
-        <label className="font-style:normal font-body text-base font-semibold text-Neutral-100">
+        <label className="font-body text-base font-semibold text-Neutral-100">
           {label}
         </label>
       )}
