@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Popup({ title, show, onClose, children }) {
   const [flipped, setFlipped] = useState(false);
@@ -6,14 +6,14 @@ function Popup({ title, show, onClose, children }) {
   useEffect(() => {
     // Add or remove 'overflow-hidden' class based on the 'show' state
     if (show) {
-      document.body.classList.add('overflow-hidden');
+      document.body.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove("overflow-hidden");
     }
 
     // Cleanup the effect
     return () => {
-      document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove("overflow-hidden");
     };
   }, [show]);
 
@@ -27,30 +27,38 @@ function Popup({ title, show, onClose, children }) {
   };
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center z-50 rounded-3xl ${show ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center rounded-3xl ${
+        show ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+    >
       <div
-        className="fixed inset-0 bg-black bg-opacity-60 filter blur-md"
+        className="fixed inset-0 bg-Neutral-900/60"
         onClick={handleClose}
       ></div>
       <div
-        className="relative p-6 bg-gradient-to-b from-[rgba(7,7,7,0.3)] to-black rounded-lg text-white text-center"
+        className="relative rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/50 to-Neutral-900/75 p-6 text-center text-white shadow-2xl backdrop-blur-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute top-0 right-4 text-6xl cursor-pointer bg-none border-none text-gray-500"
+          className="absolute right-4 top-0 cursor-pointer border-none bg-none text-6xl text-gray-500"
           onClick={handleClose}
         >
           &times;
         </button>
-        <div className={`text-container ${flipped ? 'rotate-y-360' : ''}`}>
-          <div className='flex min-w-72 max-w-180 justify-center items-center'>
+        <div className={`text-container ${flipped ? "rotate-y-360" : ""}`}>
+          <div className="flex min-w-72 max-w-180 items-center justify-center">
             <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-5xl text-transparent ">
               {title}
             </h2>
           </div>
           <div className="flex-auto">
             {React.Children.map(children, (child) =>
-              React.cloneElement(child, { onButtonClick: handleButtonClick, onClose, isFlipped: flipped })
+              React.cloneElement(child, {
+                onButtonClick: handleButtonClick,
+                onClose,
+                isFlipped: flipped,
+              }),
             )}
           </div>
         </div>
