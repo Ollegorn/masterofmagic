@@ -11,7 +11,7 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((showPassword) => !showPassword);
   };
 
   const inputType = isPassword ? (showPassword ? "text" : "password") : "text";
@@ -23,9 +23,9 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
           {label}
         </label>
       )}
-      <div className="flex items-center gap-2 self-stretch rounded-lg bg-neutral-800 p-4">
-        {icon && (
-          <div className="item flex h-6 w-6 justify-center">
+      <div className="flex items-center gap-2 self-stretch rounded-lg bg-Neutral-800 p-4 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow">
+        {
+          <div className=" flex h-6 w-6 items-center justify-center">
             {icon === "lock" ? (
               <LockClosedIcon className="size-6 text-Neutral-400" />
             ) : icon === "user" ? (
@@ -34,11 +34,11 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
               <EnvelopeIcon className="size-6 text-Neutral-400" />
             ) : null}
           </div>
-        )}
+        }
         <input
           type={inputType}
           placeholder={placeholderText}
-          className="flex flex-1 items-center"
+          className="flex flex-1 items-center bg-transparent text-Neutral-50 focus:outline-none"
         />
         {isPassword && (
           <button
