@@ -48,7 +48,7 @@ function Popup({ title, show, onClose, children }) {
         </button>
         <div className={`text-container ${flipped ? "rotate-y-360" : ""}`}>
           <div className="flex min-w-72 max-w-180 items-center justify-center">
-            <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-5xl text-transparent ">
+            <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-5xl text-transparent">
               {title}
             </h2>
           </div>
