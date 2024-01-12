@@ -54,8 +54,8 @@ function Login({ onSignupClick, onButtonClick }) {
         placeholderText="●●●●●●●●"
         isPassword
       />
-      <div className="flex flex-col items-start self-stretch p-6">
-        <Button className="flex items-center justify-center self-stretch rounded p-6">
+      <div className="flex w-full flex-col items-start py-4">
+        <Button variant="primary" className={`self-stretch`}>
           Log In
         </Button>
       </div>
