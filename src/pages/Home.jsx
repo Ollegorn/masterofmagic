@@ -25,7 +25,7 @@ function Home() {
       </div>
       <section className="flex w-full flex-col items-start justify-center gap-4 bg-hero-pattern bg-cover bg-fixed bg-center bg-no-repeat px-4 py-24 md:px-8 lg:gap-6 lg:px-6 lg:py-40">
         <div className=" flex flex-1 flex-col items-center justify-center gap-4 self-stretch lg:gap-6">
-          <svg viewBox="0.5 1 49 16" className="w-full">
+          <svg viewBox="0.5 1 49 16" className="w-full hover:animate-pulse">
             <text
               className="font-body"
               x="0"
@@ -50,7 +50,7 @@ function Home() {
             </defs>
           </svg>
 
-          <svg viewBox="0 0 73 19" className="w-full">
+          <svg viewBox="0 0 73 19" className="w-full hover:animate-pulse">
             <text
               className="font-body"
               x="0"
@@ -77,7 +77,9 @@ function Home() {
           <Button variant="cta">Begin Your Magical Journey</Button>
         </div>
       </section>
-      <Footer />
+      <div className="flex w-full max-w-[1512px] self-center pt-4 md:pt-6 lg:pt-16">
+        <Footer />
+      </div>
     </>
   );
 }
