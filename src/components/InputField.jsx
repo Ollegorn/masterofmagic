@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import EyeIcon from "../assets/eye.svg";
-import EyeSlashIcon from "../assets/eye_slash.svg";
-import EmailIcon from "../assets/email_outline.svg";
-import LockIcon from "../assets/lockIcon.svg";
-import UserIcon from "../assets/userIcon.svg";
+import { EyeIcon } from "@heroicons/react/24/outline";
+import { EyeSlashIcon} from "@heroicons/react/24/outline";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { LockClosedIcon } from "@heroicons/react/24/outline";
+import { UserCircleIcon} from "@heroicons/react/24/outline";
 
 const InputField = ({ icon, label, placeholderText, isPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,9 +15,9 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
   const inputType = isPassword ? (showPassword ? "text" : "password") : "text";
 
   const iconComponents = {
-    email: EmailIcon,
-    lock: LockIcon,
-    user: UserIcon,
+    email: <EnvelopeIcon />,
+    lock: <LockClosedIcon />,
+    user: <UserCircleIcon />,
   };
 
   return (
@@ -30,7 +30,7 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
       <div className="flex items-center gap-2 self-stretch rounded-lg bg-neutral-800 p-4">
         {icon && (
           <div className="item flex h-6 w-6 justify-center">
-            <img src={iconComponents[icon]} />
+            {iconComponents[icon]}
           </div>
         )}
         <input
@@ -44,7 +44,7 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
             onClick={togglePasswordVisibility}
             className="h-6 w-6"
           >
-            {showPassword ? <img src={EyeIcon} /> : <img src={EyeSlashIcon} />}
+            {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
           </button>
         )}
       </div>
