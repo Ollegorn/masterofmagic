@@ -54,15 +54,15 @@ function Login({ onSignupClick, onButtonClick }) {
         placeholderText="●●●●●●●●"
         isPassword
       />
-      <div className="flex flex-col items-start self-stretch p-6">
-        <Button className="flex items-center justify-center self-stretch rounded p-6">
+      <div className="flex w-full flex-col items-start py-4">
+        <Button variant="primary" className={`self-stretch`}>
           Log In
         </Button>
       </div>
       <div className="flex items-center justify-center self-center">
-        <button className="transform transition-transform duration-300 hover:translate-y-[-3px] hover:shadow-glow p-1">
+        <button className="transform transition-transform duration-300 hover:translate-y-[-3px] hover:text-primary04-50">
           Don't have an account?{" "}
-          <span className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-body text-transparent">
+          <span className="inline-block text-primary01-100">
             Sign Up
           </span>
         </button>
