@@ -25,7 +25,7 @@ function Popup({ title, show, onClose, children }) {
       ${show ? "flex" : "pointer-events-none hidden"}`}
     >
       <div
-        className="relative z-50 flex flex-col rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/30 to-Neutral-900/75 p-6 text-center text-Neutral-50 shadow-2xl backdrop-blur-lg lg:w-2/5"
+        className="relative max-w-180 z-50 flex flex-col rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/30 to-Neutral-900/75 p-6 text-center text-Neutral-50 shadow-2xl backdrop-blur-lg lg:w-2/5"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -35,7 +35,7 @@ function Popup({ title, show, onClose, children }) {
           &times;
         </button>
         <div className={"w-full items-center justify-center self-center"}>
-          <div className="flex min-w-72 max-w-180 flex-col items-center justify-center">
+          <div className="flex min-w-72 max-w-180 flex-col items-center justify-center lg:px-6">
             <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-3xl text-transparent md:text-4xl lg:text-5xl xl:text-6xl">
               {title}
             </h2>
