@@ -4,7 +4,7 @@ import Header from "./Header";
 import InputField from "./InputField";
 import Button from "./Button";
 
-function Login({ onSignupClick, onButtonClick }) {
+function Login({ onSignupClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
@@ -27,7 +27,6 @@ function Login({ onSignupClick, onButtonClick }) {
 
     try {
       // fetch logic
-
       if (response.ok) {
         // success
         setLoginMessage("Login successful! Redirecting...");
@@ -60,7 +59,10 @@ function Login({ onSignupClick, onButtonClick }) {
         </Button>
       </div>
       <div className="flex items-center justify-center self-center">
-        <button className="transform transition-transform duration-300 hover:translate-y-[-3px] hover:text-primary04-50">
+        <button 
+        className="transform transition-transform duration-300 hover:translate-y-[-3px] hover:text-primary04-50"
+        onClick={onSignupClick}
+        >
           Don't have an account?{" "}
           <span className="inline-block text-primary01-100">
             Sign Up

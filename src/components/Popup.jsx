@@ -1,36 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 function Popup({ title, show, onClose, children }) {
-  const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
-    // Add or remove 'overflow-hidden' class based on the 'show' state
     if (show) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
 
-    // Cleanup the effect
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, [show]);
 
-  const handleButtonClick = () => {
-    setFlipped(!flipped);
-  };
-
   const handleClose = () => {
-    setFlipped(false);
     onClose();
   };
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center rounded-3xl ${
-        show ? "opacity-100" : "pointer-events-none opacity-0"
-      }`}
+      className={`fixed inset-0 z-50 flex items-center justify-center rounded-3xl
+      ${show ? "opacity-100" : "pointer-events-none opacity-0"}`}
     >
       <div
         className="fixed inset-0 bg-Neutral-900/60"
@@ -46,7 +37,7 @@ function Popup({ title, show, onClose, children }) {
         >
           &times;
         </button>
-        <div className={`text-container ${flipped ? "rotate-y-360" : ""}`}>
+        <div className={"text-container"}>
           <div className="flex min-w-72 max-w-180 items-center justify-center">
             <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-5xl text-transparent">
               {title}
@@ -54,11 +45,7 @@ function Popup({ title, show, onClose, children }) {
           </div>
           <div className="flex-auto">
             {React.Children.map(children, (child) =>
-              React.cloneElement(child, {
-                onButtonClick: handleButtonClick,
-                onClose,
-                isFlipped: flipped,
-              }),
+              React.cloneElement(child, {onClose}),
             )}
           </div>
         </div>

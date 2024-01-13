@@ -9,6 +9,7 @@ import Button from "./Button";
 import { usePrimaryLinks } from "../hooks/useNavigationLinks";
 import Popup from "./Popup";
 import { usePopup } from "../hooks/usePopup";
+import SignUp from './SignUp';
 import Login from './Login';
 
 function Navbar() {
@@ -16,6 +17,7 @@ function Navbar() {
   const navItems = usePrimaryLinks();
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [popupContent, setPopupContent] = useState(null);
 
   const screen = useScreenSize();
 
@@ -28,10 +30,22 @@ function Navbar() {
 
   const isSmallScreen = screen.width < breakPoint.lg;
 
-  const handleLogin = () =>{
-    setLoggedIn(!isLoggedIn)
+  const handleLogin = () => {
+    setLoggedIn(!isLoggedIn);
     openPopup();
-  }
+    setPopupContent("login");
+  };
+
+  const handleSignupClick = () => {
+    setPopupContent("signup");
+    openPopup();
+  };
+
+  const closePopupAndResetContent = () => {
+    setPopupContent(null);
+    closePopup();
+  };
+
   return (
     <>
       <nav className="fixed z-50 flex w-full items-center justify-center border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 drop-shadow-md backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
@@ -83,9 +97,18 @@ function Navbar() {
         </div>
       </nav>
 
-      <Popup title="Log In" show={isPopupOpen} onClose={closePopup}>
-        <Login />
-      </Popup>
+      {popupContent === "login" && (
+        <Popup title="Log In" show={isPopupOpen} onClose={closePopupAndResetContent}>
+          <Login onSignupClick={handleSignupClick} />
+        </Popup>
+      )}
+
+      {popupContent === "signup" && (
+        <Popup title="Sign Up" show={isPopupOpen} onClose={closePopupAndResetContent}>
+          <SignUp onLoginClick={handleLogin} />
+        </Popup>
+      )}
+      
       {navItems
         .filter((i) => i.path === location.pathname)
         .map((item) => (
