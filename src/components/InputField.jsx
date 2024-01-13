@@ -17,39 +17,39 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
   const inputType = isPassword ? (showPassword ? "text" : "password") : "text";
 
   return (
-    <div className="flex flex-col items-start justify-center gap-3 self-stretch">
+    <div className="flex flex-col items-start justify-center gap-2 self-stretch lg:gap-3">
       {label && (
-        <label className="font-body text-base font-semibold text-Neutral-100">
+        <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">
           {label}
         </label>
       )}
-      <div className="flex items-center gap-2 self-stretch rounded-lg bg-Neutral-800 p-4 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow">
+      <div className="flex items-center gap-2 self-stretch rounded-lg bg-Neutral-800 p-4 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow md:gap-3">
         {
-          <div className=" flex h-6 w-6 items-center justify-center">
+          <div className="flex size-6 items-center justify-center">
             {icon === "lock" ? (
-              <LockClosedIcon className="size-6 text-Neutral-400" />
+              <LockClosedIcon className="size-6 text-Neutral-400 md:size-7" />
             ) : icon === "user" ? (
-              <UserCircleIcon className="size-6 text-Neutral-400" />
+              <UserCircleIcon className="size-6 text-Neutral-400 md:size-7" />
             ) : icon === "email" ? (
-              <EnvelopeIcon className="size-6 text-Neutral-400" />
+              <EnvelopeIcon className="size-6 text-Neutral-400 md:size-7" />
             ) : null}
           </div>
         }
         <input
           type={inputType}
           placeholder={placeholderText}
-          className="flex flex-1 items-center bg-transparent text-Neutral-50 focus:outline-none"
+          className="flex flex-1 items-center bg-transparent text-base text-Neutral-50 focus:outline-none md:text-lg lg:text-xl xl:text-2xl"
         />
         {isPassword && (
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="h-6 w-6"
+            className="size-6"
           >
             {showPassword ? (
-              <EyeIcon className="size-6 text-Neutral-400" />
+              <EyeIcon className="size-6 text-Neutral-400 md:size-7" />
             ) : (
-              <EyeSlashIcon className="size-6 text-Neutral-400" />
+              <EyeSlashIcon className="md-size-7 size-6 text-Neutral-400" />
             )}
           </button>
         )}

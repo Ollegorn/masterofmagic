@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 function Popup({ title, show, onClose, children }) {
-
   useEffect(() => {
     if (show) {
       document.body.classList.add("overflow-hidden");
@@ -19,16 +18,14 @@ function Popup({ title, show, onClose, children }) {
   };
 
   return (
+    //Scrim
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center rounded-3xl
-      ${show ? "opacity-100" : "pointer-events-none opacity-0"}`}
+      onClick={handleClose}
+      className={`fixed inset-0 z-50 items-center justify-center rounded-3xl bg-Neutral-900/60 
+      ${show ? "flex" : "pointer-events-none hidden"}`}
     >
       <div
-        className="fixed inset-0 bg-Neutral-900/60"
-        onClick={handleClose}
-      ></div>
-      <div
-        className="relative rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/30 to-Neutral-900/75 p-6 text-center text-Neutral-50 shadow-2xl backdrop-blur-lg"
+        className="relative z-50 flex flex-col rounded-lg border border-Neutral-700 bg-gradient-to-b from-Neutral-900/30 to-Neutral-900/75 p-6 text-center text-Neutral-50 shadow-2xl backdrop-blur-lg lg:w-2/5"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -37,15 +34,13 @@ function Popup({ title, show, onClose, children }) {
         >
           &times;
         </button>
-        <div className={"text-container"}>
-          <div className="flex min-w-72 max-w-180 items-center justify-center">
-            <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-5xl text-transparent">
+        <div className={"w-full items-center justify-center self-center"}>
+          <div className="flex min-w-72 max-w-180 flex-col items-center justify-center">
+            <h2 className="inline-block bg-gradient-to-r from-primary04-500 to-primary04-50 bg-clip-text font-display text-3xl text-transparent md:text-4xl lg:text-5xl xl:text-6xl">
               {title}
             </h2>
-          </div>
-          <div className="flex-auto">
             {React.Children.map(children, (child) =>
-              React.cloneElement(child, {onClose}),
+              React.cloneElement(child, { onClose }),
             )}
           </div>
         </div>
