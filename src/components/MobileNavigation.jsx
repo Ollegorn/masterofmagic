@@ -7,20 +7,8 @@ import Button from './Button';
 
 
 
-function MobileNavigation({ show, onClose }) {
+function MobileNavigation({ show, onClose, onLoginClick }) {
   const navItems = usePrimaryLinks();
-  
-  useEffect(() => {
-    if (show) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [show]);
 
   const onItemClick = (e) => {
     e.stopPropagation();
@@ -30,11 +18,17 @@ function MobileNavigation({ show, onClose }) {
       behavior: "smooth",
     });
   };
-  
+
   const onCloseButtonClick = (e) => {
     e.stopPropagation();
     onClose();
   };
+
+  const onLoginButtonClick = () => {
+    onClose();
+    onLoginClick();
+  };
+
 
   return (
     <div
@@ -73,7 +67,7 @@ function MobileNavigation({ show, onClose }) {
           </div>
           <div class="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100 sm:w-3/4 md:w-1/2"></div>
           <div className='flex py-3 px-6 justify-center self-stretch'>
-            <Button className='mx-auto'>
+          <Button className='mx-auto' onClick={onLoginButtonClick}>
               Log In
             </Button>
           </div>
