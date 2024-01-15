@@ -1,4 +1,5 @@
 import Button from "../components/Button";
+import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SectionEvents from "../components/SectionEvents";
@@ -9,6 +10,7 @@ import SectionRules from "../components/SectionRules";
 function Home() {
   return (
     <>
+      
       <Header
         heading={`Step Into The Arena Of Magic`}
         description={`Welcome to MasterOfMagic, the ultimate platform for duelling
@@ -18,6 +20,7 @@ function Home() {
         hasHeroImage
       />
       <div className="flex w-full max-w-[1512px] flex-col gap-16 self-center lg:gap-32">
+        
         <SectionFeatured />
         <SectionEvents />
         <SectionHighlights />

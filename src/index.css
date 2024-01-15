@@ -35,6 +35,32 @@ body {
   overflow-x: hidden;
 }
 
+/*Swipper CSS*/
+.swiper {
+  width: 100%;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: auto;
+  height: auto;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+.mySwiper .swiper-pagination-bullet {
+  background-color: white;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background-color: pink;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

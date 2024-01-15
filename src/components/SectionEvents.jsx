@@ -1,7 +1,9 @@
-import useEvents from "../hooks/useEvents";
-import EventCard from "./EventCard";
-import SectionHeader from "./SectionHeader";
-import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
+import React from 'react';
+import Carousel from './Carousel';
+import useEvents from '../hooks/useEvents';
+import EventCard from './EventCard';
+import SectionHeader from './SectionHeader';
+import { useScreenSize, breakPoint } from '../hooks/useScreenSize';
 
 function SectionEvents() {
   const events = useEvents();
@@ -17,22 +19,24 @@ function SectionEvents() {
           labelSeconary="See All"
         />
         <div className="no-scrollbar flex gap-4 overflow-x-scroll py-4 md:py-8 lg:gap-6 lg:py-16">
-          {events
-            .filter((e) => e.isFeatured)
-            .map((event) => (
-              <EventCard
-                key={event.id}
-                bgID={event.bgID}
-                title={event.title}
-                startDate={event.startDate}
-                endDate={event.endDate}
-                description={event.description}
-                type={event.type}
-                team={event.team}
-                isFeatured={event.isFeatured}
-                status={event.status}
-              />
-            ))}
+          <Carousel>
+            {events
+              .filter((e) => e.isFeatured)
+              .map((event) => (
+                <EventCard
+                  key={event.id}
+                  bgID={event.bgID}
+                  title={event.title}
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  description={event.description}
+                  type={event.type}
+                  team={event.team}
+                  isFeatured={event.isFeatured}
+                  status={event.status}
+                />
+              ))}
+          </Carousel>
         </div>
       </section>
     </>
