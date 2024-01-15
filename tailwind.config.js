@@ -13,6 +13,10 @@ export default {
       maxWidth: {
         "180": "45rem"
       },
+      screens:{
+        "xs": "430px",
+        "md2": "930px"
+      },
       colors: {
         Neutral: {
           50: "#F4F5F5",

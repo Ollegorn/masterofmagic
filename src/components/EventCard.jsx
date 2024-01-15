@@ -22,8 +22,8 @@ function EventCard({
 }) {
   return (
     <>
-      <div className="flex max-w-sm cursor-pointer flex-col-reverse justify-between rounded-lg bg-gradient-to-b from-primary04-800/15 to-primary04-800/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:shadow-glow focus:shadow-glow md:max-w-3xl md:flex-row lg:max-w-4xl xl:max-w-5xl">
-        <div className="flex min-w-60 flex-col items-center justify-center gap-4 self-stretch p-4 lg:min-w-96 lg:p-6">
+     <div className="flex max-w-80 cursor-pointer flex-col-reverse justify-between rounded-lg bg-gradient-to-b from-primary04-800/15 to-primary04-800/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:shadow-glow focus:shadow-glow xs:max-w-sm md2:max-w-3xl md2:flex-row lg:max-w-4xl xl:max-w-5xl">
+        <div className="flex min-w-32 flex-col items-center justify-center gap-4 self-stretch p-4 lg:min-w-96 lg:p-6">
           <div className="flex flex-wrap gap-1 self-stretch lg:gap-2">
             <Badge label={type} />
             <Badge label={team} />
@@ -34,18 +34,18 @@ function EventCard({
             {description}
           </p>
           {includeAction ? (
-            <div className="flex items-start justify-between gap-4 self-stretch pt-4 lg:gap-6 lg:pt-6">
+            <div className="flex flex-col xs:flex-row items-center justify-between gap-4 self-stretch pt-4 lg:gap-6 lg:pt-6">
               {includeSecondaryAction ? (
                 <Button
                   onClick={onClickSecondary}
-                  className={`flex-1`}
+                  className={`flex-1 w-full md2:w-auto`}
                   variant="secondary"
                 >
                   {labelSecondary}
                 </Button>
               ) : null}
               {includePrimaryAction ? (
-                <Button onClick={onClickPrimary} className={`flex-1`}>
+                <Button onClick={onClickPrimary} className={`flex-1 w-full md2:w-auto`}>
                   {labelPrimary}
                 </Button>
               ) : null}
