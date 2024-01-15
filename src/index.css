@@ -54,11 +54,11 @@ body {
   width: 100%;
 }
 .mySwiper .swiper-pagination-bullet {
-  background-color: white;
+  background-color: #e5e5dc;
 }
 
 .mySwiper .swiper-pagination-bullet-active {
-  background-color: pink;
+  background-color: #a6a587;
 }
 
 @layer utilities {
