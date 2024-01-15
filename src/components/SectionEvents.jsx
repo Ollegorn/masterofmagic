@@ -1,9 +1,9 @@
-import React from 'react';
-import Carousel from './Carousel';
-import useEvents from '../hooks/useEvents';
-import EventCard from './EventCard';
-import SectionHeader from './SectionHeader';
-import { useScreenSize, breakPoint } from '../hooks/useScreenSize';
+import React from "react";
+import Carousel from "./Carousel";
+import useEvents from "../hooks/useEvents";
+import EventCard from "./EventCard";
+import SectionHeader from "./SectionHeader";
+import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 
 function SectionEvents() {
   const events = useEvents();
@@ -34,6 +34,11 @@ function SectionEvents() {
                   team={event.team}
                   isFeatured={event.isFeatured}
                   status={event.status}
+                  includeAction
+                  includePrimaryAction
+                  includeSecondaryAction
+                  labelPrimary="Join Tournament"
+                  labelSecondary="Show Rules"
                 />
               ))}
           </Carousel>

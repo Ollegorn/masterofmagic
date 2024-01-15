@@ -1,5 +1,6 @@
 import Badge from "./Badge";
 import ImageCard from "./ImageCard";
+import Button from "./Button";
 
 function EventCard({
   bgID = 1,
@@ -9,12 +10,19 @@ function EventCard({
   description = "Event Description...",
   type = "Round Robin",
   team = "Solo",
-  isFeatured = true,
+  isFeatured = false,
   status = "Upcoming",
+  includeAction = false,
+  includePrimaryAction = false,
+  includeSecondaryAction = false,
+  labelPrimary = "Primary Action",
+  labelSecondary = "secondary Action",
+  onClickPrimary,
+  onClickSecondary,
 }) {
   return (
     <>
-      <div className="flex max-w-sm cursor-pointer flex-col-reverse justify-between rounded-lg bg-gradient-to-b from-primary04-800/15 to-primary04-800/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:shadow-glow focus:shadow-glow md:max-w-2xl md:flex-row lg:max-w-4xl">
+      <div className="flex max-w-sm cursor-pointer flex-col-reverse justify-between rounded-lg bg-gradient-to-b from-primary04-800/15 to-primary04-800/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:shadow-glow focus:shadow-glow md:max-w-3xl md:flex-row lg:max-w-4xl xl:max-w-5xl">
         <div className="flex min-w-60 flex-col items-center justify-center gap-4 self-stretch p-4 lg:min-w-96 lg:p-6">
           <div className="flex flex-wrap gap-1 self-stretch lg:gap-2">
             <Badge label={type} />
@@ -25,6 +33,24 @@ function EventCard({
           <p className="max-w-prose self-start font-body text-base text-primary04-100 md:self-center lg:text-lg xl:text-xl">
             {description}
           </p>
+          {includeAction ? (
+            <div className="flex items-start justify-between gap-4 self-stretch pt-4 lg:gap-6 lg:pt-6">
+              {includeSecondaryAction ? (
+                <Button
+                  onClick={onClickSecondary}
+                  className={`flex-1`}
+                  variant="secondary"
+                >
+                  {labelSecondary}
+                </Button>
+              ) : null}
+              {includePrimaryAction ? (
+                <Button onClick={onClickPrimary} className={`flex-1`}>
+                  {labelPrimary}
+                </Button>
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <ImageCard
           bgID={bgID}
