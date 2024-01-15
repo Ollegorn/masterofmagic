@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -6,11 +6,35 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 const Carousel = ({ children }) => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const resizeTimeout = useRef(null);
+  const swiper = useRef(null);
+
   const handleClick = (index) => {
     swiper.current.slideTo(index);
   };
 
-  const swiper = React.useRef(null);
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    const delayedHandleResize = () => {
+      clearTimeout(resizeTimeout.current);
+      resizeTimeout.current = setTimeout(() => {
+        handleResize();
+      }, 200);
+    };
+
+    window.addEventListener('resize', delayedHandleResize);
+    return () => {
+      window.removeEventListener('resize', delayedHandleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    swiper.current.update();
+  }, [screenWidth]);
 
   return (
     <Swiper

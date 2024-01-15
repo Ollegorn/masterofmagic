@@ -36,8 +36,14 @@ function Navbar() {
     setLoggedIn(!isLoggedIn);
     openPopup();
     setPopupContent("login");
-    handleMobileNavToggle();
   };
+
+  const handleLoginMobile = ()=> {
+    setLoggedIn(!isLoggedIn);
+    openPopup();
+    setPopupContent("login");
+    handleMobileNavToggle();
+  }
 
   const handleSignupClick = () => {
     setPopupContent("signup");
@@ -63,7 +69,7 @@ function Navbar() {
   return (
     <>
       {isMobileNavOpen ? (
-        <MobileNavigation show={isMobileNavOpen} onClose={handleMobileNavToggle} onLoginClick={handleLogin}/>
+        <MobileNavigation show={isMobileNavOpen} onClose={handleMobileNavToggle} onLoginClick={handleLoginMobile}/>
       ) : (
         <nav className="fixed z-50 flex w-full items-center justify-center border-b-2 border-solid border-Neutral-400/75 bg-gradient-to-t from-Neutral-500/15 to-Neutral-800/15 px-4 py-2 drop-shadow-md backdrop-blur-xl md:px-8 md:py-3 lg:px-6 lg:py-4">
           <div className="flex w-full max-w-[1512px] items-center justify-between">
