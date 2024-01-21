@@ -14,7 +14,7 @@ export default {
         "180": "45rem"
       },
       screens:{
-        "xs": "430px",
+        "xs": "470px",
         "md2": "830px"
       },
       colors: {

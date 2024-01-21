@@ -1,16 +1,24 @@
+import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SectionHeader from "../components/SectionHeader";
 import SectionEvents from "../components/SectionEvents";
 import EventCard from "../components/EventCard";
 import useEvents from "../hooks/useEvents";
-
-
-
+import FullscreenModal from "../components/FullScreenModal";
+import CreateTournament from "../components/CreateTournament";
 
 function TournamentHub() {
   const events = useEvents();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const handleCreateTournamentClick = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
   return (
     <>
       <div className="flex w-full max-w-[1512px] flex-col gap-16 self-center lg:gap-32">
@@ -19,6 +27,7 @@ function TournamentHub() {
           description={`Here, you can effortlessly create, manage, and cancel magical tournaments. Browse through upcoming, ongoing, and past tournaments, and set up thrilling competitions for your community.`}
           buttonLabel={`Create New Tournament`}
           isActionable
+          onClick={handleCreateTournamentClick}
         />
         <SectionEvents
           sectionHeading={`Currently Ongoing Events`}
@@ -29,6 +38,7 @@ function TournamentHub() {
             isActionable
             includePrimaryAction
             labelPrimary="Create New Tournament"
+            onClickPrimary={handleCreateTournamentClick}
           />
 
           <div className="flex flex-col no-scrollbar gap-4 overflow-x-scroll py-4 md:flex-row md:flex-wrap lg:flex-wrap xl:flex-wrap xl:flex-row lg:py-16 xl:py-16">
@@ -57,11 +67,14 @@ function TournamentHub() {
           </div>
         </section>
 
-
-   
-
         <Footer />
       </div>
+
+      {isPopupOpen && (
+        <FullscreenModal title="Create New Tournament" show={isPopupOpen} onClose={handleClosePopup}>
+          <CreateTournament />
+        </FullscreenModal>
+      )}
     </>
   );
 }
