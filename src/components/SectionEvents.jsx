@@ -5,7 +5,7 @@ import EventCard from "./EventCard";
 import SectionHeader from "./SectionHeader";
 import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 
-function SectionEvents() {
+function SectionEvents({ sectionHeading, isActionable, includeSecondaryAction, labelSeconary }) {
   const events = useEvents();
   const screen = useScreenSize();
 
@@ -13,10 +13,10 @@ function SectionEvents() {
     <>
       <section className="w-full px-4 md:px-8 lg:px-6">
         <SectionHeader
-          heading="Join Today's Magical Battles"
+          heading={sectionHeading || "Join Today's Magical Battles"}
           isActionable={screen.width > breakPoint.md ? true : false}
-          includeSecondaryAction
-          labelSeconary="See All"
+          includeSecondaryAction={includeSecondaryAction}
+          labelSeconary={labelSeconary || "See All"}
         />
         <div className="no-scrollbar flex gap-4 overflow-x-scroll py-4 md:py-8 lg:gap-6 lg:py-16">
           <Carousel>

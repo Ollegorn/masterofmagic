@@ -1,5 +1,4 @@
 import Button from "../components/Button";
-import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SectionEvents from "../components/SectionEvents";
@@ -22,7 +21,9 @@ function Home() {
       <div className="flex w-full max-w-[1512px] flex-col gap-16 self-center lg:gap-32">
         
         <SectionFeatured />
-        <SectionEvents />
+        <SectionEvents 
+          includeSecondaryAction
+        />
         <SectionHighlights />
         <SectionRules />
       </div>

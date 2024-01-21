@@ -20,7 +20,9 @@ function TournamentHub() {
           buttonLabel={`Create New Tournament`}
           isActionable
         />
-        <SectionEvents />
+        <SectionEvents
+          sectionHeading={`Currently Ongoing Events`}
+        />
         <section className="w-full px-4 md:px-8 lg:px-6">
           <SectionHeader 
             heading={`Upcoming Events`}
