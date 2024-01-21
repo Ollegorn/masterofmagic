@@ -30,15 +30,16 @@ function SectionEvents() {
                   startDate={event.startDate}
                   endDate={event.endDate}
                   description={event.description}
-                  type={event.type}
-                  team={event.team}
+                  tournamentFormat={event.tournamentFormat}
+                  duelMode={event.duelMode}
+                  twoWinsInThree={event.twoWinsInThree}
+                  balancedMode={event.balancedMode}
+                  echoBan={event.echoBan}
+                  cardBan={event.cardBan}
+                  isRewarded={event.isRewarded}
                   isFeatured={event.isFeatured}
-                  status={event.status}
                   includeAction
-                  includePrimaryAction
-                  includeSecondaryAction
-                  labelPrimary="Join Tournament"
-                  labelSecondary="Show Rules"
+                  buttonLabel="Register Now"
                 />
               ))}
           </Carousel>
