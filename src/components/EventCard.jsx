@@ -22,7 +22,7 @@ function EventCard({
     <>
       {/** card container */}
       <div
-        className={`flex w-[17.875rem] h-full flex-shrink-0 flex-col items-center rounded-2xl bg-gradient-to-br from-Neutral-700/30 to-Neutral-700/10 p-2 shadow-md backdrop-blur-xl md:w-[21.5rem] lg:w-[29.625rem] lg:p-3 xl:w-[35.375rem]`}
+        className={`flex w-[17.875rem] h-full flex-shrink-0 flex-col mx-auto items-center rounded-2xl bg-gradient-to-br from-Neutral-700/30 to-Neutral-700/10 p-2 shadow-md backdrop-blur-xl md:w-[21.5rem] lg:w-[29.625rem] lg:p-3 xl:w-[35.375rem]`}
       >
         {/** card content wrapper */}
         <div
@@ -55,7 +55,7 @@ function EventCard({
 
           {/** card text content */}
           <div
-            className={`flex flex-col h-[70%] justify-between items-start gap-4 self-stretch px-2 py-4 lg:gap-6 lg:px-4 lg:py-6`}
+            className={`flex flex-col h-[70%] justify-between items-start gap-4 self-stretch px-2 py-4 lg:gap-6 lg:px-4 lg:py-6 xl:h-[60%]`}
           >
             {/** heading + body text */}
             <div
