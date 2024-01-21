@@ -15,7 +15,7 @@ export default {
       },
       screens:{
         "xs": "430px",
-        "md2": "930px"
+        "md2": "830px"
       },
       colors: {
         Neutral: {
