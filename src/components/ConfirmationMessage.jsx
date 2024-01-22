@@ -1,11 +1,12 @@
 import React from 'react'
 import Button from './Button'
 
-function ConfirmationMessage({ label, description, buttonText}) {
+function ConfirmationMessage({ label, description, buttonText, children}) {
   return (
     <div className="flex w-80 sm:w-96 items-center gap-4 rounded-3xl">
       <div className="flex flex-col p-8 items-center gap-4  self-stretch">
         <p className="font-body font-bold text-2xl">{label}</p>
+        <div>{children}</div>
         <p className="font-body text-sm font-normal text-Neutral-100 py-4 md:py-8 md:text-lg lg:text-xl xl:text-xl">{description}</p>
         
       <Button variant="secondary" className="w-full h-14">Cancel</Button>
