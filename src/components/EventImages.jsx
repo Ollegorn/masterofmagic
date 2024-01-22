@@ -26,13 +26,13 @@ function EventImages() {
       {imagePaths.map((path, index) => (
         <div
           key={index}
-          className={`relative`}
+          className={`relative aspect-w-1 aspect-h-1`}
           onClick={() => handleClick(index)}
         >
           <img
             src={`./${path}`}
             alt={`Event ${index + 1}`}
-            className={`w-full h-auto rounded-lg object-cover cursor-pointer ${
+            className={`w-full h-full rounded-lg object-cover cursor-pointer ${
               selectedImage === index ? 'brightness-100' : 'brightness-50 hover:brightness-100'
             }`}
           />

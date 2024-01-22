@@ -26,7 +26,7 @@ const FullscreenModal = ({ title, onClose, show, children }) => {
               </div>
               <h2 className="text-3xl text-center font-bold flex-grow">{title}</h2>
             </div>
-            <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+            <div className="h-px w-full mb-8 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
 
             <div className="overflow-y-auto">{children}</div>
           </div>
