@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from './Title';
 import InputField from './InputField';
-import EventImages from './EventImages';
+import ImagesGrid from './ImagesGrid';
 import ToggleInput from './ToggleInput';
 import OptionSwitch from './OptionSwitch';
 import Button from './Button';
@@ -45,7 +45,7 @@ function CreateTournament() {
           <div className='flex flex-col items-start gap-4 self-stretch'>
             <Title>Display Settings</Title>
             <p className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Pick an image:</p>
-            <EventImages />
+            <ImagesGrid />
             <ToggleInput label="Featured"/>
           </div>
         </div>

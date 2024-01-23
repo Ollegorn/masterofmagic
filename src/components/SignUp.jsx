@@ -1,6 +1,7 @@
 import React from "react";
 import InputField from "./InputField";
 import Button from "./Button";
+import ImagesGrid from "./ImagesGrid";
 
 function SignUp({ onLoginClick }) {
   return (
@@ -19,6 +20,12 @@ function SignUp({ onLoginClick }) {
         placeholderText="Passwords must be the same"
         isPassword
       />
+      <p className="font-body text-base font-semibold text-Neutral-100 self-start md:text-lg lg:text-xl xl:text-xl">
+        Profile Picture
+      </p>
+      <div className="h-36 overflow-y-auto">
+          <ImagesGrid images="avatar" />
+        </div>
       <div className="flex w-full flex-col items-start py-4 lg:py-6">
         <Button variant="primary" className={`self-stretch`}>
           Sign Up
