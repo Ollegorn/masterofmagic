@@ -17,7 +17,6 @@ function Navbar() {
   let location = useLocation();
   const navItems = usePrimaryLinks();
   const { isPopupOpen, openPopup, closePopup } = usePopup();
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [popupContent, setPopupContent] = useState(null);
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -33,13 +32,11 @@ function Navbar() {
   const isSmallScreen = screen.width < breakPoint.lg;
 
   const handleLogin = () => {
-    setLoggedIn(!isLoggedIn);
     openPopup();
     setPopupContent("login");
   };
 
   const handleLoginMobile = ()=> {
-    setLoggedIn(!isLoggedIn);
     openPopup();
     setPopupContent("login");
     handleMobileNavToggle();
@@ -58,11 +55,12 @@ function Navbar() {
   const handleMobileNavToggle = () => {
     setMobileNavOpen((prev) => !prev);
   };
-
+  
+   //could add logic to smooth scroll if the page is the same as current
   const scrolToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: "instant",
     });
   }
 

@@ -15,15 +15,16 @@ const eventImages = [
 ];
 
 const avatarImages = [
-  'avatar01.svg',
-  'avatar02.svg',
-  'avatar03.svg',
-  'avatar04.svg',
-  'avatar05.svg',
-  'avatar06.svg',
-  'avatar07.svg',
-  'avatar08.svg',
-  'avatar09.svg',
+  'avatar0.svg',
+  'avatar1.svg',
+  'avatar2.svg',
+  'avatar3.svg',
+  'avatar4.svg',
+  'avatar5.svg',
+  'avatar6.svg',
+  'avatar7.svg',
+  'avatar8.svg',
+  'avatar9.svg',
   'avatar10.svg',
   'avatar11.svg',
   'avatar12.svg',
@@ -43,8 +44,7 @@ const avatarImages = [
   'avatar26.svg',
   'avatar27.svg',
   'avatar28.svg',
-  'avatar29.svg',
-  'avatar30.svg'
+  'avatar29.svg'
 ]
 
 function ImagesGrid({ images }) {
@@ -67,8 +67,8 @@ function ImagesGrid({ images }) {
           <img
             src={`./${path}`}
             alt={`${images} ${index + 1}`}
-            className={`rounded-lg object-cover cursor-pointer m-1 ${
-              images === 'avatar' ? 'w-14 h-14' : 'w-full h-full'
+            className={`rounded-lg object-cover cursor-pointer ${
+              images === 'avatar' ? 'w-14 h-14 m-1' : 'w-full h-full'
             } ${selectedImage === index ? 'brightness-100' : 'brightness-50 hover:brightness-100'}`}
           />
           {/*fix image outline when clicked on avatars*/}

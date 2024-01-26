@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import Button from "./Button";
+import Rankings from './Rankings';
 
 function EventCard({
+  tournamentId,
   bgID = 1,
   title = "Event Name",
   startDate = "01.01.2024",
@@ -15,9 +18,21 @@ function EventCard({
   isRewarded = false,
   isFeatured = false,
   includeAction = false,
+  registeredUsers = [],
+  duels = [],
   buttonLabel = "Primary Action",
+  onLeaderboard = false,
   onClick,
 }) {
+  const [showRankings, setShowRankings] = useState(false);
+
+  const btnLabelForLeaderBoard = showRankings ? "Hide Leaderboard" : "Show Leaderboard";
+
+  const toggleRankings = () => {
+    setShowRankings((prevShowRankings) => !prevShowRankings);
+  };
+
+
   return (
     <>
       {/** card container */}
@@ -259,7 +274,7 @@ function EventCard({
                     <p
                       className={`flex-1 font-body text-xs text-Neutral-200 md:text-sm lg:text-base`}
                     >
-                      2 Wins In 2 Duels
+                      2 Wins In 3 Duels
                     </p>
                   </div>
                 ) : null}
@@ -349,9 +364,26 @@ function EventCard({
                 </Button>
               </div>
             ) : null}
+
+            {/*Only for leaderboard page */}      
+            {onLeaderboard && (
+              <div
+              className={`flex flex-col items-start gap-2 self-stretch pt-4`}
+              >
+                <Button
+                  variant="primary"
+                  onClick={toggleRankings}
+                  className={`self-stretch`}
+                >
+                  {btnLabelForLeaderBoard}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
+        {showRankings && <Rankings registeredUsers={registeredUsers} tournamentId={tournamentId}/>}
+    
     </>
   );
 }

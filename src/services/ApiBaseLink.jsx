@@ -2,7 +2,7 @@ const Base_Url = "https://localhost:7099/api/";
 
 const Api_Endpoints = {
   //Auth
-  postRegister: "Auth/register",
+  postRegister: `${Base_Url}"Auth/register"`,
   postLogin: "Auth/Login",
   postRefreshToken: "Auth/RefreshToken",
 
@@ -15,7 +15,7 @@ const Api_Endpoints = {
   //Invitation
 
   //Tournament
-  getAllTournaments: "Tournament/AllTournaments",
+  getAllTournaments: `${Base_Url}Tournament/AllTournaments`,
   
 }
 

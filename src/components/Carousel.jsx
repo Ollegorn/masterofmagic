@@ -33,8 +33,11 @@ const Carousel = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    swiper.current.update();
-  }, [screenWidth]);
+    if (swiper.current) {
+      swiper.current.update();
+      swiper.current.slideTo(Math.floor(children.length / 2));
+    }
+  }, [children.length,screenWidth]);
 
   return (
     <Swiper
@@ -56,7 +59,6 @@ const Carousel = ({ children }) => {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       }}
-      initialSlide={Math.floor(children.length / 2)}
       modules={[EffectCoverflow, Pagination]}
       className="mySwiper"
       onSwiper={(swiperInstance) => (swiper.current = swiperInstance)}

@@ -7,10 +7,15 @@ import EventCard from "../components/EventCard";
 import useEvents from "../hooks/useEvents";
 import FullscreenModal from "../components/FullScreenModal";
 import CreateTournament from "../components/CreateTournament";
+import { useTournaments } from "../hooks/useTournaments";
+
 
 function TournamentHub() {
   const events = useEvents();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const {ongoingTournaments, upcomingTournaments} = useTournaments();
+
 
   const handleCreateTournamentClick = () => {
     setIsPopupOpen(true);
@@ -31,6 +36,7 @@ function TournamentHub() {
         />
         <SectionEvents
           sectionHeading={`Currently Ongoing Events`}
+          tournaments={ongoingTournaments}
         />
         <section className="w-full px-4 md:px-8 lg:px-6">
           <SectionHeader 
@@ -42,24 +48,22 @@ function TournamentHub() {
           />
 
           <div className="flex flex-col no-scrollbar gap-4 overflow-x-scroll py-4 md:flex-row md:flex-wrap lg:flex-wrap xl:flex-wrap xl:flex-row lg:py-16 xl:py-16">
-            {events
-              .filter((e) => e.isFeatured)
-              .map((event) => (
+          {upcomingTournaments
+              .map((tournament) => (
                 <EventCard
-                  key={event.id}
-                  bgID={event.bgID}
-                  title={event.title}
-                  startDate={event.startDate}
-                  endDate={event.endDate}
-                  description={event.description}
-                  tournamentFormat={event.tournamentFormat}
-                  duelMode={event.duelMode}
-                  twoWinsInThree={event.twoWinsInThree}
-                  balancedMode={event.balancedMode}
-                  echoBan={event.echoBan}
-                  cardBan={event.cardBan}
-                  isRewarded={event.isRewarded}
-                  isFeatured={event.isFeatured}
+                  tournamentId={tournament.tournamentId}
+                  key={tournament.tournamentId}
+                  bgID={tournament.imageNumber}
+                  title={tournament.tournamentName}
+                  startDate={tournament.startDate}
+                  endDate={tournament.endDate}
+                  description={tournament.description}
+                  twoWinsInThree={tournament.twoWinsInThreeGames}
+                  balancedMode={tournament.balancedMode}
+                  echoBan={tournament.echoBan}
+                  cardBan={tournament.cardBan}
+                  isRewarded={tournament.rewards}
+                  isFeatured={tournament.isFlagged}
                   includeAction
                   buttonLabel="Register Now"
                 />
