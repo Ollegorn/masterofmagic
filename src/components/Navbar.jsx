@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logosm from "..assets/logosm.svg";
+import logosm from "../assets/logosm.svg";
 import logolg from "../assets/logolg.svg";
 import logoxl from "../assets/logoxl.svg";
 import { useScreenSize, breakPoint } from "../hooks/useScreenSize";

@@ -1,4 +1,4 @@
-import logosm from "/logosm.svg";
+import logosm from "../assets/logosm.svg";
 import logomd from "../assets/logomd.svg";
 import logolg from "../assets/logolg.svg";
 import logoxl from "../assets/logoxl.svg";
