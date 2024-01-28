@@ -47,11 +47,12 @@ const avatarImages = [
   'avatar29.svg'
 ]
 
-function ImagesGrid({ images }) {
-  const [selectedImage, setSelectedImage] = useState(null);
+const ImagesGrid = ({ images, onSelect }) => {
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const handleClick = (index) => {
     setSelectedImage((prevSelected) => (prevSelected === index ? null : index));
+    onSelect(index);
   };
 
   const selectedArray = images === 'avatar' ? avatarImages : eventImages;
@@ -71,7 +72,6 @@ function ImagesGrid({ images }) {
               images === 'avatar' ? 'w-14 h-14 m-1' : 'w-full h-full'
             } ${selectedImage === index ? 'brightness-100' : 'brightness-50 hover:brightness-100'}`}
           />
-          {/*fix image outline when clicked on avatars*/}
           {selectedImage !== null && selectedImage === index && (
             <div className="absolute inset-0 rounded-lg border-2"></div>
           )}

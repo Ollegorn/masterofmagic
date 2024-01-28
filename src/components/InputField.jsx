@@ -7,7 +7,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
-const InputField = ({ icon, label, placeholderText, isPassword }) => {
+const InputField = ({ icon, label, placeholderText, isPassword, onChange }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -39,6 +39,7 @@ const InputField = ({ icon, label, placeholderText, isPassword }) => {
           type={inputType}
           placeholder={placeholderText}
           className={`flex flex-1 items-center bg-transparent text-base text-Neutral-50 focus:outline-none md:text-lg lg:text-xl xl:text-2xl ${icon ? "" : "pl-4"}`}
+          onChange={onChange}
         />
         {isPassword && (
           <button
