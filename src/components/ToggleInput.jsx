@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-function ToggleInput({ label, initialValue, onChange }) {
-  const [isChecked, setIsChecked] = useState(initialValue);
+function ToggleInput({ label, fieldName, onChange }) {
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleToggle = () => {
     const newValue = !isChecked;
     setIsChecked(newValue);
     if (onChange) {
-      onChange(newValue);
+      onChange(fieldName, newValue);
     }
   };
 

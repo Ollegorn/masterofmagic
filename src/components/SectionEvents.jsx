@@ -30,6 +30,8 @@ function SectionEvents({ sectionHeading, isActionable, includeSecondaryAction, l
                   startDate={tournament.startDate}
                   endDate={tournament.endDate}
                   description={tournament.description}
+                  tournamentFormat={tournament.format}
+                  duelMode={tournament.duelMode}
                   twoWinsInThree={tournament.twoWinsInThreeGames}
                   balancedMode={tournament.balancedMode}
                   echoBan={tournament.echoBan}

@@ -1,4 +1,4 @@
-const Base_Url = "https://masterofmagicapi.azurewebsites.net/api/";
+const Base_Url = "https://localhost:7099/api/";
 
 const Api_Endpoints = {
   //Auth
@@ -21,6 +21,7 @@ const Api_Endpoints = {
   //Tournament
   getAllTournaments: `${Base_Url}Tournament/AllTournaments`,
   getTournamentById: `${Base_Url}Tournament/`, //takes id at the end Duel/{id}
+  postTournament: `${Base_Url}Tournament/CreateTournament`,
 
   
 }
