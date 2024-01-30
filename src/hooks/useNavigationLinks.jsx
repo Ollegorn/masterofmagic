@@ -1,4 +1,4 @@
-export function usePrimaryLinks() {
+export function usePrimaryLinks(isAuthenticated) {
   return [
     {
       id: "01",
@@ -18,9 +18,9 @@ export function usePrimaryLinks() {
       id: "03",
       page: "Duelist Zone",
       path: "/duelist_zone",
-      isVisible: true,
+      isVisible: isAuthenticated, // Show if user is authenticated
       bg: "bg-duellistZone-pattern",
-    }, //!REPLACE THIS BOOLEAN EXPRESSION BY LOGIC THAT CHECKS IF USER IS LOGGED IN
+    },
     {
       id: "04",
       page: "Leaderboard",
@@ -37,6 +37,7 @@ export function usePrimaryLinks() {
     },
   ];
 }
+
 
 export function useSecondaryLinks() {
   return [

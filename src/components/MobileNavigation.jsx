@@ -7,8 +7,8 @@ import Button from './Button';
 
 
 
-function MobileNavigation({ show, onClose, onLoginClick }) {
-  const navItems = usePrimaryLinks();
+function MobileNavigation({ show, onClose, onLoginClick, isAuthenticated, onLogoutButtonClick }) {
+  const navItems = usePrimaryLinks(isAuthenticated);
 
   const onItemClick = (e) => {
     e.stopPropagation();
@@ -67,9 +67,15 @@ function MobileNavigation({ show, onClose, onLoginClick }) {
           </div>
           <div class="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100 sm:w-3/4 md:w-1/2"></div>
           <div className='flex py-3 px-6 justify-center self-stretch'>
-          <Button className='mx-auto' onClick={onLoginButtonClick}>
-              Log In
-            </Button>
+            {!isAuthenticated ? (
+              <Button className='mx-auto' onClick={onLoginButtonClick}>
+                Log In
+              </Button>
+            ) : (
+              <Button className="mx-auto" onClick={onLogoutButtonClick}>
+                Log Out
+              </Button>
+            )}
           </div>
         </div>
       </div>

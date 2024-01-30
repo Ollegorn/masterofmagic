@@ -31,22 +31,22 @@ const useLogin = (onLoginSuccess) => {
       if (response.ok) {
         const data = await response.json();
 
-        // Save tokens in cookies
         setCookie("jwtToken", data.token, { path: "/" });
         setCookie("refreshToken", data.refreshToken, { path: "/" });
         setCookie("userId", data.userId, { path: "/" });
 
-        // Fetch additional user details
-        const userDetailsResponse = await fetch(`${Api_Endpoints.getUserById}${data.userId}`, {
-          headers: {
-            Authorization: `Bearer ${data.token}`,
-          },
-        });
+        const userDetailsResponse = await fetch(
+          `${Api_Endpoints.getUserById}${data.userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${data.token}`,
+            },
+          }
+        );
 
         if (userDetailsResponse.ok) {
           const userDetails = await userDetailsResponse.json();
 
-          // Save username and roles in LocalStorage
           localStorage.setItem("userName", userDetails.userName);
           localStorage.setItem("roles", JSON.stringify(userDetails.roles));
 

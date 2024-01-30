@@ -3,9 +3,9 @@ import InputField from "./InputField";
 import Button from "./Button";
 import useLogin from "../hooks/useLogin";
 
-function Login({ onSignupClick }) {
+function Login({ onSignupClick, closePopupOnSuccessLogin }) {
   const { formData, handleChange, handleSubmit } = useLogin(() => {
-    console.log("Login successful!");
+    closePopupOnSuccessLogin();
   });
 
   return (
