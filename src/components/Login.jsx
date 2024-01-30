@@ -1,58 +1,36 @@
-import { useState } from "react";
+import React from "react";
 import InputField from "./InputField";
 import Button from "./Button";
+import useLogin from "../hooks/useLogin";
 
 function Login({ onSignupClick }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginMessage, setLoginMessage] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleTogglePassword = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // fetch logic
-      if (response.ok) {
-        // success
-        setLoginMessage("Login successful! Redirecting...");
-        setTimeout(() => {
-          setLoginMessage("");
-          window.location.href = "/";
-        }, 1000);
-      } else {
-        setLoginMessage("Login failed. Please check your credentials.");
-        console.error("Login failed");
-      }
-    } catch (error) {
-      setLoginMessage("Error during login. Please try again.");
-      console.error("Error during login:", error);
-    }
-  };
+  const { formData, handleChange, handleSubmit } = useLogin(() => {
+    console.log("Login successful!");
+  });
 
   return (
     <div className="flex w-full flex-col items-center gap-4 rounded-3xl py-4 lg:gap-6 lg:py-6">
-      <InputField icon="email" label="Email" placeholderText="user@email.com" />
+      <InputField
+        icon="email"
+        label="Email"
+        placeholderText="Enter your email"
+        value={formData.email}
+        onChange={(e) => handleChange("email", e.target.value)}
+      />
       <InputField
         icon="lock"
         label="Password"
-        placeholderText="enter your password"
+        placeholderText="Enter your password"
         isPassword
+        value={formData.password}
+        onChange={(e) => handleChange("password", e.target.value)}
       />
       <div className="flex w-full flex-col items-start py-4 lg:py-6">
-        <Button variant="primary" className={`self-stretch`}>
+        <Button
+          variant="primary"
+          className={`self-stretch`}
+          onClick={handleSubmit}
+        >
           Log In
         </Button>
       </div>

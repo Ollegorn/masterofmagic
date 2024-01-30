@@ -1,4 +1,4 @@
-const Base_Url = "https://localhost:7099/api/";
+const Base_Url = "https://masterofmagicapi.azurewebsites.net/api/";
 
 const Api_Endpoints = {
   //Auth
