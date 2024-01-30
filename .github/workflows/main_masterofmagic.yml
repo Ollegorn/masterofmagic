@@ -59,4 +59,4 @@ jobs:
           app-name: 'masterofmagic'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_56D75CC9F05E4447B95F6D68D2AE8373 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6F0010E4E29A441D84F7057304FCD13E }}
