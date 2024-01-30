@@ -4,8 +4,6 @@ function UserInfo({
   variant = "success",
   orientation
 }) {
-  console.log(useravatar);
-
   return (
     <>
       <div className={`flex flex-1 items-center justify-center gap-1 ${orientation === "row" ? "flex-row gap-2" : "flex-col"}`}>

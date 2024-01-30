@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Api_Endpoints } from "../services/ApiBaseLink";
+import { useCookies } from "react-cookie";
 
-const useLogin = () => {
+const useLogin = (onLoginSuccess) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [cookies, setCookie] = useCookies(["jwtToken", "refreshToken"]);
 
   const handleChange = (fieldName, value) => {
     setFormData((prevData) => ({
@@ -15,7 +18,6 @@ const useLogin = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
     try {
       const response = await fetch(`${Api_Endpoints.postLogin}`, {
         method: "POST",
@@ -27,7 +29,31 @@ const useLogin = () => {
       });
 
       if (response.ok) {
-        console.log("Login successfull");
+        const data = await response.json();
+
+        // Save tokens in cookies
+        setCookie("jwtToken", data.token, { path: "/" });
+        setCookie("refreshToken", data.refreshToken, { path: "/" });
+        setCookie("userId", data.userId, { path: "/" });
+
+        // Fetch additional user details
+        const userDetailsResponse = await fetch(`${Api_Endpoints.getUserById}${data.userId}`, {
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+        });
+
+        if (userDetailsResponse.ok) {
+          const userDetails = await userDetailsResponse.json();
+
+          // Save username and roles in LocalStorage
+          localStorage.setItem("userName", userDetails.userName);
+          localStorage.setItem("roles", JSON.stringify(userDetails.roles));
+
+          onLoginSuccess();
+        } else {
+          console.error("Failed to fetch user details");
+        }
       } else {
         console.error("Login failed");
       }

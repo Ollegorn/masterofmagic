@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import Button from "../components/Button";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -12,7 +12,6 @@ import Popup from "../components/Popup";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { useNavigate } from "react-router-dom";
-
 
 function Home() {
   const { tournamentsData, loading, error, ongoingTournaments } = useTournaments();

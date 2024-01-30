@@ -23,7 +23,10 @@ const Api_Endpoints = {
   getTournamentById: `${Base_Url}Tournament/`, //takes id at the end Duel/{id}
   postTournament: `${Base_Url}Tournament/CreateTournament`,
 
-  
+  //User
+  getAllUsers: `${Base_Url}User/AllUsers`,
+  getUserById: `${Base_Url}User/`, //takes id at the end Duel/{id}
+  getUserRolesByUsername: `${Base_Url}Setup/GetUserRoles`,
 }
 
 export {Base_Url, Api_Endpoints};
