@@ -21,6 +21,7 @@ function TournamentHub() {
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const { ongoingTournaments, upcomingTournaments } = useTournaments();
   const { registerToEvent } = useRegisterToTournament();
+  const isAuthenticated = document.cookie.includes("jwtToken");
 
   const [selectedTournamentId, setSelectedTournamentId] = useState(null);
 
@@ -99,7 +100,8 @@ function TournamentHub() {
                   cardBan={tournament.cardBan}
                   isRewarded={tournament.rewards}
                   isFeatured={tournament.isFlagged}
-                  includeAction
+                  //can change so it prompts user to login instead
+                  includeAction={isAuthenticated ? true : false}
                   buttonLabel="Register Now"
                   onClick={registerToEventConfirmationMessage}
                 />
