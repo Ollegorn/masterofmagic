@@ -5,7 +5,7 @@ import Tournament from "../assets/tabler_tournament.svg";
 import Reward from "../assets/material-symbols_rewarded-ads.svg";
 import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 
-function SectionRules({onClickPrimary, onClickSecondary}) {
+function SectionRules({onClickPrimary, showPrimary, onClickSecondary}) {
   const screen = useScreenSize();
   return (
     <>
@@ -16,7 +16,7 @@ function SectionRules({onClickPrimary, onClickSecondary}) {
           includeSecondaryAction={screen.width > breakPoint.lg ? true : false}
           labelSeconary="Join A Tournament"
           onClickSecondary={onClickSecondary}
-          includePrimaryAction
+          includePrimaryAction = {showPrimary ? true : null}
           labelPrimary="Create A Profile"
           onClickPrimary={onClickPrimary}
         />

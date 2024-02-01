@@ -8,22 +8,56 @@ import useEvents from "../hooks/useEvents";
 import FullscreenModal from "../components/FullScreenModal";
 import CreateTournament from "../components/CreateTournament";
 import { useTournaments } from "../hooks/useTournaments";
-
+import { useNavigate } from "react-router-dom";
+import Popup from "../components/Popup";
+import ConfirmationMessage from "../components/ConfirmationMessage";
+import { usePopup } from "../hooks/usePopup";
+import useRegisterToTournament from "../hooks/useRegisterToTournament";
 
 function TournamentHub() {
   const events = useEvents();
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isPopupOpen, openPopup, closePopup } = usePopup();
+  const { ongoingTournaments, upcomingTournaments } = useTournaments();
+  const { registerToEvent } = useRegisterToTournament();
 
-  const {ongoingTournaments, upcomingTournaments} = useTournaments();
-
+  const [selectedTournamentId, setSelectedTournamentId] = useState(null);
 
   const handleCreateTournamentClick = () => {
-    setIsPopupOpen(true);
+    setIsModalOpen(true);
   };
 
-  const handleClosePopup = () => {
-    setIsPopupOpen(false);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
+
+  const scrolToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
+  const handleOnClickInsideEventCard = () => {
+    navigate("/leaderboard");
+    scrolToTop();
+  };
+
+  const closePopupAndResetContent = () => {
+    closePopup();
+  };
+
+  const registerToEventConfirmationMessage = (tournamentId) => {
+    setSelectedTournamentId(tournamentId);
+    openPopup();
+  };
+
+  const handleConfirmation = () => {
+    registerToEvent(selectedTournamentId);
+    closePopupAndResetContent();
+  };
+
   return (
     <>
       <div className="flex w-full max-w-[1512px] flex-col gap-16 self-center lg:gap-32">
@@ -37,6 +71,7 @@ function TournamentHub() {
         <SectionEvents
           sectionHeading={`Currently Ongoing Events`}
           tournaments={ongoingTournaments}
+          onClick={handleOnClickInsideEventCard}
         />
         <section className="w-full px-4 md:px-8 lg:px-6">
           <SectionHeader 
@@ -66,6 +101,7 @@ function TournamentHub() {
                   isFeatured={tournament.isFlagged}
                   includeAction
                   buttonLabel="Register Now"
+                  onClick={registerToEventConfirmationMessage}
                 />
               ))}
           </div>
@@ -74,10 +110,21 @@ function TournamentHub() {
         <Footer />
       </div>
 
-      {isPopupOpen && (
-        <FullscreenModal title="Create New Tournament" show={isPopupOpen} onClose={handleClosePopup}>
+      {isModalOpen && (
+        <FullscreenModal title="Create New Tournament" show={isModalOpen} onClose={handleCloseModal}>
           <CreateTournament />
         </FullscreenModal>
+      )}
+      {isPopupOpen && (
+        <Popup show={isPopupOpen} onClose={closePopupAndResetContent}>
+        <ConfirmationMessage
+          label="Register Confirmation"
+          description="Are you sure you want to register to this upcoming tournament?"
+          buttonText="Register"
+          onCancel={closePopupAndResetContent}
+          onConfirm={handleConfirmation}
+        />
+      </Popup>
       )}
     </>
   );

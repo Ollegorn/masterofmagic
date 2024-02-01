@@ -357,7 +357,7 @@ function EventCard({
               >
                 <Button
                   variant="primary"
-                  onClick={onClick}
+                  onClick={() => onClick && onClick(tournamentId)}
                   className={`self-stretch`}
                 >
                   {buttonLabel}

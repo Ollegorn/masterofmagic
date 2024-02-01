@@ -20,8 +20,7 @@ function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [forceRender, setForceRender] = useState(false); 
   const screen = useScreenSize();
-  const isAuthenticated =
-    document.cookie.includes("jwtToken") || localStorage.getItem("jwtToken");
+  const isAuthenticated = document.cookie.includes("jwtToken");
   const navItems = usePrimaryLinks(isAuthenticated);
 
   const handleLogout = () => {

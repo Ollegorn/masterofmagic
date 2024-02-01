@@ -17,11 +17,17 @@ function Home() {
   const { tournamentsData, loading, error, ongoingTournaments } = useTournaments();
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [popupContent, setPopupContent] = useState(null);
+  const isAuthenticated = document.cookie.includes("jwtToken");
   const navigate = useNavigate();
 
  const handleLogin = () => {
-    openPopup();
-    setPopupContent("login");
+    if(!isAuthenticated){
+      openPopup();
+      setPopupContent("login");
+    }
+    else{
+      navigate("/tournament_hub");
+    }
   };
 
 
@@ -46,6 +52,10 @@ function Home() {
     navigate("/tournament_hub");
     scrolToTop();
   };
+  const handleOnClickInsideEventCard = () => {
+    navigate("/leaderboard");
+    scrolToTop();
+  }
 
   return (
     <>
@@ -65,10 +75,12 @@ function Home() {
           includeSecondaryAction
           tournaments={ongoingTournaments}
           onClickSecondary={handleSecondaryAction}
+          onClick={handleOnClickInsideEventCard}
         />
         {/*<SectionHighlights /> */}
         <SectionRules 
-          onClickPrimary={handleSignupClick} 
+          showPrimary={!isAuthenticated ? true : false}
+          onClickPrimary={isAuthenticated ? null : handleSignupClick} 
           onClickSecondary={handleSecondaryAction}
         />
       </div>
@@ -128,7 +140,7 @@ function Home() {
 
         {popupContent === "login" && (
         <Popup title="Log In" show={isPopupOpen} onClose={closePopupAndResetContent}>
-          <Login onSignupClick={handleSignupClick} />
+          <Login onSignupClick={handleSignupClick} closePopupOnSuccessLogin={closePopupAndResetContent}/>
         </Popup>
       )}
 
