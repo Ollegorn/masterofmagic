@@ -5,7 +5,7 @@ import EventCard from "./EventCard";
 import SectionHeader from "./SectionHeader";
 import { useScreenSize, breakPoint } from "../hooks/useScreenSize";
 
-function SectionEvents({ sectionHeading, isActionable, includeSecondaryAction, labelSeconary, onClickSecondary, tournaments, onClick }) {
+function SectionEvents({ sectionHeading, isActionable, includeSecondaryAction, labelPrimary, labelSeconary, onClickSecondary, tournaments, onClick }) {
   const events = useEvents();
   const screen = useScreenSize();
 
@@ -39,8 +39,8 @@ function SectionEvents({ sectionHeading, isActionable, includeSecondaryAction, l
                   isRewarded={tournament.rewards}
                   isFeatured={tournament.isFlagged}
                   includeAction
-                  onClick={onClick}
-                  buttonLabel="Go To Leaderboard"
+                  onClick={() => onClick(tournament)}
+                  buttonLabel={labelPrimary}
                 />
               ))}
           </Carousel>

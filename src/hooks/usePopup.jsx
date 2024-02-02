@@ -1,18 +1,18 @@
 import { useState } from 'react';
 
 export function usePopup() {
-  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = () => {
-    setPopupOpen(true);
+    setIsPopupOpen(true);
   };
 
   const closePopup = () => {
-    setPopupOpen(false);
+    setIsPopupOpen(false);
   };
 
   const togglePopup = () => {
-    setPopupOpen((prev) => !prev);
+    setIsPopupOpen((prev) => !prev);
   };
 
   return {
@@ -20,6 +20,29 @@ export function usePopup() {
     openPopup,
     closePopup,
     togglePopup,
+  };
+};
+
+export function useFullscreenModal() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  }
+
+  return {
+    isModalOpen, 
+    openModal, 
+    closeModal, 
+    toggleModal,
   };
 };
 

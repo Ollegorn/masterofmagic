@@ -8,7 +8,7 @@ const Api_Endpoints = {
 
   //Duel
   getAllDuels: `${Base_Url}Duel/AllDuels`,
-  getDuelById: `${Base_Url}Duel/`, //takes id at the end Duel/{id}
+  getDuelById: `${Base_Url}Duel/`, //takes id at the end 
   deleteDuel: `${Base_Url}Duel/DeleteDuel`,
   updateDuel: `${Base_Url}Duel/UpdateDuel`,
 
@@ -20,13 +20,15 @@ const Api_Endpoints = {
 
   //Tournament
   getAllTournaments: `${Base_Url}Tournament/AllTournaments`,
-  getTournamentById: `${Base_Url}Tournament/`, //takes id at the end Duel/{id}
+  getTournamentById: `${Base_Url}Tournament/`, //takes id at the end 
   postTournament: `${Base_Url}Tournament/CreateTournament`,
   postAddUserToTournament: ` ${Base_Url}Tournament/AddUserToTournament`,
+  postStartTournament: `${Base_Url}Tournament/StartTournament?tournamentId=`, //takes id at the end 
+  deleteTournament: `${Base_Url}Tournament/DeleteTournament?id=`, //takes id at the end 
 
   //User
   getAllUsers: `${Base_Url}User/AllUsers`,
-  getUserById: `${Base_Url}User/`, //takes id at the end Duel/{id}
+  getUserById: `${Base_Url}User/`, //takes id at the end 
   getUserRolesByUsername: `${Base_Url}Setup/GetUserRoles`,
 }
 

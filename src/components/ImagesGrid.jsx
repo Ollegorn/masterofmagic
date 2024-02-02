@@ -52,7 +52,7 @@ const ImagesGrid = ({ images, onSelect }) => {
 
   const handleClick = (index) => {
     setSelectedImage((prevSelected) => (prevSelected === index ? null : index));
-    onSelect(index);
+    onSelect(index + 1);
   };
 
   const selectedArray = images === 'avatar' ? avatarImages : eventImages;

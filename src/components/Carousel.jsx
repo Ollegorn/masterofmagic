@@ -35,7 +35,6 @@ const Carousel = ({ children }) => {
   useEffect(() => {
     if (swiper.current) {
       swiper.current.update();
-      swiper.current.slideTo(Math.floor(children.length / 2));
     }
   }, [children.length,screenWidth]);
 

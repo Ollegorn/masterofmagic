@@ -32,7 +32,7 @@ export function usePrimaryLinks(isAuthenticated) {
       id: "05",
       page: "Rules",
       path: "/rules",
-      isVisible: true,
+      isVisible: false,
       bg: "bg-home-pattern",
     },
   ];
