@@ -3,13 +3,12 @@ import useUsers from "../hooks/useUsers";
 
 function DuelListItem({
   variant = "",
-  player1Id = 1,
-  player2Id = 2,
-  player1Wins = 2,
-  player2Wins = 1,
+  player1,
+  player2,
+  player1Wins,
+  player2Wins,
 }) {
-  const player1 = useUsers(player1Id);
-  const player2 = useUsers(player2Id);
+  console.log(player1);
   return (
     <>
       <li
@@ -22,8 +21,8 @@ function DuelListItem({
         } px-3 py-2`}
       >
         <UserInfo
-          userName={player1[0].username}
-          useravatar={player1[0].userAvatar}
+          userName={player1.userName}
+          useravatar={`bg-avatar${player1.imageNumber}`}
           variant={variant}
         />
         <div
@@ -50,8 +49,8 @@ function DuelListItem({
           </p>
         </div>
         <UserInfo
-          userName={player2[0].username}
-          useravatar={player2[0].userAvatar}
+          userName={player2.userName}
+          useravatar={`bg-avatar${player2.imageNumber}`}
           variant={variant}
         />
       </li>

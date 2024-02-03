@@ -1,20 +1,16 @@
-import { useDuels } from "../hooks/useEvents";
 import DuelListItem from "./DuelListItem";
 import Title from "./Title";
 import { Tab } from "@headlessui/react";
 
-function DuellingHistory({ evenId = 1, userId = 1 }) {
-  const duels = useDuels(evenId, userId);
+function DuellingHistory({ duels, userId }) {
+  console.log("Duels received in DuellingHistory:", duels);
   const wins = duels.filter(
-    (d) =>
-      (userId === d.player1Id && d.player1Wins > d.player2Wins) ||
-      (userId === d.player2Id && d.player2Wins > d.player1Wins),
+    (d) => d.duelWins > d.duelDefeats
   );
   const losses = duels.filter(
-    (d) =>
-      (userId === d.player1Id && d.player1Wins < d.player2Wins) ||
-      (userId === d.player2Id && d.player2Wins < d.player1Wins),
+    (d) => d.duelWins < d.duelDefeats
   );
+  
   return (
     <>
       <div className="flex flex-col gap-4 lg:gap-6">
@@ -91,14 +87,12 @@ function DuellingHistory({ evenId = 1, userId = 1 }) {
                 {duels.map((d) => (
                   <DuelListItem
                     key={d.eventId}
-                    player1Id={d.player1Id}
-                    player1Wins={d.player1Wins}
-                    player2Id={d.player2Id}
-                    player2Wins={d.player2Wins}
+                    player1={d.userOne}
+                    player1Wins={d.duelWins}
+                    player2={d.userTwo}
+                    player2Wins={d.duelDefeats}
                     variant={
-                      (userId === d.player1Id &&
-                        d.player1Wins > d.player2Wins) ||
-                      (userId === d.player2Id && d.player2Wins > d.player1Wins)
+                      d.duelWins > d.duelDefeats
                         ? "success"
                         : "failure"
                     }
@@ -109,16 +103,14 @@ function DuellingHistory({ evenId = 1, userId = 1 }) {
             <Tab.Panel>
               <ul className="flex flex-col gap-4">
                 {wins.map((d) => (
-                  <DuelListItem
+                    <DuelListItem
                     key={d.eventId}
-                    player1Id={d.player1Id}
-                    player1Wins={d.player1Wins}
-                    player2Id={d.player2Id}
-                    player2Wins={d.player2Wins}
+                    player1={d.userOne}
+                    player1Wins={d.duelWins}
+                    player2={d.userTwo}
+                    player2Wins={d.duelDefeats}
                     variant={
-                      (userId === d.player1Id &&
-                        d.player1Wins > d.player2Wins) ||
-                      (userId === d.player2Id && d.player2Wins > d.player1Wins)
+                      d.duelWins > d.duelDefeats
                         ? "success"
                         : "failure"
                     }
@@ -129,12 +121,12 @@ function DuellingHistory({ evenId = 1, userId = 1 }) {
             <Tab.Panel>
               <ul className="flex flex-col gap-4">
                 {losses.map((d) => (
-                  <DuelListItem
+                    <DuelListItem
                     key={d.eventId}
-                    player1Id={d.player1Id}
-                    player1Wins={d.player1Wins}
-                    player2Id={d.player2Id}
-                    player2Wins={d.player2Wins}
+                    player1={d.userOne}
+                    player1Wins={d.duelWins}
+                    player2={d.userTwo}
+                    player2Wins={d.duelDefeats}
                     variant={
                       (userId === d.player1Id &&
                         d.player1Wins > d.player2Wins) ||

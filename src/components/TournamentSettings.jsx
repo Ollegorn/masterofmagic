@@ -182,12 +182,12 @@ function TournamentSettings({ tournamentData, registerToEventConfirmationMessage
             </div>
           </div>
           <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
-          <Button className="w-full h-14 mb-12" >Submit Changes</Button>
+          <Button className="w-full h-14 mb-12" variant="secondary" >Submit Changes</Button>
         <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
           </>
         )}
         
-        <Button className="w-full h-14 my-12" variant="secondary" onClick={handleRegisterToTournament} >Register To Tournament</Button>
+        <Button className="w-full h-14 my-12"  onClick={handleRegisterToTournament} >Register To Tournament</Button>
         <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
         <Button className="w-full h-14 my-12" onClick={handleStartTournament}>Start Tournament</Button>
         <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
