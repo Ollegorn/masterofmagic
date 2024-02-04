@@ -21,7 +21,7 @@ function SectionJoinedEvents() {
   return (
     <>
       <section className="w-full px-4 md:px-8 lg:px-6">
-      <SectionHeader
+        <SectionHeader
           heading="Events You Have Joined"
           isActionable={screen.width > breakPoint.md ? true : false}
           includeSecondaryAction
