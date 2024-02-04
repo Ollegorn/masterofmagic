@@ -2,22 +2,20 @@ import React from 'react';
 import UserInfo from './UserInfo';
 
 function Rankings({ registeredUsers, tournamentId }) {
+  const findTournamentStats = (user) => {
+    const stats = user.tournamentStats.find(stats => stats.tournamentId === tournamentId)
+    return stats;
+  };
+
   const sortUsersByTotalPoints = () => {
-    return registeredUsers.slice().sort((a, b) => b.tournamentStats[0].totalPoints - a.tournamentStats[0].totalPoints);
+    return registeredUsers.slice().sort((a, b) => {
+      const statsA = findTournamentStats(a);
+      const statsB = findTournamentStats(b);
+      return statsB.totalPoints - statsA.totalPoints;
+    });
   };
 
   const sortedUsers = sortUsersByTotalPoints();
-
-  // Function to find tournamentStats based on tournamentId
-  const findTournamentStats = (user) => {
-    const stats = user.tournamentStats.find(stats => stats.tournamentId === tournamentId) || {
-      played: 0,
-      wins: 0,
-      defeats: 0,
-      totalPoints: 0
-    };
-    return stats;
-  };
 
   return (
     <div className="flex flex-col items-center gap-4 self-stretch mx-auto">

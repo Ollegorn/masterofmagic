@@ -20,6 +20,7 @@ function Leaderboard() {
           {ongoingTournaments.map((tournament) => (
             <EventCard
               key={tournament.tournamentId}
+              tournamentId={tournament.tournamentId}
               bgID={tournament.imageNumber}
               title={tournament.tournamentName}
               startDate={tournament.startDate}

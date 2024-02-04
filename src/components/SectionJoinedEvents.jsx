@@ -5,6 +5,7 @@ import Statistics from "./Statistics";
 import DuellingHistory from "./DuellingHistory";
 import UnchallengedOpponents from "./UnchallengedOpponents";
 import { useTournaments } from "../hooks/useTournaments";
+import useDuels from "../hooks/useDuels";
 
 function SectionJoinedEvents() {
   const userIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('userId='));
@@ -14,51 +15,13 @@ function SectionJoinedEvents() {
   const screen = useScreenSize();
   const ongoingTournamentsUserParticipates = ongoingTournaments.filter((t) => t.registeredUsers.some((u) => u.id === userId));
   const upcomingTournamentsUserParticipates = upcomingTournaments.filter((t) => t.registeredUsers.some((u) => u.id === userId));
-  
-  function getPlayedDuels(tournamentData, userId) {
-    const playedDuels = [];
-    tournamentData.forEach((tournament) => {
-        tournament.tournamentDuels.forEach((duel) => {
-            const isUserInDuel = duel.userOne.id === userId || duel.userTwo.id === userId;
-            if (isUserInDuel && duel.isCompleted) {
-                //logged-in user always userOne
-                const modifiedDuel = {
-                    ...duel,
-                    userOne: duel.userTwo.id === userId ? duel.userTwo : duel.userOne,
-                    userTwo: duel.userTwo.id === userId ? duel.userOne : duel.userTwo,
-                };
-                playedDuels.push(modifiedDuel);
-            }
-        });
-    });
-    return playedDuels;
-}
 
-function getUnplayedDuels(tournamentData, userId) {
-    const unplayedDuels = [];
-    tournamentData.forEach((tournament) => {
-        tournament.tournamentDuels.forEach((duel) => {
-            const isUserInDuel = duel.userOne.id === userId || duel.userTwo.id === userId;
-            if (isUserInDuel && !duel.isCompleted) {
-                //logged-in user always userOne
-                const modifiedDuel = {
-                    ...duel,
-                    userOne: duel.userTwo.id === userId ? duel.userTwo : duel.userOne,
-                    userTwo: duel.userTwo.id === userId ? duel.userOne : duel.userTwo,
-                };
-                unplayedDuels.push(modifiedDuel);
-            }
-        });
-    });
-    return unplayedDuels;
-}
-
-
+  const { playedDuels, unplayedDuels, getUserTournamentStats, getUserRank } = useDuels(userId, ongoingTournamentsUserParticipates);
 
   return (
     <>
       <section className="w-full px-4 md:px-8 lg:px-6">
-        <SectionHeader
+      <SectionHeader
           heading="Events You Have Joined"
           isActionable={screen.width > breakPoint.md ? true : false}
           includeSecondaryAction
@@ -75,10 +38,24 @@ function getUnplayedDuels(tournamentData, userId) {
                 isClickable
               />
               <div className="flex flex-col gap-4 self-stretch py-4 md:gap-8 md:py-8 lg:gap-16 lg:py-16">
-                <Statistics key={event.id} eventId={event.id} />
-                <DuellingHistory key={event.tournamentId} eventId={event.tournamentId} userId={userId} duels={getPlayedDuels([event], userId)} />
-                {console.log("Duels passed to DuellingHistory:", getPlayedDuels([event], userId))}
-                <UnchallengedOpponents key={event.tournamentId} eventId={event.tournamentId} userId={userId} duels={getUnplayedDuels([event], userId)} />
+                <Statistics
+                  key={event.tournamentId} 
+                  eventId={event.tournamentId}
+                  tournamentStats={getUserTournamentStats(event)}
+                  userRank={getUserRank(event)}
+                />
+                <DuellingHistory 
+                  key={event.tournamentId} 
+                  eventId={event.tournamentId} 
+                  userId={userId} 
+                  duels={playedDuels} 
+                />
+                <UnchallengedOpponents 
+                  key={event.tournamentId} 
+                  eventId={event.tournamentId} 
+                  userId={userId} 
+                  duels={unplayedDuels} 
+                />
               </div>
             </div>
           ))}
