@@ -41,7 +41,7 @@ function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageN
           </div>
         ) : (
           <>
-            {isOpen && !isPendingResponse && (
+            {(isOpen || isPendingResponse) && (
               <>
                 <div className="self-stretch">
                   <p className="font-body text-sm">

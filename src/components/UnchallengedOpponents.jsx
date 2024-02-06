@@ -5,7 +5,7 @@ import Slider from "./Slider";
 function UnchallengedOpponents({ unplayedDuels }) {
   return (
     <>
-      <div className="flex flex-col mx-2 lg:gap-6">
+      <div className="flex flex-col lg:gap-6">
         <Title>Unchallenged Opponents</Title>
         <Slider>
           {unplayedDuels.map((duel) => (

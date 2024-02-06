@@ -7,7 +7,7 @@ function ChallengesReceived({ receivedInvitations }) {
 
   return (
     <>
-      <div className="flex flex-col mx-2 lg:gap-6">
+      <div className="flex flex-col  lg:gap-6">
         <Title>Incoming Challenges</Title>
         {pendingReceivedInvitations.length > 0 ? (
           <Slider>
@@ -15,8 +15,8 @@ function ChallengesReceived({ receivedInvitations }) {
               <Challenge 
                 key={inv.id}
                 isOpen
-                username={inv.recipient.userName}
-                imageNumber={inv.recipient.imageNumber}
+                username={inv.sender.userName}
+                imageNumber={inv.sender.imageNumber}
                 message={inv.message}
                 dateTime={inv.dateTime}
               />

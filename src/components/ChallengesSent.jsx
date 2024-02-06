@@ -7,14 +7,14 @@ function ChallengesSent({ sentInvitations }) {
 
   return (
     <>
-      <div className="flex flex-col mx-2 lg:gap-6">
+      <div className="flex flex-col lg:gap-6">
         <Title>Awaiting Response</Title>
         {pendingSentInvitations.length > 0 ? (
           <Slider>
             {pendingSentInvitations.map((inv) => (
               <Challenge 
                 key={inv.id}
-                isOpen
+                isPendingResponse
                 username={inv.recipient.userName}
                 imageNumber={inv.recipient.imageNumber}
                 message={inv.message}
