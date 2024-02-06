@@ -8,7 +8,6 @@ function DuelListItem({
   player1Wins,
   player2Wins,
 }) {
-  console.log(player1);
   return (
     <>
       <li

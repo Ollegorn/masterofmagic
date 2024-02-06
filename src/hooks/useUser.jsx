@@ -1,34 +1,26 @@
-// UserContext.js
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Api_Endpoints } from '../services/ApiBaseLink';
 
-const UserContext = createContext();
-
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ roles: [] });
+export const useAllUsers = () => {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // Check for stored roles in localStorage
-    const storedRoles = localStorage.getItem('userRoles');
-    if (storedRoles) {
-      setUser({ roles: JSON.parse(storedRoles) });
-    }
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(Api_Endpoints.getAllUsers);
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        const userData = await response.json();
+        setUsers(userData);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
-  const updateUser = (newUser) => {
-    setUser(newUser);
-  };
-
-  return (
-    <UserContext.Provider value={{ user, updateUser }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return users;
 };
 
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
-};

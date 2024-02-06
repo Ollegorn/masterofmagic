@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from "./Button";
 import Rankings from './Rankings';
+import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 
 function EventCard({
   tournamentId,
@@ -78,21 +79,7 @@ function EventCard({
             >
               {/** date */}
               <div className={`flex items-center gap-1 self-stretch`}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  className={`size-4 md:size-5 lg:size-6`}
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M12.6667 2.66665H12V1.33331H10.6667V2.66665H5.33333V1.33331H4V2.66665H3.33333C2.59333 2.66665 2 3.26665 2 3.99998V13.3333C2 14.0666 2.59333 14.6666 3.33333 14.6666H12.6667C13.4 14.6666 14 14.0666 14 13.3333V3.99998C14 3.26665 13.4 2.66665 12.6667 2.66665ZM12.6667 13.3333H3.33333V5.99998H12.6667V13.3333ZM4.33333 8.66665C4.33333 7.74665 5.08 6.99998 6 6.99998C6.92 6.99998 7.66667 7.74665 7.66667 8.66665C7.66667 9.58665 6.92 10.3333 6 10.3333C5.08 10.3333 4.33333 9.58665 4.33333 8.66665Z"
-                    fill="#DFE2E1"
-                  />
-                </svg>
+                <CalendarDaysIcon className="w-6" />
                 <p
                   className={`flex-1 font-body text-xs text-Neutral-200 md:text-sm lg:text-base xl:text-2xl`}
                 >{`${startDate} - ${endDate}`}</p>

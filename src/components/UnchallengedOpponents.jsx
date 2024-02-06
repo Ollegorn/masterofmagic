@@ -1,22 +1,23 @@
-import DuelListItem from "./DuelListItem";
 import Title from "./Title";
+import Challenge from "./Challenge";
+import Slider from "./Slider";
 
-function UnchallengedOpponents({ duels, userId }) {
+function UnchallengedOpponents({ unplayedDuels }) {
   return (
     <>
-      <div className="flex flex-col gap-4 lg:gap-6">
+      <div className="flex flex-col mx-2 lg:gap-6">
         <Title>Unchallenged Opponents</Title>
-        <ul className="flex flex-col gap-4">
-          {duels.map((d) => (
-            <DuelListItem
-            key={d.eventId}
-            player1={d.userOne}
-            player1Wins={d.duelWins}
-            player2={d.userTwo}
-            player2Wins={d.duelDefeats}
-          />
+        <Slider>
+          {unplayedDuels.map((duel) => (
+            <Challenge 
+              key={duel.duelId}
+              isUnchallenged
+              username={duel.userTwo.userName}
+              imageNumber={duel.userTwo.imageNumber}
+            />
           ))}
-        </ul>
+        </Slider>
+        
       </div>
     </>
   );

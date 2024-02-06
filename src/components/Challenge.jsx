@@ -1,51 +1,71 @@
 import React from 'react';
-import avatar1 from '/avatar01.svg';
-import avatar2 from '/avatar02.svg';
-import ConfirmationMessage from './ConfirmationMessage';
+import UserInfo from './UserInfo';
+import { CalendarIcon, ClockIcon, XMarkIcon, CheckIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
+import Button from './Button';
 
-/*Dynamically render users using UserInfo*/
+function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageNumber, message, dateTime }) {
+  const parsedDate = new Date(dateTime);
 
-function Challenge() {
+  const date = parsedDate.toLocaleDateString();
+  const time = parsedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
   return (
     <>
-      <ConfirmationMessage label="Challenge Opponent To A Magical Duel"  buttonText="Challenge Opponent">
-        <div className="flex py-4 justify-center items-center gap-3 self-stretch rounded-lg">
-          <div className="flex p-0 flex-col justify-center items-center gap-1">
-              <img src={`${avatar1}`} className="w-10 h-10 justify-center items-center"/>
-              <p className="font-body font-normal text-sm text-Neutral-50">wzrdFace</p>
-          </div>
-
-          <div className="flex py-3 px-4 mx-4 justify-center items-center gap-1 rounded bg-Neutral-500">
-              <p className="font-body font-bold text-lg text-Neutral-50">VS</p>
-          </div>
-
-          <div className="flex p-0 flex-col justify-center items-center gap-1">
-              <img src={`${avatar2}`} className="w-10 h-10 justify-center items-center"/>
-              <p className="font-body font-normal text-sm text-Neutral-50">CassCass</p>
-          </div>
-
-        </div>
-        <div className="flex flex-col items-start">
-          <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl ">Date</label>
-          <div className="flex mb-4 items-center gap-2 self-stretch rounded-lg bg-Neutral-800 py-4 px-2 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow md:gap-3">
-            <input type="date" className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"></input>
-          </div>
-          <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl ">Time</label>
-          <div className="flex mb-4 items-center gap-2 self-stretch rounded-lg bg-Neutral-800 py-4 px-2 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow md:gap-3">
-            <input type="time" className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"></input>
-          </div>
-          <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Message</label>
-          <div className="flex items-center gap-2 self-stretch rounded-lg bg-Neutral-800 p-4 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow md:gap-3">
-            <textarea
-              placeholder="Write a short message to your opponent."
-              className="flex flex-1 h-auto items-center bg-transparent text-base text-Neutral-50 focus:outline-none md:text-lg lg:text-xl xl:text-2xl resize-none w-full"
-              maxLength={150}
-            />
+      <div className="flex w-48 p-2 flex-col justify-center items-center gap-2 rounded-lg border border-solid border-neutral-500 backdrop-blur-xl">
+        <div className="flex flex-col w-44 justify-center items-center gap-2 mt-2">
+          <UserInfo
+            orientation={isUnchallenged ? "" : "row"}
+            userName={username}
+            useravatar={`bg-avatar${imageNumber}`}
+          />
+          <div className="flex items-center gap-4 self-stretch mx-auto">
+            {!isUnchallenged && (
+              <>
+                <div className="flex items-center gap-1">
+                  <CalendarIcon className="w-4" />
+                  <p className="font-body text-sm text-Neutral-50">{date}</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <ClockIcon className="w-4"/>
+                  <p className="font-body text-sm text-Neutral-50">{time}</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
-      </ConfirmationMessage>
+        <div className="h-[3px] w-full my-2 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"/>
+        {isUnchallenged && !isPendingResponse ? (
+          <div className="flex flex-col w-full gap-4">
+            <Button variant="secondary" className="w-full h-12">Submit Result</Button>
+            <Button className="w-full h-12">Challenge</Button>
+          </div>
+        ) : (
+          <>
+            {isOpen && !isPendingResponse && (
+              <>
+                <div className="self-stretch">
+                  <p className="font-body text-sm">
+                    {message}
+                  </p>
+                </div>
+                <div className="h-[3px] w-full my-2 rounded bg-gradient-to-r from-primary04-500 to-primary04-100" />
+              </>
+            )}
+            {!isPendingResponse && (
+              <div className="flex justify-between items-center self-stretch">
+                <XMarkIcon className="h-12 mx-2 p-1" />
+                {isOpen ? (
+                  <CheckIcon className="h-12 mx-2 p-2 rounded-lg bg-primary01-800" />
+                ) : (
+                  <ArrowDownOnSquareIcon className="h-12 mx-2 p-2 rounded-lg bg-primary01-800" />
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </>
-  )
+  );
 }
 
-export default Challenge
+export default Challenge;

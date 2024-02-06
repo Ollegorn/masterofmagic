@@ -3,7 +3,6 @@ import Title from "./Title";
 import { Tab } from "@headlessui/react";
 
 function DuellingHistory({ duels, userId }) {
-  console.log("Duels received in DuellingHistory:", duels);
   const wins = duels.filter(
     (d) => d.duelWins > d.duelDefeats
   );
