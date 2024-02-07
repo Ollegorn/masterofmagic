@@ -117,12 +117,14 @@ function SectionJoinedEvents() {
                 <ChallengesScheduled
                   receivedInvitations= {filterUserById(userId)?.receivedInvitations}
                   sentInvitations={filterUserById(userId)?.sentInvitations}
+                  userId={userId}
                 />
                 <ChallengesReceived 
                   receivedInvitations= {filterUserById(userId)?.receivedInvitations}
                 />
                 <UnchallengedOpponents
                   unplayedDuels={getUnplayedDuels([event], userId)}
+                  tournamentId={event.tournamentId}
                 />
                 <ChallengesSent 
                   sentInvitations={filterUserById(userId)?.sentInvitations}

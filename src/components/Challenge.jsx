@@ -1,11 +1,11 @@
+// Challenge.js
 import React from 'react';
 import UserInfo from './UserInfo';
 import { CalendarIcon, ClockIcon, XMarkIcon, CheckIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
 import Button from './Button';
 
-function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageNumber, message, dateTime }) {
+function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageNumber, message, dateTime, onClickChallenge }) {
   const parsedDate = new Date(dateTime);
-
   const date = parsedDate.toLocaleDateString();
   const time = parsedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -37,7 +37,7 @@ function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageN
         {isUnchallenged && !isPendingResponse ? (
           <div className="flex flex-col w-full gap-4">
             <Button variant="secondary" className="w-full h-12">Submit Result</Button>
-            <Button className="w-full h-12">Challenge</Button>
+            <Button onClick={onClickChallenge} className="w-full h-12">Challenge</Button>
           </div>
         ) : (
           <>

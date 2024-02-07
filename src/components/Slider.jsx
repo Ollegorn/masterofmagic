@@ -15,7 +15,7 @@ const Slider = ({children}) => {
           className="mySwiper"
         >
         {React.Children.map(children, (child, index) => (
-          <SwiperSlide key={index} onClick={() => handleClick(index)}>
+          <SwiperSlide key={index}>
             {child}
           </SwiperSlide>
         ))}

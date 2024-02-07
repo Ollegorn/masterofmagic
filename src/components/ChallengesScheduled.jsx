@@ -2,7 +2,7 @@ import Challenge from "./Challenge";
 import Title from "./Title";
 import Slider from "./Slider";
 
-function ChallengesScheduled({ receivedInvitations, sentInvitations }) {
+function ChallengesScheduled({ receivedInvitations, sentInvitations, userId }) {
   const receivedAcceptedInvitations = receivedInvitations ? receivedInvitations.filter(inv => inv.isAccepted) : [];
   const sentAcceptedInvitations = sentInvitations ? sentInvitations.filter(inv => inv.isAccepted) : [];
   const allAcceptedInvitations = [...receivedAcceptedInvitations, ...sentAcceptedInvitations];
@@ -13,22 +13,24 @@ function ChallengesScheduled({ receivedInvitations, sentInvitations }) {
         <Title>Your Next Matches</Title>
         {allAcceptedInvitations.length > 0 ? (
           <Slider>
-            {allAcceptedInvitations.map((invitation) => (
-              <Challenge
-                key={invitation.id}
-                username={invitation.recipient.userName}
-                imageNumber={invitation.recipient.imageNumber}
-                message={invitation.message}
-                dateTime={invitation.dateTime}
-              />
-            ))}
+            {allAcceptedInvitations.map((invitation) => {
+              return (
+                <Challenge
+                  key={invitation.id}
+                  username={invitation.recipient.id === userId ? invitation.sender.userName : invitation.recipient.userName}
+                  imageNumber={invitation.recipient.id === userId ? invitation.sender.imageNumber : invitation.recipient.imageNumber}
+                  message={invitation.message}
+                  dateTime={invitation.dateTime}
+                />
+              );
+            })}
           </Slider>
         ) : (
           <p className="font-body text-sm text-neutral-400">Nothing here yet.</p>
         )}
       </div>
     </>
-  )
+  );
 }
 
 export default ChallengesScheduled;

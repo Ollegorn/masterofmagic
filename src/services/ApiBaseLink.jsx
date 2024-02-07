@@ -17,6 +17,7 @@ const Api_Endpoints = {
   postInvitation: `${Base_Url}Invitation/AddInvitation`,
   deleteInvitation: `${Base_Url}Invitation/DeleteInvitation`,
   returnInvitationToSender: `${Base_Url}Invitation/ReturnInvitationToSender`, //Post
+  postAcceptInvitation: `${Base_Url}Invitation/AcceptInvitation`,
 
   //Tournament
   getAllTournaments: `${Base_Url}Tournament/AllTournaments`,
