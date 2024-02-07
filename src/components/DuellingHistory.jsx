@@ -13,10 +13,10 @@ function DuellingHistory({ duels, userId }) {
   
   return (
     <>
-      <div className="flex flex-col  gap-4 lg:gap-6">
+      <div className="flex flex-col gap-2 lg:gap-6">
         <Title>Duelling History</Title>
         {duels.length <= 0 ?(
-          <p className="font-body text-sm text-neutral-400">Nothing here yet.</p>
+          <p className="font-body text-sm mb-2  text-neutral-400">Nothing here yet.</p>
         ):(
           <>
           <Tab.Group>

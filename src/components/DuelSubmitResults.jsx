@@ -1,31 +1,50 @@
 import React, { useState } from 'react';
 import ConfirmationMessage from './ConfirmationMessage';
-import avatar1 from '/avatar01.svg';
-import avatar2 from '/avatar02.svg';
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
+import UserInfo from './UserInfo';
+import useDuel from '../hooks/useDuel';
 
-/*Dynamically render users using UserInfo*/
-
-function DuelSubmitResults() {
+function DuelSubmitResults({onCancel, duel}) {
   const [scorePlayer1, setScorePlayer1] = useState(0);
   const [scorePlayer2, setScorePlayer2] = useState(0);
+  const { updateDuel, error } = useDuel();
+  console.log(duel);
 
   const handleScoreChange = (player, increment) => {
+    const totalScore = scorePlayer1 + scorePlayer2;
+
     if (player === 'player1') {
-      setScorePlayer1(Math.max(0, Math.min(2, scorePlayer1 + increment)));
+      if (scorePlayer1 + increment <= 2 && totalScore + increment <= 3) {
+        setScorePlayer1(Math.max(0, scorePlayer1 + increment));
+      }
     } else if (player === 'player2') {
-      setScorePlayer2(Math.max(0, Math.min(2, scorePlayer2 + increment)));
+      if (scorePlayer2 + increment <= 2 && totalScore + increment <= 3) {
+        setScorePlayer2(Math.max(0, scorePlayer2 + increment));
+      }
     }
+  };
+
+  const handleSubmitResult = () => {
+    updateDuel(duel.duelId, scorePlayer1, scorePlayer2, true);
+    console.log(duel.duelId);
   };
 
   return (
     <div className="flex items-center justify-center">
-      <ConfirmationMessage label="Submit the Match Result" description="Please note that once you submit the result, this match will be locked. Subsequent changes can only be made by administrators of the tournament." buttonText="Submit Result">
+      <ConfirmationMessage 
+      label="Submit the Match Result" 
+      description="Please note that once you submit the result, this match will be locked. Subsequent changes can only be made by administrators of the tournament." 
+      buttonText="Submit Result"
+      onCancel={onCancel}
+      onConfirm={handleSubmitResult}
+      >
         <div className="flex py-2 justify-center items-center gap-3 self-stretch rounded-lg">
           {/* Player 1 */}
           <div className="flex p-0 flex-col justify-center items-center gap-1">
-            <img src={`${avatar1}`} className="w-10 h-10 justify-center items-center"/>
-            <p className="font-body font-normal text-sm text-Neutral-50">wzrdFace</p>
+            <UserInfo
+              userName={duel.userOne.userName}
+              useravatar={duel.userOne.imageNumber}
+            />
             <div className="flex items-center border-solid border-Neutral-400 border-[1px]">
               <div className="flex min-w-14 h-12 pr-6 pl-3 flex-col justify-center items-start gap-2 border-solid border-Neutral-400 border-[1px] bg-Neutral-800">
                 <p className="font-body text-xl font-normal text-Neutral-400">{scorePlayer1}</p>
@@ -45,8 +64,10 @@ function DuelSubmitResults() {
 
           {/* Player 2 */}
           <div className="flex p-0 flex-col justify-center items-center gap-1">
-            <img src={`${avatar2}`} className="w-10 h-10 justify-center items-center"/>
-            <p className="font-body font-normal text-sm text-Neutral-50">CassCass</p>
+            <UserInfo 
+              userName={duel.userTwo.userName}
+              useravatar={duel.userTwo.imageNumber}
+            />
             <div className="flex items-center border-solid border-Neutral-400 border-[1px]">
               <div className="flex min-w-14 h-12 pr-6 pl-3 flex-col justify-center items-start gap-2 border-solid border-Neutral-400 border-[1px] bg-Neutral-800">
                 <p className="font-body text-xl font-normal text-Neutral-400">{scorePlayer2}</p>

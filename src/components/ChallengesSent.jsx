@@ -23,7 +23,7 @@ function ChallengesSent({ sentInvitations }) {
             ))}
           </Slider>
         ) : (
-          <p className="font-body text-sm text-neutral-400">Nothing here yet.</p>
+          <p className="font-body text-sm mt-2 mb-4 text-neutral-400">Nothing here yet.</p>
         )}
       </div>
     </>

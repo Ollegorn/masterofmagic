@@ -4,7 +4,7 @@ import UserInfo from './UserInfo';
 import { CalendarIcon, ClockIcon, XMarkIcon, CheckIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
 import Button from './Button';
 
-function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageNumber, message, dateTime, onClickChallenge }) {
+function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageNumber, message, dateTime, onClickChallenge, onClickSubmit, isChallenged }) {
   const parsedDate = new Date(dateTime);
   const date = parsedDate.toLocaleDateString();
   const time = parsedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -36,22 +36,18 @@ function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageN
         <div className="h-[3px] w-full my-2 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"/>
         {isUnchallenged && !isPendingResponse ? (
           <div className="flex flex-col w-full gap-4">
-            <Button variant="secondary" className="w-full h-12">Submit Result</Button>
-            <Button onClick={onClickChallenge} className="w-full h-12">Challenge</Button>
+            <Button onClick={onClickSubmit} variant="secondary" className="w-full h-12">Submit Result</Button>
+            <Button isDisabled={isChallenged} onClick={onClickChallenge} className="w-full h-12">Challenge</Button>
           </div>
         ) : (
           <>
-            {(isOpen || isPendingResponse) && (
-              <>
-                <div className="self-stretch">
-                  <p className="font-body text-sm">
-                    {message}
-                  </p>
-                </div>
-                <div className="h-[3px] w-full my-2 rounded bg-gradient-to-r from-primary04-500 to-primary04-100" />
-              </>
-            )}
-            {!isPendingResponse && (
+            <div className="self-stretch">
+              <p className="font-body text-sm">
+                {message}
+              </p>
+            </div>
+            <div className="h-[3px] w-full my-2 rounded bg-gradient-to-r from-primary04-500 to-primary04-100" />
+            {!isPendingResponse ? (
               <div className="flex justify-between items-center self-stretch">
                 <XMarkIcon className="h-12 mx-2 p-1" />
                 {isOpen ? (
@@ -60,6 +56,8 @@ function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageN
                   <ArrowDownOnSquareIcon className="h-12 mx-2 p-2 rounded-lg bg-primary01-800" />
                 )}
               </div>
+            ):(
+              <Button variant="secondary" className="w-full h-12">Cancel</Button>
             )}
           </>
         )}

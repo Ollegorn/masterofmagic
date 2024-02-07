@@ -20,7 +20,7 @@ function Rankings({ registeredUsers, tournamentId }) {
   return (
     <div className="flex flex-col items-center gap-4 self-stretch mx-auto">
       {sortedUsers.map((user, index) => (
-        <div key={user.id} className={`md:hidden flex py-2 px-4 justify-center items-center gap-4 self-start rounded-lg bg-primary03-900`}>
+        <div key={user.id} className={`md:hidden min-w-72 flex py-2 px-4 justify-center items-center gap-4 self-start rounded-lg bg-primary03-900`}>
           <div className="flex w-14 flex-col items-center gap-1">
             <p className="font-body font-semibold text-xs text-primary03-400">Rank</p>
             <p className="font-body font-bold text-lg text-Neutral-50">#{index + 1}</p>

@@ -9,7 +9,7 @@ function ChallengesScheduled({ receivedInvitations, sentInvitations, userId }) {
 
   return (
     <>
-      <div className="flex flex-col gap-4 lg:gap-6">
+      <div className="flex flex-col lg:gap-6">
         <Title>Your Next Matches</Title>
         {allAcceptedInvitations.length > 0 ? (
           <Slider>
@@ -26,7 +26,7 @@ function ChallengesScheduled({ receivedInvitations, sentInvitations, userId }) {
             })}
           </Slider>
         ) : (
-          <p className="font-body text-sm text-neutral-400">Nothing here yet.</p>
+          <p className="font-body text-sm  mt-2 mb-4 text-neutral-400">Nothing here yet.</p>
         )}
       </div>
     </>

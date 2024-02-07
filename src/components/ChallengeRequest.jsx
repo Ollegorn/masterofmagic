@@ -27,10 +27,12 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
       senderUsername: duel.userOne.userName,
       recipientUsername: duel.userTwo.userName,
       tournamentId: tournamentId,
+      duelId: duel.duelId,
       dateTime: `${date}T${time}`,
       message: message,
       isAccepted: false,
       isDeclined: false,
+      isChallenged: true,
     };
     console.log(invitationData);
     addInvitation(invitationData);
@@ -47,7 +49,10 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
         onConfirm={handleChallengeOpponent}
       >
         <div className="flex py-4 justify-center items-center gap-3 self-stretch rounded-lg">
-          {/* UserInfo components */}
+          <UserInfo 
+            userName={duel.userTwo.userName}
+            useravatar={duel.userTwo.imageNumber}
+          />
         </div>
         <div className="flex flex-col items-start">
           <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Date</label>
@@ -56,7 +61,7 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
               type="date" 
               className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"
               value={date}
-              onChange={handleDateChange} // Handle date input change
+              onChange={handleDateChange}
             />
           </div>
           <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Time</label>
@@ -65,7 +70,7 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
               type="time" 
               className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"
               value={time}
-              onChange={handleTimeChange} // Handle time input change
+              onChange={handleTimeChange}
             />
           </div>
           <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Message</label>
@@ -75,7 +80,7 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
               className="flex flex-1 h-auto items-center bg-transparent text-base text-Neutral-50 focus:outline-none md:text-lg lg:text-xl xl:text-2xl resize-none w-full"
               maxLength={150}
               value={message}
-              onChange={handleMessageChange} // Handle message input change
+              onChange={handleMessageChange}
             />
           </div>
         </div>
