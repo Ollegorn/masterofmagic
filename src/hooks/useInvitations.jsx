@@ -36,8 +36,11 @@ const useInvitations = () => {
 
   const deleteInvitation = async (invitationId) => {
     try {
-      await fetch(`${Api_Endpoints.deleteInvitation}/${invitationId}`, {
+      await fetch(`${Api_Endpoints.deleteInvitation}${invitationId}`, {
         method: 'DELETE',
+        headers: {
+          'accept': '*/*'
+        },
       });
       setInvitations(invitations.filter(invitation => invitation.id !== invitationId));
     } catch (error) {
@@ -45,14 +48,67 @@ const useInvitations = () => {
     }
   };
 
-  // Other CRUD operations can be implemented similarly
+  const acceptInvitation = async (invitationId) => {
+    try {
+      await fetch(Api_Endpoints.postAcceptInvitation, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: invitationId,
+          message: "",
+          isAccepted: true,
+        }),
+      });
+    } catch (error) {
+      console.error('Error accepting invitation:', error);
+    }
+  };
+
+  const returnInvitationToSender = async (requestBody) => {
+    try {
+      console.log(requestBody);
+      await fetch(Api_Endpoints.returnInvitationToSender, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+    } catch (error) {
+      console.error('Error returning invitation to sender:', error);
+      throw error;
+    }
+  };
+
+  const cancelInvitation = async (invitationId) => {
+    try {
+      await fetch(Api_Endpoints.postAcceptInvitation, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: invitationId,
+          message: "",
+          isAccepted: true,
+          isDeclined: true
+        }),
+      });
+    } catch (error) {
+      console.error('Error accepting invitation:', error);
+    }
+  }
 
   return {
     invitations,
     getAllInvitations,
     addInvitation,
     deleteInvitation,
-    // Other CRUD functions
+    acceptInvitation,
+    returnInvitationToSender,
+    cancelInvitation
   };
 };
 

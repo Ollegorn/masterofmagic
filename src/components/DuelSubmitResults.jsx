@@ -4,11 +4,12 @@ import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
 import UserInfo from './UserInfo';
 import useDuel from '../hooks/useDuel';
 
-function DuelSubmitResults({onCancel, duel}) {
+function DuelSubmitResults({ onCancel, duel, invitation }) {
+  console.log(invitation);
+  console.log(duel);
   const [scorePlayer1, setScorePlayer1] = useState(0);
   const [scorePlayer2, setScorePlayer2] = useState(0);
   const { updateDuel, error } = useDuel();
-  console.log(duel);
 
   const handleScoreChange = (player, increment) => {
     const totalScore = scorePlayer1 + scorePlayer2;
@@ -25,25 +26,29 @@ function DuelSubmitResults({onCancel, duel}) {
   };
 
   const handleSubmitResult = () => {
-    updateDuel(duel.duelId, scorePlayer1, scorePlayer2, true);
-    console.log(duel.duelId);
+    const duelId = duel ? duel.duelId : invitation.duelId;
+    updateDuel(duelId, scorePlayer1, scorePlayer2, true);
   };
+
+  // Determine user data source
+  const userOneData = duel ? duel.userOne : invitation.recipient;
+  const userTwoData = duel ? duel.userTwo : invitation.sender;
 
   return (
     <div className="flex items-center justify-center">
-      <ConfirmationMessage 
-      label="Submit the Match Result" 
-      description="Please note that once you submit the result, this match will be locked. Subsequent changes can only be made by administrators of the tournament." 
-      buttonText="Submit Result"
-      onCancel={onCancel}
-      onConfirm={handleSubmitResult}
+      <ConfirmationMessage
+        label="Submit the Match Result"
+        description="Please note that once you submit the result, this match will be locked. Subsequent changes can only be made by administrators of the tournament."
+        buttonText="Submit Result"
+        onCancel={onCancel}
+        onConfirm={handleSubmitResult}
       >
         <div className="flex py-2 justify-center items-center gap-3 self-stretch rounded-lg">
           {/* Player 1 */}
           <div className="flex p-0 flex-col justify-center items-center gap-1">
             <UserInfo
-              userName={duel.userOne.userName}
-              useravatar={duel.userOne.imageNumber}
+              userName={userOneData.userName}
+              useravatar={userOneData.imageNumber}
             />
             <div className="flex items-center border-solid border-Neutral-400 border-[1px]">
               <div className="flex min-w-14 h-12 pr-6 pl-3 flex-col justify-center items-start gap-2 border-solid border-Neutral-400 border-[1px] bg-Neutral-800">
@@ -64,9 +69,9 @@ function DuelSubmitResults({onCancel, duel}) {
 
           {/* Player 2 */}
           <div className="flex p-0 flex-col justify-center items-center gap-1">
-            <UserInfo 
-              userName={duel.userTwo.userName}
-              useravatar={duel.userTwo.imageNumber}
+            <UserInfo
+              userName={userTwoData.userName}
+              useravatar={userTwoData.imageNumber}
             />
             <div className="flex items-center border-solid border-Neutral-400 border-[1px]">
               <div className="flex min-w-14 h-12 pr-6 pl-3 flex-col justify-center items-start gap-2 border-solid border-Neutral-400 border-[1px] bg-Neutral-800">

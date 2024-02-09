@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import useInvitations from '../hooks/useInvitations';
 import ConfirmationMessage from './ConfirmationMessage';
 import UserInfo from './UserInfo';
+import useInvitations from "../hooks/useInvitations";
 
-function ChallengeRequest({ duel, onCancel, tournamentId }) {
+function ChallengeRequest({ invitation, onCancel }) {
+  const { returnInvitationToSender } = useInvitations();
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [message, setMessage] = useState('');
-  const { addInvitation } = useInvitations();
 
   const handleDateChange = (event) => {
     setDate(event.target.value);
@@ -21,21 +21,16 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
     setMessage(event.target.value);
   };
 
-  const handleChallengeOpponent = () => {
-    const invitationData = {
-      senderUsername: duel.userOne.userName,
-      recipientUsername: duel.userTwo.userName,
-      tournamentId: tournamentId,
-      duelId: duel.duelId,
+  const handleReschedule = () => {
+    const requestBody = {
+      id: invitation.id,
       dateTime: `${date}T${time}`,
       message: message,
       isAccepted: false,
       isDeclined: false,
-      isChallenged: true,
     };
-    addInvitation(invitationData);
 
-    onCancel();
+    returnInvitationToSender(requestBody);
   };
 
   return (
@@ -44,12 +39,12 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
         label="Challenge Opponent To A Magical Duel"
         buttonText="Challenge Opponent"
         onCancel={onCancel}
-        onConfirm={handleChallengeOpponent}
+        onConfirm={handleReschedule}
       >
         <div className="flex py-4 justify-center items-center gap-3 self-stretch rounded-lg">
           <UserInfo 
-            userName={duel.userTwo.userName}
-            useravatar={duel.userTwo.imageNumber}
+            userName={invitation.sender.userName}
+            useravatar={invitation.sender.imageNumber}
           />
         </div>
         <div className="flex flex-col items-start">

@@ -11,7 +11,6 @@ function UnchallengedOpponents({ unplayedDuels, tournamentId, }) {
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [selectedDuel, setSelectedDuel] = useState(null);
   const [popupContent, setPopupContent] = useState(null);
-  console.log(unplayedDuels);
   const handleChallengeClick = (duel) => {
     setSelectedDuel(duel);
     openPopup();
@@ -45,18 +44,18 @@ function UnchallengedOpponents({ unplayedDuels, tournamentId, }) {
         ):(
           <p className="font-body text-sm mt-2 mb-4 text-neutral-400">You have played all your duels!</p>
         )}
-        {popupContent === "challenge" &&(
-          <Popup show={isPopupOpen} onClose={closePopup}>
-            {selectedDuel && <ChallengeRequest duel={selectedDuel} onCancel={closePopup} tournamentId={tournamentId} />}
-        </Popup>
-        )}
-        
-        {popupContent === "submitResults" &&(
-          <Popup show={isPopupOpen} onClose={closePopup}>
-            {selectedDuel && <DuelSubmitResults duel={selectedDuel} onCancel={closePopup} />}
-        </Popup>
-        )}
       </div>
+      {popupContent === "challenge" &&(
+        <Popup show={isPopupOpen} onClose={closePopup}>
+          {selectedDuel && <ChallengeRequest duel={selectedDuel} onCancel={closePopup} tournamentId={tournamentId} />}
+        </Popup>
+      )}
+        
+      {popupContent === "submitResults" &&(
+        <Popup show={isPopupOpen} onClose={closePopup}>
+          {selectedDuel && <DuelSubmitResults duel={selectedDuel} onCancel={closePopup} />}
+        </Popup>
+      )}
     </>
   );
 }
