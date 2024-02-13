@@ -2,20 +2,26 @@ import Challenge from "./Challenge";
 import Title from "./Title";
 import Slider from "./Slider";
 import { usePopup } from "../hooks/usePopup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Popup from "./Popup";
 import ConfirmationMessage from "./ConfirmationMessage";
 import DuelSubmitResults from "./DuelSubmitResults";
 import useInvitations from "../hooks/useInvitations";
 
-function ChallengesScheduled({ receivedInvitations, sentInvitations, userId }) {
-  const receivedAcceptedInvitations = receivedInvitations ? receivedInvitations.filter(inv => inv.isAccepted || inv.isDeclined) : [];
-  const sentAcceptedInvitations = sentInvitations ? sentInvitations.filter(inv => inv.isAccepted || inv.isDeclined) : [];
-  const allAcceptedInvitations = [...receivedAcceptedInvitations, ...sentAcceptedInvitations];
+function ChallengesScheduled({ receivedInvitations, sentInvitations, userId, onClick }) {
+  const [allAcceptedInvitations, setAllAcceptedInvitations] = useState([]);
   const [popupContent, setPopupContent] = useState(null);
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [selectedInv, setSelectedInv] = useState(null);
   const { cancelInvitation } = useInvitations();
+
+  useEffect(() => {
+    // Combine received and sent accepted invitations into one array
+    const receivedAcceptedInvitations = receivedInvitations ? receivedInvitations.filter(inv => inv.isAccepted || inv.isDeclined) : [];
+    const sentAcceptedInvitations = sentInvitations ? sentInvitations.filter(inv => inv.isAccepted || inv.isDeclined) : [];
+    const combinedAcceptedInvitations = [...receivedAcceptedInvitations, ...sentAcceptedInvitations];
+    setAllAcceptedInvitations(combinedAcceptedInvitations);
+  }, [receivedInvitations, sentInvitations]);
 
   const handleCancelClick = (inv) => {
     setSelectedInv(inv);
@@ -29,10 +35,11 @@ function ChallengesScheduled({ receivedInvitations, sentInvitations, userId }) {
     setPopupContent("submitResults");
   }
 
-  const handleCancelInvitation = () => {
+  const handleCancelInvitation = async () => {
     if (selectedInv){
-      cancelInvitation(selectedInv.id);
+      await cancelInvitation(selectedInv.id);
       closePopup();
+      onClick();
     }
   }
 
@@ -74,7 +81,7 @@ function ChallengesScheduled({ receivedInvitations, sentInvitations, userId }) {
       )}
       {popupContent === "submitResults" &&(
         <Popup show={isPopupOpen} onClose={closePopup}>
-           <DuelSubmitResults invitation={selectedInv} onCancel={closePopup} />
+           <DuelSubmitResults invitation={selectedInv} onCancel={closePopup} handleHelper={onClick}/>
         </Popup>
       )}
     </>

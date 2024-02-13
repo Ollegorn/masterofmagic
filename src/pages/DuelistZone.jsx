@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import SectionJoinedEvents from "../components/SectionJoinedEvents";
 
 function DuelistZone() {
-  // Check for JWT token in cookies
+  
   const jwtToken = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwtToken='));
   const isLoggedIn = jwtToken !== undefined && jwtToken !== null;
 

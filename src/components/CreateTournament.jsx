@@ -41,7 +41,7 @@ function CreateTournament() {
 
   return (
     <>
-      <div className="flex min-w-68 max-w-180 py-4 px-0 flex-col items-start mx-auto gap-8 ">
+      <div className="flex min-w-68 max-w-180 py-4 px-2 flex-col items-start mx-auto gap-8 ">
         <div className='flex pt-4 flex-col items-start gap-4 self-stretch'>
           <Title>General Settings</Title>
           <InputField 

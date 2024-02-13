@@ -3,7 +3,7 @@ import ConfirmationMessage from './ConfirmationMessage';
 import UserInfo from './UserInfo';
 import useInvitations from "../hooks/useInvitations";
 
-function ChallengeRequest({ invitation, onCancel }) {
+function ChallengeRequest({ invitation, onCancel, handleHelper }) {
   const { returnInvitationToSender } = useInvitations();
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -21,7 +21,7 @@ function ChallengeRequest({ invitation, onCancel }) {
     setMessage(event.target.value);
   };
 
-  const handleReschedule = () => {
+  const handleReschedule = async () => {
     const requestBody = {
       id: invitation.id,
       dateTime: `${date}T${time}`,
@@ -30,7 +30,9 @@ function ChallengeRequest({ invitation, onCancel }) {
       isDeclined: false,
     };
 
-    returnInvitationToSender(requestBody);
+    await returnInvitationToSender(requestBody);
+    handleHelper();
+    onCancel();
   };
 
   return (

@@ -6,26 +6,25 @@ export function useTournaments() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchTournamentsData = async () => {
-      try {
-        const response = await fetch(`${Api_Endpoints.getAllTournaments}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch tournaments data');
-        }
-        const data = await response.json();
-        setTournamentsData(data);
-        console.log("Tournaments Data:", data);
-
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+  useEffect(()=>{
+    getTournamentsData();
+  },[])
+  const getTournamentsData = async () => {
+    try {
+      const response = await fetch(`${Api_Endpoints.getAllTournaments}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch tournaments data');
       }
-    };
+      const data = await response.json();
+      setTournamentsData(data);
+      console.log("Tournaments Data:", data);
 
-    fetchTournamentsData();
-  }, []);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const ongoingTournaments = tournamentsData.filter(t => {
     const startDate = new Date(t.startDate);
@@ -48,6 +47,7 @@ export function useTournaments() {
 
   return {
     tournamentsData,
+    getTournamentsData,
     loading,
     error,
     ongoingTournaments,

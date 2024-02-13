@@ -3,7 +3,7 @@ import useInvitations from '../hooks/useInvitations';
 import ConfirmationMessage from './ConfirmationMessage';
 import UserInfo from './UserInfo';
 
-function ChallengeRequest({ duel, onCancel, tournamentId }) {
+function ChallengeRequest({ duel, onCancel, tournamentId, handleHelper }) {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [message, setMessage] = useState('');
@@ -21,7 +21,7 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
     setMessage(event.target.value);
   };
 
-  const handleChallengeOpponent = () => {
+  const handleChallengeOpponent = async () => {
     const invitationData = {
       senderUsername: duel.userOne.userName,
       recipientUsername: duel.userTwo.userName,
@@ -33,8 +33,9 @@ function ChallengeRequest({ duel, onCancel, tournamentId }) {
       isDeclined: false,
       isChallenged: true,
     };
-    addInvitation(invitationData);
-
+    
+    await addInvitation(invitationData);
+    handleHelper();
     onCancel();
   };
 

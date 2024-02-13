@@ -4,9 +4,6 @@ import { Api_Endpoints } from '../services/ApiBaseLink';
 const useInvitations = () => {
   const [invitations, setInvitations] = useState([]);
 
-  useEffect(() => {
-    getAllInvitations();
-  }, []);
 
   const getAllInvitations = async () => {
     try {

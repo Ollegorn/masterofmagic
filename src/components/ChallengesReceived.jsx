@@ -2,20 +2,27 @@ import Title from "./Title";
 import Slider from "./Slider";
 import Challenge from "./Challenge";
 import { usePopup } from "../hooks/usePopup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Popup from "./Popup";
 import ConfirmationMessage from "./ConfirmationMessage";
 import useInvitations from "../hooks/useInvitations";
 import ChallengeReturn from "./ChallengeReturn";
 
-function ChallengesReceived({ receivedInvitations }) {
-  const pendingReceivedInvitations = receivedInvitations ? receivedInvitations.filter(inv => !inv.isAccepted) : [];
+function ChallengesReceived({ receivedInvitations, onClick }) {
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [selectedInv, setSelectedInv] = useState(null);
   const { acceptInvitation } = useInvitations();
   const [popupContent, setPopupContent] = useState(null);
+  const [pendingReceivedInvitations, setPendingReceivedInvitations] = useState([]);
 
-  const handleCheckClick = (inv) =>{
+  useEffect(() => {
+    if (receivedInvitations) {
+      const filteredInvitations = receivedInvitations.filter(inv => !inv.isAccepted);
+      setPendingReceivedInvitations(filteredInvitations);
+    }
+  }, [receivedInvitations]);
+
+  const handleCheckClick = (inv) => {
     setSelectedInv(inv);
     openPopup();
     setPopupContent("accept");
@@ -27,12 +34,14 @@ function ChallengesReceived({ receivedInvitations }) {
     setPopupContent("cancel");
   }
 
-  const handleConfirmation = () => {
+  const handleConfirmation = async () => {
     if (selectedInv){
-      acceptInvitation(selectedInv.id);
+      await acceptInvitation(selectedInv.id);
       closePopup();
+      onClick();
     }
   }
+
   const handleReschedule = (inv) => {
     setSelectedInv(inv);
     openPopup();
@@ -86,7 +95,7 @@ function ChallengesReceived({ receivedInvitations }) {
       )}
       {popupContent === "challenge" && (
         <Popup show={isPopupOpen} onClose={closePopup}>
-          <ChallengeReturn  onCancel={closePopup} invitation={selectedInv} />
+          <ChallengeReturn  onCancel={closePopup} invitation={selectedInv} handleHelper={onClick}/>
         </Popup>
       )}
     </>

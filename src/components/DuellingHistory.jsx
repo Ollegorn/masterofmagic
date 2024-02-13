@@ -89,7 +89,7 @@ function DuellingHistory({ duels, userId }) {
                 <ul className="flex flex-col gap-4">
                   {duels.map((d) => (
                     <DuelListItem
-                      key={d.eventId}
+                      key={`all-${d.duelId}`}
                       player1={d.userOne}
                       player1Wins={d.duelWins}
                       player2={d.userTwo}
@@ -107,7 +107,7 @@ function DuellingHistory({ duels, userId }) {
                 <ul className="flex flex-col gap-4">
                   {wins.map((d) => (
                       <DuelListItem
-                      key={d.eventId}
+                      key={`wins-${d.duelId}`}
                       player1={d.userOne}
                       player1Wins={d.duelWins}
                       player2={d.userTwo}
@@ -125,7 +125,7 @@ function DuellingHistory({ duels, userId }) {
                 <ul className="flex flex-col gap-4">
                   {losses.map((d) => (
                       <DuelListItem
-                      key={d.eventId}
+                      key={`lost-${d.duelId}`}
                       player1={d.userOne}
                       player1Wins={d.duelWins}
                       player2={d.userTwo}

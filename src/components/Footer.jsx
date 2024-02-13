@@ -37,6 +37,7 @@ function Footer() {
         <ul className="flex list-none flex-col items-center gap-4 md:flex-row lg:gap-6">
           {navItems.map((item) => (
             <li
+              key={item.id}
               id={item.id}
               className={
                 item.isVisible
@@ -54,6 +55,7 @@ function Footer() {
         <ul className="flex list-none flex-col items-center gap-4 md:flex-row lg:gap-6">
           {navItemsSecondary.map((item) => (
             <li
+              key={item.id}
               id={item.id}
               className={
                 item.isVisible

@@ -7,7 +7,7 @@ import Popup from "./Popup";
 import ConfirmationMessage from "./ConfirmationMessage";
 import useInvitations from "../hooks/useInvitations";
 
-function ChallengesSent({ sentInvitations }) {
+function ChallengesSent({ sentInvitations, onClick }) {
   const pendingSentInvitations = sentInvitations ? sentInvitations.filter(inv => !inv.isAccepted) : [];
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [selectedInv, setSelectedInv] = useState(null);
@@ -18,10 +18,11 @@ function ChallengesSent({ sentInvitations }) {
     openPopup();
   }
 
-  const handleConfirmation = () => {
+  const handleConfirmation = async () => {
     if (selectedInv) {
-      deleteInvitation(selectedInv.id);
+      await deleteInvitation(selectedInv.id);
       closePopup();
+      onClick();
     }
   }
 

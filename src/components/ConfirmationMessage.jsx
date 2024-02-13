@@ -37,17 +37,3 @@ function ConfirmationMessage({ label, description, buttonText, children, onCance
 }
 
 export default ConfirmationMessage;
-
-
-/* DELETE TOURNAMENT
-
-<Popup show={isPopupOpen} onClose={closePopupAndResetContent}>
-          <ConfirmationMessage label="Delete the tournament" description="This is an ongoing tournament, deleting it will erase all the duel scores and all progress will be lost. This cannot be undone." buttonText="Delete Tournament" />
-</Popup> 
-*/
-
-/* CANCEL PARTICIPATION
-<Popup show={isPopupOpen} onClose={closePopupAndResetContent}>
-          <ConfirmationMessage label="Cancel Participation" description="This is an ongoing tournament, if you cancel your participation, all your unfought duels will be forfeit, your opponents will be declared the winners and gain all points. This cannot be undone." buttonText="Cancel Participation" />
-</Popup>
- */

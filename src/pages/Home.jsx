@@ -76,7 +76,8 @@ function Home() {
           tournaments={ongoingTournaments}
           onClickSecondary={handleSecondaryAction}
           onClick={handleOnClickInsideEventCard}
-          labelPrimary={"Register Now"}
+          labelPrimary={"See Rankings"}
+          isMainPage="true"
         />
         {/*<SectionHighlights /> */}
         <SectionRules 

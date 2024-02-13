@@ -4,9 +4,7 @@ import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
 import UserInfo from './UserInfo';
 import useDuel from '../hooks/useDuel';
 
-function DuelSubmitResults({ onCancel, duel, invitation }) {
-  console.log(invitation);
-  console.log(duel);
+function DuelSubmitResults({ onCancel, duel, invitation, handleHelper }) {
   const [scorePlayer1, setScorePlayer1] = useState(0);
   const [scorePlayer2, setScorePlayer2] = useState(0);
   const { updateDuel, error } = useDuel();
@@ -25,9 +23,11 @@ function DuelSubmitResults({ onCancel, duel, invitation }) {
     }
   };
 
-  const handleSubmitResult = () => {
+  const handleSubmitResult = async () => {
     const duelId = duel ? duel.duelId : invitation.duelId;
-    updateDuel(duelId, scorePlayer1, scorePlayer2, true);
+    await updateDuel(duelId, scorePlayer1, scorePlayer2, true);
+    handleHelper();
+    onCancel();
   };
 
   // Determine user data source

@@ -1,5 +1,4 @@
 import UserInfo from "./UserInfo";
-import useUsers from "../hooks/useUsers";
 
 function DuelListItem({
   variant = "",

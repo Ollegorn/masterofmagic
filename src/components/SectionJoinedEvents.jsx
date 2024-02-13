@@ -9,23 +9,37 @@ import { useTournaments } from "../hooks/useTournaments";
 import ChallengesReceived from "./ChallengesReceived";
 import ChallengesScheduled from "./ChallengesScheduled";
 import ChallengesSent from "./ChallengesSent";
-import { useAllUsers} from "../hooks/useUser"; 
+import useInvitations from "../hooks/useInvitations"; 
+
 
 function SectionJoinedEvents() {
   const userIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('userId='));
   const userId = userIdCookie ? userIdCookie.split('=')[1] : null;
-  const { ongoingTournaments, upcomingTournaments } = useTournaments();
+  const { ongoingTournaments, upcomingTournaments,  getTournamentsData  } = useTournaments();
   const screen = useScreenSize();
   const ongoingTournamentsUserParticipates = ongoingTournaments.filter((t) => t.registeredUsers.some((u) => u.id === userId));
   const upcomingTournamentsUserParticipates = upcomingTournaments.filter((t) => t.registeredUsers.some((u) => u.id === userId));
-  const allUsers = useAllUsers();
+  const { invitations, getAllInvitations } = useInvitations();
+  const [helper, setHelper] = useState(false);
   
-  
-  function filterUserById(userId) {
-    if (!userId || allUsers.length === 0) return null;
-    return allUsers.find(user => user.id === userId);
-  }
-  
+  useEffect(() => {
+    getAllInvitations();
+    getTournamentsData();
+    console.log("re-render")
+  }, [helper]);
+
+  const handleHelper = () => {
+    setHelper(!helper);
+  };
+
+  const getInvitationsBySenderId = (senderId) => {
+    return invitations.filter(invitation => invitation.sender.id === senderId);
+  };
+
+  const getInvitationsByRecipientId = (recipientId) => {
+    return invitations.filter(invitation => invitation.recipient.id === recipientId);
+  };
+
   function getPlayedDuels(tournamentData, userId) {
     const playedDuels = [];
     tournamentData.forEach((tournament) => {
@@ -80,6 +94,8 @@ function SectionJoinedEvents() {
 
     return userIndex !== -1 ? userIndex + 1 : null;
   }
+  
+ 
 
 
   return (
@@ -93,8 +109,9 @@ function SectionJoinedEvents() {
         />
         <div className="flex flex-col gap-4 self-stretch py-4 md:py-8 lg:gap-6 lg:py-16">
           {ongoingTournamentsUserParticipates.map((event) => (
-            <div key={event.id} className="flex flex-col gap-4 self-stretch py-4 md:py-8 lg:gap-6 lg:py-16">
+            <div key={`ongoing-tournaments-${event.tournamentId}`} className="flex flex-col gap-4 self-stretch py-4 md:py-8 lg:gap-6 lg:py-16">
               <ImageCard
+                key={event.tournamentId}
                 bgID={event.imageNumber}
                 title={event.tournamentName}
                 startDate={event.startDate}
@@ -103,38 +120,47 @@ function SectionJoinedEvents() {
               />
               <div className="flex flex-col gap-4 self-stretch py-4 md:gap-8 md:py-8 lg:gap-16 lg:py-16">
                 <Statistics
-                  key={event.tournamentId} 
+                  key={`stats-${event.tournamentId}`} 
                   eventId={event.tournamentId}
                   tournamentStats={getUserTournamentStats(userId, event)}
                   userRank={getUserRank(userId, event)}
                  />
                 <DuellingHistory 
-                  key={event.tournamentId} 
+                  key={`duel-history-${event.tournamentId}`} 
                   eventId={event.tournamentId} 
                   userId={userId} 
                   duels={getPlayedDuels([event], userId)} 
                 />
                 <ChallengesScheduled
-                  receivedInvitations= {filterUserById(userId)?.receivedInvitations}
-                  sentInvitations={filterUserById(userId)?.sentInvitations}
+                  key={`challenges-shceduled-${event.tournamentId}`}
+                  receivedInvitations={getInvitationsByRecipientId(userId)}
+                  sentInvitations={getInvitationsBySenderId(userId)}
                   userId={userId}
+                  onClick={handleHelper}
                 />
                 <ChallengesReceived 
-                  receivedInvitations= {filterUserById(userId)?.receivedInvitations}
+                  key={event.tournamentId}
+                  receivedInvitations={getInvitationsByRecipientId(userId)}
+                  onClick={handleHelper}
                 />
                 <UnchallengedOpponents
+                  key={`unchallenged-opp-${event.tournamentId}`}
                   unplayedDuels={getUnplayedDuels([event], userId)}
                   tournamentId={event.tournamentId}
+                  onClick={handleHelper}
                 />
                 <ChallengesSent 
-                  sentInvitations={filterUserById(userId)?.sentInvitations}
+                  key={`challenges-sent-${event.tournamentId}`}
+                  sentInvitations={getInvitationsBySenderId(userId)}
+                  onClick={handleHelper}
                 />
               </div>
             </div>
           ))}
           {upcomingTournamentsUserParticipates.map((event) => (
-            <div key={event.id} className="flex flex-col gap-4 self-stretch py-4 md:py-8 lg:gap-6 lg:py-16">
+            <div key={`upcomming-tourns-${event.tournamentId}`} className="flex flex-col gap-4 self-stretch py-4 md:py-8 lg:gap-6 lg:py-16">
               <ImageCard
+                key={event.tournamentId}
                 bgID={event.imageNumber}
                 title={event.tournamentName}
                 startDate={event.startDate}

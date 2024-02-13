@@ -49,7 +49,7 @@ const useLogin = (onLoginSuccess) => {
 
           localStorage.setItem("userName", userDetails.userName);
           localStorage.setItem("roles", JSON.stringify(userDetails.roles));
-
+          window.location.reload();
           onLoginSuccess();
         } else {
           console.error("Failed to fetch user details");

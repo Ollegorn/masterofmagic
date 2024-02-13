@@ -12,16 +12,17 @@ import { usePopup } from "../hooks/usePopup";
 import SignUp from './SignUp';
 import Login from './Login';
 import MobileNavigation from './MobileNavigation';
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   let location = useLocation();
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [popupContent, setPopupContent] = useState(null);
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-  const [forceRender, setForceRender] = useState(false); 
   const screen = useScreenSize();
   const isAuthenticated = document.cookie.includes("jwtToken");
   const navItems = usePrimaryLinks(isAuthenticated);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     document.cookie = "jwtToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -30,8 +31,9 @@ function Navbar() {
 
     localStorage.removeItem("userName");
     localStorage.removeItem("roles");
-
-    setForceRender((prev) => !prev);
+    navigate("/");
+    window.location.reload();
+    scrolToTop();
   };
 
   const logo =
