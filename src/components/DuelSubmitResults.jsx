@@ -25,12 +25,26 @@ function DuelSubmitResults({ onCancel, duel, invitation, handleHelper }) {
 
   const handleSubmitResult = async () => {
     const duelId = duel ? duel.duelId : invitation.duelId;
-    await updateDuel(duelId, scorePlayer1, scorePlayer2, true);
+    const validScores = ['2-1', '1-2', '2-0', '0-2'];
+    const submittedScore = `${scorePlayer1}-${scorePlayer2}`;
+  
+    if (!validScores.includes(submittedScore)) {
+      console.error('Invalid score.');
+      return;
+    }
+    let player1Wins = scorePlayer1;
+    let player2Wins = scorePlayer2;
+  
+    if (duel && duel.isSwapped) {
+      [player1Wins, player2Wins] = [player2Wins, player1Wins];
+    }
+  
+    await updateDuel(duelId, player1Wins, player2Wins, true);
     handleHelper();
     onCancel();
   };
 
-  // Determine user data source
+  //determine user data source
   const userOneData = duel ? duel.userOne : invitation.recipient;
   const userTwoData = duel ? duel.userTwo : invitation.sender;
 

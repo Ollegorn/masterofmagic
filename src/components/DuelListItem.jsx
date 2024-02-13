@@ -4,8 +4,8 @@ function DuelListItem({
   variant = "",
   player1,
   player2,
-  player1Wins,
-  player2Wins,
+  player1Wins=0,
+  player2Wins=0,
 }) {
   return (
     <>
@@ -41,8 +41,8 @@ function DuelListItem({
                   : `text-Neutral-900`
             }`}
           >
-            {`${player1Wins !== 0 && player2Wins !== 0 ? player1Wins : "-"} - ${
-              player1Wins !== 0 && player2Wins !== 0 ? player2Wins : "-"
+            {`${player1Wins !== 0 || player2Wins !== 0 ? player1Wins : "-"} - ${
+              player1Wins !== 0 || player2Wins !== 0 ? player2Wins : "-"
             }`}
           </p>
         </div>

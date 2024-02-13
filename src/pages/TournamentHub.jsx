@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SectionHeader from "../components/SectionHeader";
@@ -18,13 +18,12 @@ import useDeleteTournament from "../hooks/useDeleteTournament";
 import useStartTournament from "../hooks/useStartTournament";
 
 function TournamentHub() {
-  const events = useEvents();
   const navigate = useNavigate();
   const { isModalOpen, openModal, closeModal } = useFullscreenModal();
   const [ modalContent, setModalContent ] = useState(null);
   const { isPopupOpen, openPopup, closePopup } = usePopup();
   const [ popupContent, setPopupContent ] = useState(null);
-  const { ongoingTournaments, upcomingTournaments } = useTournaments();
+  const { ongoingTournaments, upcomingTournaments, getTournamentsData } = useTournaments();
   const { registerToEvent } = useRegisterToTournament();
   const { deleteTournament } = useDeleteTournament();
   const { startTournament } = useStartTournament();
@@ -32,7 +31,13 @@ function TournamentHub() {
   const isAdmin = localStorage.getItem("roles")?.includes("Admin");
   const [selectedTournamentId, setSelectedTournamentId] = useState(null);
   const [selectedTournamentData, setSelectedTournamentData] = useState(null);
-
+  const [ helper, setHelper ] = useState(false);
+  
+  useEffect(()=>{
+    getTournamentsData();
+    console.log("re-render");
+  },[helper])
+  
   const handleCreateTournamentClick = () => {
     openModal();
     setModalContent("create");
@@ -42,6 +47,8 @@ function TournamentHub() {
     setSelectedTournamentData(null);
     closeModal();
     setModalContent(null);
+    setHelper(!helper);
+
   };
 
   const scrolToTop = () => {
@@ -77,18 +84,18 @@ function TournamentHub() {
     setPopupContent("start");
   }
 
-  const handleConfirmation = () => {
-    registerToEvent(selectedTournamentId);
+  const handleConfirmation = async () => {
+    await registerToEvent(selectedTournamentId);
     closePopupAndResetContent();
   };
 
-  const handleDeletion = () => {
-    deleteTournament(selectedTournamentId);
+  const handleDeletion = async () => {
+    await deleteTournament(selectedTournamentId);
     closePopupAndResetContent();
   }
 
-  const handleStart = () => {
-    startTournament(selectedTournamentId);
+  const handleStart = async () => {
+    await startTournament(selectedTournamentId);
     closePopupAndResetContent();
   }
 
@@ -148,7 +155,6 @@ function TournamentHub() {
               ))}
           </div>
         </section>
-
         <Footer />
       </div>
 

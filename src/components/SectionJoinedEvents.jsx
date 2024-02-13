@@ -46,37 +46,39 @@ function SectionJoinedEvents() {
         tournament.tournamentDuels.forEach((duel) => {
             const isUserInDuel = duel.userOne.id === userId || duel.userTwo.id === userId;
             if (isUserInDuel && duel.isCompleted) {
-                //logged-in user always userOne
+                const isSwapped = duel.userTwo.id === userId;
                 const modifiedDuel = {
                     ...duel,
-                    userOne: duel.userTwo.id === userId ? duel.userTwo : duel.userOne,
-                    userTwo: duel.userTwo.id === userId ? duel.userOne : duel.userTwo,
+                    userOne: isSwapped ? duel.userTwo : duel.userOne,
+                    userTwo: isSwapped ? duel.userOne : duel.userTwo,
+                    isSwapped: isSwapped,
                 };
                 playedDuels.push(modifiedDuel);
             }
         });
     });
     return playedDuels;
-  }
+}
 
-  function getUnplayedDuels(tournamentData, userId) {
-      const unplayedDuels = [];
-      tournamentData.forEach((tournament) => {
-          tournament.tournamentDuels.forEach((duel) => {
-              const isUserInDuel = duel.userOne.id === userId || duel.userTwo.id === userId;
-              if (isUserInDuel && !duel.isCompleted) {
-                  //logged-in user always userOne
-                  const modifiedDuel = {
-                      ...duel,
-                      userOne: duel.userTwo.id === userId ? duel.userTwo : duel.userOne,
-                      userTwo: duel.userTwo.id === userId ? duel.userOne : duel.userTwo,
-                  };
-                  unplayedDuels.push(modifiedDuel);
-              }
-          });
-      });
-      return unplayedDuels;
-  }
+function getUnplayedDuels(tournamentData, userId) {
+    const unplayedDuels = [];
+    tournamentData.forEach((tournament) => {
+        tournament.tournamentDuels.forEach((duel) => {
+            const isUserInDuel = duel.userOne.id === userId || duel.userTwo.id === userId;
+            if (isUserInDuel && !duel.isCompleted) {
+                const isSwapped = duel.userTwo.id === userId;
+                const modifiedDuel = {
+                    ...duel,
+                    userOne: isSwapped ? duel.userTwo : duel.userOne,
+                    userTwo: isSwapped ? duel.userOne : duel.userTwo,
+                    isSwapped: isSwapped,
+                };
+                unplayedDuels.push(modifiedDuel);
+            }
+        });
+    });
+    return unplayedDuels;
+}
 
   function getUserTournamentStats(userId, tournament) {
     const user = tournament.registeredUsers.find(user => user.id === userId);

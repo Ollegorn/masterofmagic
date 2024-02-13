@@ -4,8 +4,12 @@ import { Api_Endpoints } from "../services/ApiBaseLink";
 const useDuel = () => {
   const [error, setError] = useState(null);
 
-  const updateDuel = async (duelId, userOneWins, userOneDefeats, isCompleted) => {
+  const updateDuel = async (duelId, userOneWins=0, userOneDefeats=0, isCompleted) => {
+    if (userOneWins === userOneDefeats) {
+      throw new Error('userOneWins and userOneDefeats cannot be equal');
+    }
     try {
+      console.log(userOneWins, userOneDefeats)
       const response = await fetch(`${Api_Endpoints.updateDuel}`, {
         method: 'PUT',
         headers: {

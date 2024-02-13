@@ -43,7 +43,7 @@ function Rankings({ registeredUsers, tournamentId }) {
           <UserInfo userName={user.userName} orientation="row" useravatar={`bg-avatar${user.imageNumber}`} />
           <div className="flex w-14 flex-col items-center gap-1 ml-auto">
             <p className="font-body font-semibold text-xs text-primary03-400">Played</p>
-            <p className="font-body font-bold text-lg text-Neutral-50">{findTournamentStats(user).played}</p>
+            <p className="font-body font-bold text-lg text-Neutral-50">{findTournamentStats(user).wins + findTournamentStats(user).defeats}</p>
           </div>
           <div className="flex w-14 flex-col items-center gap-1">
             <p className="font-body font-semibold text-xs text-primary03-400">Wins</p>
