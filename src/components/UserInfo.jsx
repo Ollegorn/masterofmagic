@@ -1,15 +1,19 @@
 function UserInfo({
   userName = "username",
-  useravatar = "bg-avatar3",
+  useravatar = 3, // Default avatar index
   variant = "success",
-  orientation
+  orientation = "row"
 }) {
+
+
   return (
     <>
       <div className={`flex flex-1 items-center justify-center gap-1 ${orientation === "row" ? "flex-row gap-2" : "flex-col"}`}>
-        <div
-          className={`${useravatar} size-7 bg-cover bg-center bg-no-repeat md:size-10 lg:size-14 xl:size-16`}
-        ></div>
+        <img
+          src={`./avatar${useravatar}.svg`}
+          alt={`Avatar ${useravatar}`}
+          className={`size-7 md:size-10 lg:size-14 xl:size-16`}
+        />
         <p
           className={`text-ellipsis font-body text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl ${
             variant === "success"

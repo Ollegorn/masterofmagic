@@ -18,7 +18,7 @@ function Challenge({ isOpen, isUnchallenged, isPendingResponse, username, imageN
           <UserInfo
             orientation={isUnchallenged ? "" : "row"}
             userName={username}
-            useravatar={`bg-avatar${imageNumber}`}
+            useravatar={imageNumber}
           />
           <div className="flex items-center gap-4 self-stretch mx-auto">
             {!isUnchallenged && (

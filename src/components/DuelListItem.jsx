@@ -20,7 +20,7 @@ function DuelListItem({
       >
         <UserInfo
           userName={player1.userName}
-          useravatar={`bg-avatar${player1.imageNumber}`}
+          useravatar={player1.imageNumber}
           variant={variant}
         />
         <div
@@ -48,7 +48,7 @@ function DuelListItem({
         </div>
         <UserInfo
           userName={player2.userName}
-          useravatar={`bg-avatar${player2.imageNumber}`}
+          useravatar={player2.imageNumber}
           variant={variant}
         />
       </li>

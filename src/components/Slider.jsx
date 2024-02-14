@@ -3,9 +3,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from 'swiper/modules';
 
 const Slider = ({children}) => {
+  
+  let slidesPerView = 1.8;
+
+  if (window.innerWidth >= 650 && window.innerWidth < 1024) {
+    slidesPerView = 3;
+  } else if (window.innerWidth >= 1024 && window.innerWidth < 1280) {
+    slidesPerView = 4;
+  } else if (window.innerWidth >= 1280) {
+    slidesPerView = 5;
+  }
+
   return (
     <Swiper
-          slidesPerView={1.8}
+          slidesPerView={slidesPerView}
           spaceBetween={20}
           freeMode={true}
           pagination={{

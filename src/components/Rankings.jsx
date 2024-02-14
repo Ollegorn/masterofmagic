@@ -25,7 +25,7 @@ function Rankings({ registeredUsers, tournamentId }) {
             <p className="font-body font-semibold text-xs text-primary03-400">Rank</p>
             <p className="font-body font-bold text-lg text-Neutral-50">#{index + 1}</p>
           </div>
-          <UserInfo userName={user.userName} orientation="row" useravatar={`bg-avatar${user.imageNumber}`} />
+          <UserInfo userName={user.userName} orientation="row" useravatar={user.imageNumber} />
           <div className="flex w-14 flex-col items-center gap-1">
             <p className="font-body font-semibold text-xs text-primary03-400">Points</p>
             <p className="font-body font-bold text-lg text-Neutral-50">{findTournamentStats(user).totalPoints}</p>
@@ -40,7 +40,7 @@ function Rankings({ registeredUsers, tournamentId }) {
             <p className="font-body font-semibold text-xs text-primary03-400">Rank</p>
             <p className="font-body font-bold text-lg text-Neutral-50">#{index + 1}</p>
           </div>
-          <UserInfo userName={user.userName} orientation="row" useravatar={`bg-avatar${user.imageNumber}`} />
+          <UserInfo userName={user.userName} orientation="row" useravatar={user.imageNumber} />
           <div className="flex w-14 flex-col items-center gap-1 ml-auto">
             <p className="font-body font-semibold text-xs text-primary03-400">Played</p>
             <p className="font-body font-bold text-lg text-Neutral-50">{findTournamentStats(user).wins + findTournamentStats(user).defeats}</p>

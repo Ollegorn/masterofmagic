@@ -73,13 +73,14 @@ function Home() {
         <SectionFeatured />
         <SectionEvents 
           includeSecondaryAction
+          sectionHeading="Ongoing Tournaments"
           tournaments={ongoingTournaments}
           onClickSecondary={handleSecondaryAction}
           onClick={handleOnClickInsideEventCard}
           labelPrimary={"See Rankings"}
           isMainPage="true"
         />
-        {/*<SectionHighlights /> */}
+        <SectionHighlights />
         <SectionRules 
           showPrimary={!isAuthenticated ? true : false}
           onClickPrimary={isAuthenticated ? null : handleSignupClick} 
