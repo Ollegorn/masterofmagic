@@ -1,16 +1,19 @@
-// useSignUp.jsx
-
 import { useState } from "react";
 import { Api_Endpoints } from "../services/ApiBaseLink";
+import { useCookies } from "react-cookie";
+import useLogin from "./useLogin";
 
 const useSignUp = (onSignUpSuccess) => {
-  const [formData, setFormData] = useState({
+  const [formDataSignup, setFormDataSignup] = useState({
     userName: "",
     email: "",
     imageNumber: 0,
     password: "",
     confirmPassword: "",
   });
+
+  const loginHook = useLogin(onSignUpSuccess);
+  const [cookies, setCookie] = useCookies(["jwtToken", "refreshToken"]);
 
   const [errors, setErrors] = useState({
     userName: "",
@@ -20,14 +23,14 @@ const useSignUp = (onSignUpSuccess) => {
   });
 
   const handleChange = (fieldName, value) => {
-    setFormData((prevData) => ({
+    setFormDataSignup((prevData) => ({
       ...prevData,
       [fieldName]: value,
     }));
   };
 
   const handleImageSelect = (imageNumber) => {
-    setFormData((prevData) => ({
+    setFormDataSignup((prevData) => ({
       ...prevData,
       imageNumber: imageNumber,
     }));
@@ -48,23 +51,23 @@ const useSignUp = (onSignUpSuccess) => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.userName) {
+    if (!formDataSignup.userName) {
       newErrors.userName = "Username is required";
     }
 
-    if (!formData.email) {
+    if (!formDataSignup.email) {
       newErrors.email = "Email is required";
-    } else if (!isValidEmail(formData.email)) {
+    } else if (!isValidEmail(formDataSignup.email)) {
       newErrors.email = "Invalid email address";
     }
 
-    if (!formData.password) {
+    if (!formDataSignup.password) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length <= 6) {
+    } else if (formDataSignup.password.length <= 6) {
       newErrors.password = "Password must be more than 6 characters";
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (formDataSignup.password !== formDataSignup.confirmPassword) {
       newErrors.confirmPassword = "Password and Confirm Password must match";
     }
 
@@ -82,17 +85,21 @@ const useSignUp = (onSignUpSuccess) => {
     }
 
     try {
-      console.log(formData);
       const response = await fetch(`${Api_Endpoints.postRegister}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataSignup),
       });
 
       if (response.ok) {
+        const formDataLogin = {
+          email: formDataSignup.email,
+          password: formDataSignup.password
+        }
+        await loginHook.handleSubmitFromSignup(formDataLogin);
         onSignUpSuccess();
       } else {
         console.error("Sign up failed");
@@ -103,7 +110,7 @@ const useSignUp = (onSignUpSuccess) => {
   };
 
   return {
-    formData,
+    formDataSignup,
     errors,
     handleChange,
     handleImageSelect,

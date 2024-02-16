@@ -10,6 +10,13 @@ const useLogin = (onLoginSuccess) => {
 
   const [cookies, setCookie] = useCookies(["jwtToken", "refreshToken"]);
 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [loginError, setLoginError] = useState("");
+
   const handleChange = (fieldName, value) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -19,7 +26,7 @@ const useLogin = (onLoginSuccess) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`${Api_Endpoints.postLogin}`, {
+      const response = await fetch(Api_Endpoints.postLogin, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -49,21 +56,32 @@ const useLogin = (onLoginSuccess) => {
 
           localStorage.setItem("userName", userDetails.userName);
           localStorage.setItem("roles", JSON.stringify(userDetails.roles));
-          window.location.reload();
+          setLoginError(null);
           onLoginSuccess();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         } else {
           console.error("Failed to fetch user details");
         }
       } else {
-        console.error("Login failed");
+        const errorData = await response.json();
+        setErrors({
+          email: errorData.email || "",
+          password: errorData.password || "",
+        });
+        setLoginError("Incorrect email or password");
       }
     } catch (error) {
       console.error("Error during login:", error);
+      setLoginError("An error occurred during login");
     }
   };
 
   return {
     formData,
+    errors,
+    loginError,
     handleChange,
     handleSubmit,
   };

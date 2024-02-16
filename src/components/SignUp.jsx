@@ -6,7 +6,7 @@ import useSignUp from "../hooks/useSignUp";
 
 function SignUp({ onLoginClick }) {
   const {
-    formData,
+    formDataSignup,
     errors,
     setErrors,
     handleChange,
@@ -42,7 +42,7 @@ function SignUp({ onLoginClick }) {
         icon="user"
         label="Username"
         placeholderText="Aberforth99"
-        value={formData.userName}
+        value={formDataSignup.userName}
         onChange={handleUsernameChange}
       />
       {errors.userName && <p className="text-red-500">{errors.userName}</p>}
@@ -50,7 +50,7 @@ function SignUp({ onLoginClick }) {
         icon="email"
         label="Email"
         placeholderText="user@email.com"
-        value={formData.email}
+        value={formDataSignup.email}
         onChange={handleEmailChange}
       />
       {errors.email && <p className="text-red-500">{errors.email}</p>}
@@ -59,7 +59,7 @@ function SignUp({ onLoginClick }) {
         label="Password"
         placeholderText="Enter at least 7 characters"
         isPassword
-        value={formData.password}
+        value={formDataSignup.password}
         onChange={handlePasswordChange}
       />
       {errors.password && <p className="text-red-500">{errors.password}</p>}
@@ -68,7 +68,7 @@ function SignUp({ onLoginClick }) {
         label="Confirm Password"
         placeholderText="Passwords must be the same"
         isPassword
-        value={formData.confirmPassword}
+        value={formDataSignup.confirmPassword}
         onChange={handleConfirmPasswordChange}
       />
       {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}

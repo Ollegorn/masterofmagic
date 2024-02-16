@@ -80,7 +80,7 @@ function Home() {
           labelPrimary={"See Rankings"}
           isMainPage="true"
         />
-        <SectionHighlights />
+        {/*<SectionHighlights /> */}
         <SectionRules 
           showPrimary={!isAuthenticated ? true : false}
           onClickPrimary={isAuthenticated ? null : handleSignupClick} 
