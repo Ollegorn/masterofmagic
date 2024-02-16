@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Api_Endpoints } from "../services/ApiBaseLink";
 import { useCookies } from "react-cookie";
 import useLogin from "./useLogin";
+import sha256 from 'crypto-js/sha256';
 
 const useSignUp = (onSignUpSuccess) => {
   const [formDataSignup, setFormDataSignup] = useState({
@@ -21,6 +22,8 @@ const useSignUp = (onSignUpSuccess) => {
     password: "",
     confirmPassword: "",
   });
+
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (fieldName, value) => {
     setFormDataSignup((prevData) => ({
@@ -85,16 +88,23 @@ const useSignUp = (onSignUpSuccess) => {
     }
 
     try {
-      const response = await fetch(`${Api_Endpoints.postRegister}`, {
+      const hashedPassword = sha256(formDataSignup.password).toString();
+
+      const encryptedFormData = {
+        ...formDataSignup,
+        password: hashedPassword,
+      };
+      const response = await fetch(Api_Endpoints.postRegister, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formDataSignup),
+        body: JSON.stringify(encryptedFormData),
       });
 
       if (response.ok) {
+        setSuccessMessage("Signup successful!");
         const formDataLogin = {
           email: formDataSignup.email,
           password: formDataSignup.password
@@ -112,6 +122,7 @@ const useSignUp = (onSignUpSuccess) => {
   return {
     formDataSignup,
     errors,
+    successMessage,
     handleChange,
     handleImageSelect,
     handleSubmit,

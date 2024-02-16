@@ -112,7 +112,7 @@ function TournamentHub() {
           heading={`Tournament hub: Your Central Portal for all things duelling`}
           description={`Here, you can effortlessly create, manage, and cancel magical tournaments. Browse through upcoming, ongoing, and past tournaments, and set up thrilling competitions for your community.`}
           buttonLabel={`Create New Tournament`}
-          isActionable
+          isActionable = {isAdmin ? true : false}
           onClick={handleCreateTournamentClick}
         />
         <SectionEvents
@@ -124,15 +124,17 @@ function TournamentHub() {
         <section className="w-full px-4 md:px-8 lg:px-6">
           <SectionHeader 
             heading={`Upcoming Events`}
-            isActionable
-            includePrimaryAction
+            isActionable = {isAdmin ? true : false}
+            includePrimaryAction 
             labelPrimary="Create New Tournament"
             onClickPrimary={handleCreateTournamentClick}
           />
 
           <div className="flex flex-col no-scrollbar gap-4 overflow-x-scroll py-4 md:flex-row md:flex-wrap lg:flex-wrap xl:flex-wrap xl:flex-row lg:py-16 xl:py-16">
-          {upcomingTournaments
-              .map((tournament) => (
+            {upcomingTournaments.length === 0 ? (
+              <div className="font-body text-sm mt-2 mb-4 text-neutral-400">No scheduled events for now.</div>
+            ) : (
+              upcomingTournaments.map((tournament) => (
                 <EventCard
                   tournamentId={tournament.tournamentId}
                   key={tournament.tournamentId}
@@ -147,12 +149,14 @@ function TournamentHub() {
                   cardBan={tournament.cardBan}
                   isRewarded={tournament.rewards}
                   isFeatured={tournament.isFlagged}
-                  //can change so it prompts user to login instead
                   includeAction={isAuthenticated ? true : false}
-                  buttonLabel={isAdmin ? "Setting" :"Register Now"}
-                  onClick={() => isAdmin ? handleOpenSettings(tournament) : registerToEventConfirmationMessage(tournament.tournamentId)}
+                  buttonLabel={isAdmin ? "Setting" : "Register Now"}
+                  onClick={() =>
+                    isAdmin ? handleOpenSettings(tournament) : registerToEventConfirmationMessage(tournament.tournamentId)
+                  }
                 />
-              ))}
+              ))
+            )}
           </div>
         </section>
         <Footer />
