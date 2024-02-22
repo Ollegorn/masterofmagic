@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Api_Endpoints } from '../services/ApiBaseLink';
 
-const useCreateTournament = (onCreateSuccess) => {
+const useCreateTournament = (onCreateSuccess, onCreateError) => {
   const [tournamentData, setTournamentData] = useState({
     tournamentName: '',
     imageNumber: 0,
@@ -24,8 +24,7 @@ const useCreateTournament = (onCreateSuccess) => {
     startDate: '',
     endDate: '',
     description: '',
-
-  })
+  });
 
   const handleInputChange = (fieldName, value) => {
     setTournamentData((prevData) => ({
@@ -61,33 +60,33 @@ const useCreateTournament = (onCreateSuccess) => {
       [fieldName]: error,
     }));
   };
-  
+
   const validateTournament = () => {
     const newErrors = {};
 
-    if (!tournamentData.tournamentName){
-      newErrors.tournamentName = "Tournament name is required";
+    if (!tournamentData.tournamentName) {
+      newErrors.tournamentName = 'Tournament name is required';
     }
-    if (!tournamentData.startDate || !tournamentData.endDate){
-      newErrors.startDate = "Both dates are required";
+    if (!tournamentData.startDate || !tournamentData.endDate) {
+      newErrors.startDate = 'Both dates are required';
     }
-    if (tournamentData.startDate > tournamentData.endDate){
+    if (tournamentData.startDate > tournamentData.endDate) {
       newErrors.startDate = "End date can't be earlier than Start date";
     }
-    if (!tournamentData.description){
-      newErrors.description = "Description is required";
+    if (!tournamentData.description) {
+      newErrors.description = 'Description is required';
     }
 
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
-  }
+  };
 
   const handleSubmit = async () => {
     const isTournamentValid = validateTournament();
 
-    if (!isTournamentValid){
-      console.log("Tournament not valid");
+    if (!isTournamentValid) {
+      console.log('Tournament not valid');
       return;
     }
 
@@ -96,7 +95,7 @@ const useCreateTournament = (onCreateSuccess) => {
       const response = await fetch(Api_Endpoints.postTournament, {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(tournamentData),
@@ -105,10 +104,12 @@ const useCreateTournament = (onCreateSuccess) => {
       if (response.ok) {
         onCreateSuccess();
       } else {
-        console.error('Tournament creation failed');
+        const errorMessage = await response.text(); // Extract error message from response
+        onCreateError(errorMessage);
       }
     } catch (error) {
       console.error('Error during tournament creation:', error);
+      onCreateError('An error occurred while creating the tournament');
     }
   };
 

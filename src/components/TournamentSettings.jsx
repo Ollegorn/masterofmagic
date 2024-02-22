@@ -7,8 +7,6 @@ import OptionSwitch from './OptionSwitch';
 import Button from './Button';
 import Error from './Error';
 import useUpdateTournament from '../hooks/useUpdateTournament';
-import useStartTournament from '../hooks/useStartTournament';
-import useDeleteTournament from '../hooks/useDeleteTournament';
 
 function TournamentSettings({ tournamentData, registerToEventConfirmationMessage, deleteTournamentConfirmationMessage, startTournamentConfirmationMessage }) {
   const {

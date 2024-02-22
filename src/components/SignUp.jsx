@@ -9,6 +9,7 @@ function SignUp({ onLoginClick }) {
     formDataSignup,
     errors,
     successMessage,
+    errorMessage,
     setErrors,
     handleChange,
     handleImageSelect,
@@ -87,8 +88,9 @@ function SignUp({ onLoginClick }) {
           >
           Sign Up
         </Button>
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {successMessage && <p className="text-green-500">{successMessage}</p>}
       </div>
-      {successMessage && <p className="text-green-500">{successMessage}</p>}
       <div className="flex w-full items-center justify-center">
         <button
           className="font-body text-sm font-semibold text-primary04-500 transition-all duration-300 hover:-translate-y-1 hover:text-primary04-400 lg:text-base xl:text-lg"

@@ -69,7 +69,6 @@ function Home() {
         onClick={handleLogin}
       />
       <div className="flex w-full max-w-[1512px] flex-col gap-16 self-center lg:gap-32">
-        
         <SectionFeatured />
         <SectionEvents 
           includeSecondaryAction

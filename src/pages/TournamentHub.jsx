@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SectionHeader from "../components/SectionHeader";
 import SectionEvents from "../components/SectionEvents";
 import EventCard from "../components/EventCard";
-import useEvents from "../hooks/useEvents";
 import FullscreenModal from "../components/FullScreenModal";
 import CreateTournament from "../components/CreateTournament";
 import { useTournaments } from "../hooks/useTournaments";
@@ -16,13 +15,14 @@ import useRegisterToTournament from "../hooks/useRegisterToTournament";
 import TournamentSettings from "../components/TournamentSettings";
 import useDeleteTournament from "../hooks/useDeleteTournament";
 import useStartTournament from "../hooks/useStartTournament";
+import NotificationPopup from "../components/NotificationPopup";
 
 function TournamentHub() {
   const navigate = useNavigate();
   const { isModalOpen, openModal, closeModal } = useFullscreenModal();
-  const [ modalContent, setModalContent ] = useState(null);
+  const [modalContent, setModalContent] = useState(null);
   const { isPopupOpen, openPopup, closePopup } = usePopup();
-  const [ popupContent, setPopupContent ] = useState(null);
+  const [popupContent, setPopupContent] = useState(null);
   const { ongoingTournaments, upcomingTournaments, getTournamentsData } = useTournaments();
   const { registerToEvent } = useRegisterToTournament();
   const { deleteTournament } = useDeleteTournament();
@@ -31,13 +31,23 @@ function TournamentHub() {
   const isAdmin = localStorage.getItem("roles")?.includes("Admin");
   const [selectedTournamentId, setSelectedTournamentId] = useState(null);
   const [selectedTournamentData, setSelectedTournamentData] = useState(null);
-  const [ helper, setHelper ] = useState(false);
-  
-  useEffect(()=>{
+  const [helper, setHelper] = useState(false);
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+
+  useEffect(() => {
     getTournamentsData();
     console.log("re-render");
-  },[helper])
-  
+  }, [helper]);
+
+  useEffect(() => {
+    if (showSuccessNotification) {
+      const timer = setTimeout(() => {
+        setShowSuccessNotification(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessNotification]);
+
   const handleCreateTournamentClick = () => {
     openModal();
     setModalContent("create");
@@ -47,8 +57,7 @@ function TournamentHub() {
     setSelectedTournamentData(null);
     closeModal();
     setModalContent(null);
-    setHelper(!helper);
-
+    setHelper(prev => !prev);
   };
 
   const scrolToTop = () => {
@@ -85,18 +94,36 @@ function TournamentHub() {
   }
 
   const handleConfirmation = async () => {
-    await registerToEvent(selectedTournamentId);
-    closePopupAndResetContent();
+    try {
+      await registerToEvent(selectedTournamentId);
+      setShowSuccessNotification(true);
+      closePopupAndResetContent();
+      setHelper(prev => !prev);
+    } catch (error) {
+      console.error("Failed to register to tournament:", error);
+    }
   };
 
   const handleDeletion = async () => {
-    await deleteTournament(selectedTournamentId);
-    closePopupAndResetContent();
+    try {
+      await deleteTournament(selectedTournamentId);
+      setShowSuccessNotification(true);
+      closePopupAndResetContent();
+      setHelper(prev => !prev);
+    } catch (error) {
+      console.error("Failed to delete tournament:", error);
+    }
   }
 
   const handleStart = async () => {
-    await startTournament(selectedTournamentId);
-    closePopupAndResetContent();
+    try {
+      await startTournament(selectedTournamentId);
+      setShowSuccessNotification(true);
+      closePopupAndResetContent();
+      setHelper(prev => !prev);
+    } catch (error) {
+      console.error("Failed to start tournament:", error);
+    }
   }
 
   const handleOpenSettings = (tournamentData) => {
@@ -112,7 +139,7 @@ function TournamentHub() {
           heading={`Tournament hub: Your Central Portal for all things duelling`}
           description={`Here, you can effortlessly create, manage, and cancel magical tournaments. Browse through upcoming, ongoing, and past tournaments, and set up thrilling competitions for your community.`}
           buttonLabel={`Create New Tournament`}
-          isActionable = {isAdmin ? true : false}
+          isActionable={isAdmin ? true : false}
           onClick={handleCreateTournamentClick}
         />
         <SectionEvents
@@ -122,10 +149,10 @@ function TournamentHub() {
           labelPrimary={isAdmin ? "Settings" : "Go to Leaderboard"}
         />
         <section className="w-full px-4 md:px-8 lg:px-6">
-          <SectionHeader 
+          <SectionHeader
             heading={`Upcoming Events`}
-            isActionable = {isAdmin ? true : false}
-            includePrimaryAction 
+            isActionable={isAdmin ? true : false}
+            includePrimaryAction
             labelPrimary="Create New Tournament"
             onClickPrimary={handleCreateTournamentClick}
           />
@@ -169,10 +196,9 @@ function TournamentHub() {
       )}
       {modalContent === "settings" && (
         <FullscreenModal title="Tournament settings" show={isModalOpen} onClose={handleCloseModal}>
-          {/*might be able to pass the already existing data inside this */}
-          <TournamentSettings 
-            tournamentData={selectedTournamentData} 
-            registerToEventConfirmationMessage={registerToEventConfirmationMessage} 
+          <TournamentSettings
+            tournamentData={selectedTournamentData}
+            registerToEventConfirmationMessage={registerToEventConfirmationMessage}
             deleteTournamentConfirmationMessage={deleteTournamentConfirmationMessage}
             startTournamentConfirmationMessage={startTournamentConfirmationMessage}
           />
@@ -180,36 +206,43 @@ function TournamentHub() {
       )}
       {popupContent === "register" && (
         <Popup show={isPopupOpen} onClose={closePopupAndResetContent}>
-        <ConfirmationMessage
-          label="Register Confirmation"
-          description="Are you sure you want to register to this upcoming tournament?"
-          buttonText="Register"
-          onCancel={closePopupAndResetContent}
-          onConfirm={handleConfirmation}
-        />
-      </Popup>
+          <ConfirmationMessage
+            label="Register Confirmation"
+            description="Are you sure you want to register to this upcoming tournament?"
+            buttonText="Register"
+            onCancel={closePopupAndResetContent}
+            onConfirm={handleConfirmation}
+          />
+        </Popup>
       )}
       {popupContent === "delete" && (
         <Popup show={isPopupOpen} onClose={closePopupAndResetContent}>
-        <ConfirmationMessage
-          label="Delete the tournament"
-          description="This is an ongoing tournament, deleting it will erase all the duel scores and all progress will be lost. This cannot be undone." 
-          buttonText="Delete Tournament"
-          onCancel={closePopupAndResetContent}
-          onConfirm={handleDeletion}
-        />
-      </Popup>
+          <ConfirmationMessage
+            label="Delete the tournament"
+            description="This is an ongoing tournament, deleting it will erase all the duel scores and all progress will be lost. This cannot be undone."
+            buttonText="Delete Tournament"
+            onCancel={closePopupAndResetContent}
+            onConfirm={handleDeletion}
+          />
+        </Popup>
       )}
       {popupContent === "start" && (
         <Popup show={isPopupOpen} onClose={closePopupAndResetContent}>
-        <ConfirmationMessage
-          label="Start the tournament"
-          description="Starting the tournament will move its starting day to today. No more users will be able to join and the matchmaking will begin." 
-          buttonText="Start Tournament"
-          onCancel={closePopupAndResetContent}
-          onConfirm={handleStart}
+          <ConfirmationMessage
+            label="Start the tournament"
+            description="Starting the tournament will move its starting day to today. No more users will be able to join and the matchmaking will begin."
+            buttonText="Start Tournament"
+            onCancel={closePopupAndResetContent}
+            onConfirm={handleStart}
+          />
+        </Popup>
+      )}
+      {showSuccessNotification && (
+        <NotificationPopup
+          message="Action was successful!"
+          variant="success"
+          onClose={() => setShowSuccessNotification(false)}
         />
-      </Popup>
       )}
     </>
   );

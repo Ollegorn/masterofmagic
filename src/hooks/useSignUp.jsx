@@ -14,7 +14,6 @@ const useSignUp = (onSignUpSuccess) => {
   });
 
   const loginHook = useLogin(onSignUpSuccess);
-  const [cookies, setCookie] = useCookies(["jwtToken", "refreshToken"]);
 
   const [errors, setErrors] = useState({
     userName: "",
@@ -24,6 +23,7 @@ const useSignUp = (onSignUpSuccess) => {
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (fieldName, value) => {
     setFormDataSignup((prevData) => ({
@@ -112,6 +112,7 @@ const useSignUp = (onSignUpSuccess) => {
         await loginHook.handleSubmitFromSignup(formDataLogin);
         onSignUpSuccess();
       } else {
+        setErrorMessage("Something went wrong");
         console.error("Sign up failed");
       }
     } catch (error) {
@@ -123,6 +124,7 @@ const useSignUp = (onSignUpSuccess) => {
     formDataSignup,
     errors,
     successMessage,
+    errorMessage,
     handleChange,
     handleImageSelect,
     handleSubmit,

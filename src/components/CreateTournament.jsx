@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Title from './Title';
 import InputField from './InputField';
 import ImagesGrid from './ImagesGrid';
@@ -7,37 +7,34 @@ import OptionSwitch from './OptionSwitch';
 import Button from './Button';
 import Error from './Error';
 import useCreateTournament from '../hooks/useCreateTournament';
+import NotificationPopup from './NotificationPopup';
 
 function CreateTournament() {
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [notificationType, setNotificationType] = useState('');
+
+  const handleCreateSuccess = () => {
+    setShowNotification(true);
+    setNotificationType('success');
+    setNotificationMessage('Tournament created successfully!');
+  };
+
+  const handleCreateError = (errorMessage) => {
+    setShowNotification(true);
+    setNotificationType('error');
+    setNotificationMessage(errorMessage);
+  };
+
   const {
     tournamentData,
     errors,
-    setErrors,
     handleInputChange,
     handleImageSelect,
     handleToggleChange,
     handleDateChange,
-    handleSubmit
-  } = useCreateTournament(() => {
-    console.log("Tournament created successfully!");
-  })
-
-  const handleTournamentNameChange = (e) => {
-    handleInputChange("tournamentName", e.target.value);
-    setErrors({...errors, tournamentName: ""});
-  }
-  const handleDescriptionChange = (e) => {
-    handleInputChange("description", e.target.value);
-    setErrors({...errors, description: ""});
-  }
-  const handleStartDateChange = (e) => {
-    handleDateChange("startDate", e.target.value);
-    setErrors({...errors, startDate: ""});
-  };
-  const handleEndDateChange = (e) => {
-    handleDateChange("endDate", e.target.value);
-    setErrors({...errors, endDate: ""});
-  }
+    handleSubmit,
+  } = useCreateTournament(handleCreateSuccess, handleCreateError);
 
   return (
     <>
@@ -48,7 +45,7 @@ function CreateTournament() {
             label="Tournament Name" 
             placeholderText="Tournament Name"
             value={tournamentData.tournamentName}
-            onChange={handleTournamentNameChange}
+            onChange={(e) => handleInputChange("tournamentName", e.target.value)}
           />
           {errors.tournamentName && <Error>{errors.tournamentName}</Error>}
           <div className="flex p-0 items-start gap-2 self-stretch">
@@ -56,10 +53,10 @@ function CreateTournament() {
               <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl ">Start Date</label>
               <div className="flex items-center gap-2 self-stretch rounded-lg bg-Neutral-800 py-4 px-2 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow md:gap-3">
                 <input 
-                type="date" 
-                className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"
-                value={tournamentData.startDate}
-                onChange={handleStartDateChange}
+                  type="date" 
+                  className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"
+                  value={tournamentData.startDate}
+                  onChange={(e) => handleDateChange("startDate", e.target.value)}
                 />
               </div>
             </div>
@@ -67,10 +64,10 @@ function CreateTournament() {
               <label className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">End Date</label>
               <div className="flex items-center gap-2 self-stretch rounded-lg bg-Neutral-800 py-4 px-2 focus-within:bg-Neutral-700 focus-within:shadow-glow hover:bg-Neutral-700 hover:shadow-glow md:gap-3">
                 <input 
-                type="date" 
-                className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"
-                value={tournamentData.endDate}
-                onChange={handleEndDateChange}
+                  type="date" 
+                  className="flex flex-1 items-center bg-transparent text-base text-gray-400 focus:outline-none md:text-lg lg:text-xl xl:text-2xl w-full"
+                  value={tournamentData.endDate}
+                  onChange={(e) => handleDateChange("endDate", e.target.value)}
                 />
               </div>
             </div>
@@ -85,7 +82,7 @@ function CreateTournament() {
                 className="flex flex-1 h-auto items-center bg-transparent text-base text-Neutral-50 focus:outline-none md:text-lg lg:text-xl xl:text-2xl resize-none w-full"
                 maxLength={150}
                 value={tournamentData.description}
-                onChange={handleDescriptionChange}
+                onChange={(e) => handleInputChange("description", e.target.value)}
               />
             </div>
             {errors.description && <Error>{errors.description}</Error>}
@@ -149,8 +146,15 @@ function CreateTournament() {
           </div>
         </div>
         <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
-        <Button className="w-full h-14" onClick={handleSubmit}>Create Tournament</Button>
+         <Button className="w-full h-14" onClick={handleSubmit}>Create Tournament</Button>
 
+        {showNotification && (
+          <NotificationPopup
+            message={notificationMessage}
+            variant={notificationType}
+            onClose={() => setShowNotification(false)}
+          />
+        )}
       </div>
     </>
   );
