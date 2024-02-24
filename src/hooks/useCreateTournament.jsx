@@ -104,7 +104,7 @@ const useCreateTournament = (onCreateSuccess, onCreateError) => {
       if (response.ok) {
         onCreateSuccess();
       } else {
-        const errorMessage = await response.text(); // Extract error message from response
+        const errorMessage = await response.text();
         onCreateError(errorMessage);
       }
     } catch (error) {

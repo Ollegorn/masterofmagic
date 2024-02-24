@@ -22,12 +22,18 @@ function TournamentSettings({ tournamentData, registerToEventConfirmationMessage
   } = useUpdateTournament(() => {
     console.log('Tournament updated successfully!');
   });
-
+  
   const [isOpen, setIsOpen] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const localStorageUsername = localStorage.getItem('userName');
 
   useEffect(() => {
     setInitialData(tournamentData);
-  }, [tournamentData]);
+    if (tournamentData.registeredUsers) {
+      const isUserRegistered = tournamentData.registeredUsers.some(user => user.userName === localStorageUsername);
+      setIsRegistered(isUserRegistered);
+    }
+  }, [tournamentData, localStorageUsername]);
 
   const handleTournamentNameChange = (e) => {
     handleInputChange("tournamentName", e.target.value);
@@ -125,70 +131,77 @@ function TournamentSettings({ tournamentData, registerToEventConfirmationMessage
             </div>
 
 
-          <div className="flex min-w-80 p-0 px-4 flex-col items-start gap-4">
-            <div className='flex flex-col items-start gap-4 self-stretch'>
-              <Title>Display Settings</Title>
-              <p className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Pick an image:</p>
-              <ImagesGrid onSelect={handleImageSelect}/>
-              <ToggleInput 
-                label="Featured" 
-                fieldName="isFeatured"
-                onChange={handleToggleChange}
-              />
+            <div className="flex min-w-80 p-0 px-4 flex-col items-start gap-4">
+              <div className='flex flex-col items-start gap-4 self-stretch'>
+                <Title>Display Settings</Title>
+                <p className="font-body text-base font-semibold text-Neutral-100 md:text-lg lg:text-xl xl:text-xl">Pick an image:</p>
+                <ImagesGrid onSelect={handleImageSelect}/>
+                <ToggleInput 
+                  label="Featured" 
+                  fieldName="isFeatured"
+                  onChange={handleToggleChange}
+                />
+              </div>
             </div>
-          </div>
-          <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+            <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
 
 
-          <div className="flex w-full min-w-80 p-0 px-4 flex-col items-start gap-4">
-            <div className='flex flex-col items-start gap-4 self-stretch'>
-              <Title>Tournament Format</Title>
-              <OptionSwitch label="Format" option1="Round Robin" option2="Knockout"/>
-              <OptionSwitch label="Duel Mode" option1="Solo" option2="Duo" />
+            <div className="flex w-full min-w-80 p-0 px-4 flex-col items-start gap-4">
+              <div className='flex flex-col items-start gap-4 self-stretch'>
+                <Title>Tournament Format</Title>
+                <OptionSwitch label="Format" option1="Round Robin" option2="Knockout"/>
+                <OptionSwitch label="Duel Mode" option1="Solo" option2="Duo" />
+              </div>
             </div>
-          </div>
-          <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+            <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
 
-          <div className="flex w-full min-w-80 p-0 px-4 flex-col items-start gap-4">
-            <div className='flex flex-col items-start gap-4 self-stretch'>
-              <Title>Dueling Room Setup</Title>
-              <ToggleInput 
-                label="Balanced Mode"
-                fieldName="balancedMode"
-                onChange={handleToggleChange} 
-              />
-              <ToggleInput 
-                label="Echo Ban"
-                fieldName="echoBan"
-                onChange={handleToggleChange} 
-              />
-              <ToggleInput 
-                label="Card Ban"
-                fieldName="cardBan"
-                onChange={handleToggleChange} 
-              />
-              <ToggleInput 
-                label="Two Wins In Three Games"
-                fieldName="twoWinsInThreeGames"
-                onChange={handleToggleChange} 
-              />
-              <ToggleInput
-                label="Rewards"
-                fieldName="rewards" 
-                onChange={handleToggleChange}
-              />
+            <div className="flex w-full min-w-80 p-0 px-4 flex-col items-start gap-4">
+              <div className='flex flex-col items-start gap-4 self-stretch'>
+                <Title>Dueling Room Setup</Title>
+                <ToggleInput 
+                  label="Balanced Mode"
+                  fieldName="balancedMode"
+                  onChange={handleToggleChange} 
+                />
+                <ToggleInput 
+                  label="Echo Ban"
+                  fieldName="echoBan"
+                  onChange={handleToggleChange} 
+                />
+                <ToggleInput 
+                  label="Card Ban"
+                  fieldName="cardBan"
+                  onChange={handleToggleChange} 
+                />
+                <ToggleInput 
+                  label="Two Wins In Three Games"
+                  fieldName="twoWinsInThreeGames"
+                  onChange={handleToggleChange} 
+                />
+                <ToggleInput
+                  label="Rewards"
+                  fieldName="rewards" 
+                  onChange={handleToggleChange}
+                />
+              </div>
             </div>
-          </div>
-          <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
-          <Button className="w-full h-14 mb-12" variant="secondary" >Submit Changes</Button>
-        <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+            <div className="h-px w-full my-12 rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+            <Button className="w-full h-14 mb-12" variant="secondary" >Submit Changes</Button>
+            <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
           </>
         )}
-        
-        <Button className="w-full h-14 my-12"  onClick={handleRegisterToTournament} >Register To Tournament</Button>
-        <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
-        <Button className="w-full h-14 my-12" onClick={handleStartTournament}>Start Tournament</Button>
-        <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+        {!isRegistered && (
+          <>
+          <Button className="w-full h-14 my-12"  onClick={handleRegisterToTournament} >Register To Tournament</Button>
+          <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+          </>
+        )}
+        {tournamentData.tournamentDuels.length <= 0 && (
+          <>
+            <Button className="w-full h-14 my-12" onClick={handleStartTournament}>Start Tournament</Button>
+            <div className="h-px w-full rounded bg-gradient-to-r from-primary04-500 to-primary04-100"></div>
+          </>
+        )}
         <Button className="w-full h-14 my-12" onClick={handleDeleteTournament}>Delete Tournament</Button>
 
       </div>
