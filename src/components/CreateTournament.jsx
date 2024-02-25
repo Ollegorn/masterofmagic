@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Title from './Title';
 import InputField from './InputField';
 import ImagesGrid from './ImagesGrid';
@@ -14,16 +14,25 @@ function CreateTournament() {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [notificationType, setNotificationType] = useState('');
 
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showNotification]);
+
   const handleCreateSuccess = () => {
     setShowNotification(true);
     setNotificationType('success');
     setNotificationMessage('Tournament created successfully!');
   };
 
-  const handleCreateError = (errorMessage) => {
+  const handleCreateError = () => {
     setShowNotification(true);
     setNotificationType('error');
-    setNotificationMessage(errorMessage);
+    setNotificationMessage("Something went wrong...");
   };
 
   const {

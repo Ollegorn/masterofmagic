@@ -43,7 +43,7 @@ function TournamentHub() {
     if (showSuccessNotification) {
       const timer = setTimeout(() => {
         setShowSuccessNotification(false);
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [showSuccessNotification]);
