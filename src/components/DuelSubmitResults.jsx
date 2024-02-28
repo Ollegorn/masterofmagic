@@ -7,7 +7,7 @@ import useDuel from '../hooks/useDuel';
 function DuelSubmitResults({ onCancel, duel, invitation, handleHelper }) {
   const [scorePlayer1, setScorePlayer1] = useState(0);
   const [scorePlayer2, setScorePlayer2] = useState(0);
-  const { updateDuel, error } = useDuel();
+  const { updateDuel} = useDuel();
 
   const handleScoreChange = (player, increment) => {
     const totalScore = scorePlayer1 + scorePlayer2;

@@ -20,7 +20,6 @@ function Popup({ title, show, onClose, children }) {
   return (
     //Scrim
     <div
-      onClick={handleClose}
       className={`fixed inset-0 z-50 items-center justify-center rounded-3xl bg-Neutral-900/60 
       ${show ? "flex" : "pointer-events-none hidden"}`}
     >

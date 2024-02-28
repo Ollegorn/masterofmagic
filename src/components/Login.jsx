@@ -3,7 +3,7 @@ import InputField from "./InputField";
 import Button from "./Button";
 import useLogin from "../hooks/useLogin";
 
-function Login({ onSignupClick, closePopupOnSuccessLogin }) {
+function Login({ onSignupClick }) {
   const { formData, handleChange, handleSubmit, loginError } = useLogin(() => {
     setShowSuccessMessage(true);
   });

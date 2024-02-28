@@ -18,9 +18,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Navbar />}>
       <Route index element={<Home />} />
-      <Route path="tournament_hub" element={<TournamentHub />} />
-      <Route path="duelist_zone" element={<DuelistZone />} />
-      <Route path="leaderboard" element={<Leaderboard />} />
+      <Route path="tournament_hub/" element={<TournamentHub />} />
+      <Route path="duelist_zone/" element={<DuelistZone />} />
+      <Route path="leaderboard/" element={<Leaderboard />} />
       <Route path="rules" element={<Rules />} />
       <Route path="faq" element={<FAQ />} />
       <Route path="support" element={<Support />} />
