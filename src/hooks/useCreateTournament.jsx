@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Api_Endpoints } from '../services/ApiBaseLink';
+import { useCookies } from 'react-cookie';
 
 const useCreateTournament = (onCreateSuccess, onCreateError) => {
   const [tournamentData, setTournamentData] = useState({
@@ -25,6 +26,8 @@ const useCreateTournament = (onCreateSuccess, onCreateError) => {
     endDate: '',
     description: '',
   });
+
+  const [cookies] = useCookies(['jwtToken', 'refreshToken']);
 
   const handleInputChange = (fieldName, value) => {
     setTournamentData((prevData) => ({
@@ -97,6 +100,8 @@ const useCreateTournament = (onCreateSuccess, onCreateError) => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.jwtToken}`,
+          RefreshToken: cookies.refreshToken,
         },
         body: JSON.stringify(tournamentData),
       });

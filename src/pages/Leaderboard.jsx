@@ -6,8 +6,7 @@ import EventCard from '../components/EventCard';
 import { useTournaments } from "../hooks/useTournaments";
 
 function Leaderboard() {
-  const { tournamentsData, loading, error, ongoingTournaments } = useTournaments();
-  console.log(tournamentsData);
+  const { ongoingTournaments } = useTournaments();
   return (
     <>
       <div className="flex w-full max-w-[1512px] flex-col gap-8 self-center lg:gap-32">

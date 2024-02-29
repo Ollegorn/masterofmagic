@@ -3,7 +3,6 @@ import Title from "./Title";
 import { Tab } from "@headlessui/react";
 
 function DuellingHistory({ duels, userId }) {
-  console.log(duels);
   
   //swap if user was swapped on sectionjoinedevents
   const wins = [];

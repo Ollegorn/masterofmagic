@@ -37,7 +37,7 @@ function ChallengesScheduled({ receivedInvitations, sentInvitations, userId, onC
 
   const handleCancelInvitation = async () => {
     if (selectedInv){
-      await cancelInvitation(selectedInv.id);
+      await cancelInvitation(selectedInv.id, selectedInv.duelId);
       closePopup();
       onClick();
     }

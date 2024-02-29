@@ -48,6 +48,22 @@ const useLogin = (onLoginSuccess) => {
         setCookie("refreshToken", data.refreshToken, { path: "/" });
         setCookie("userId", data.userId, { path: "/" });
 
+        const refreshResponse = await fetch(Api_Endpoints.postRefreshToken, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: data.token,
+            refreshToken: data.refreshToken,
+          }),
+        });
+  
+        if (!refreshResponse.ok) {
+          console.error("Failed to refresh token");
+        }
+
         const userDetailsResponse = await fetch(
           `${Api_Endpoints.getUserById}${data.userId}`,
           {
@@ -107,6 +123,22 @@ const useLogin = (onLoginSuccess) => {
         setCookie("jwtToken", data.token, { path: "/" });
         setCookie("refreshToken", data.refreshToken, { path: "/" });
         setCookie("userId", data.userId, { path: "/" });
+
+        const refreshResponse = await fetch(Api_Endpoints.postRefreshToken, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: data.token,
+            refreshToken: data.refreshToken,
+          }),
+        });
+  
+        if (!refreshResponse.ok) {
+          console.error("Failed to refresh token");
+        }
 
         const userDetailsResponse = await fetch(
           `${Api_Endpoints.getUserById}${data.userId}`,

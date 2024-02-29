@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react';
 import { Api_Endpoints } from '../services/ApiBaseLink';
+import { useCookies } from 'react-cookie';
 
 const useDeleteTournament = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [cookies] = useCookies(['jwtToken', 'refreshToken']);
 
   const deleteTournament = useCallback(async (tournamentId) => {
     setIsLoading(true);
@@ -14,6 +16,8 @@ const useDeleteTournament = () => {
         method: 'DELETE',
         headers: {
           'Accept': '*/*',
+          'Authorization': `Bearer ${cookies.jwtToken}`,
+          'RefreshToken': cookies.refreshToken,
         },
       });
 
@@ -31,7 +35,7 @@ const useDeleteTournament = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [cookies.jwtToken, cookies.refreshToken]);
 
   return {
     deleteTournament,

@@ -65,7 +65,6 @@ const useInvitations = () => {
 
   const returnInvitationToSender = async (requestBody) => {
     try {
-      console.log(requestBody);
       await fetch(Api_Endpoints.returnInvitationToSender, {
         method: 'POST',
         headers: {
@@ -79,7 +78,7 @@ const useInvitations = () => {
     }
   };
 
-  const cancelInvitation = async (invitationId) => {
+  const cancelInvitation = async (invitationId, duelId) => {
     try {
       await fetch(Api_Endpoints.postAcceptInvitation, {
         method: 'POST',
@@ -88,6 +87,7 @@ const useInvitations = () => {
         },
         body: JSON.stringify({
           id: invitationId,
+          duelId: duelId,
           message: "",
           isAccepted: true,
           isDeclined: true

@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react';
 import { Api_Endpoints } from '../services/ApiBaseLink';
+import { useCookies } from 'react-cookie';
 
 const useStartTournament = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [cookies] = useCookies(['jwtToken', 'refreshToken']);
 
   const startTournament = useCallback(async (tournamentId) => {
     setIsLoading(true);
@@ -14,6 +16,8 @@ const useStartTournament = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookies.jwtToken}`,
+          'RefreshToken': cookies.refreshToken,
         },
       });
 
@@ -33,7 +37,7 @@ const useStartTournament = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [cookies.jwtToken, cookies.refreshToken]);
 
   return {
     startTournament,

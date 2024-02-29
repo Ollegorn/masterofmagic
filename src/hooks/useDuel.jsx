@@ -9,7 +9,6 @@ const useDuel = () => {
       throw new Error('userOneWins and userOneDefeats cannot be equal');
     }
     try {
-      console.log(userOneWins, userOneDefeats)
       const response = await fetch(`${Api_Endpoints.updateDuel}`, {
         method: 'PUT',
         headers: {

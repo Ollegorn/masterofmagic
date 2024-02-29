@@ -17,7 +17,6 @@ export function useTournaments() {
       }
       const data = await response.json();
       setTournamentsData(data);
-      console.log("Tournaments Data:", data);
 
     } catch (error) {
       setError(error.message);

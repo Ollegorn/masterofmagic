@@ -3,7 +3,7 @@ import ConfirmationMessage from './ConfirmationMessage';
 import UserInfo from './UserInfo';
 import useInvitations from "../hooks/useInvitations";
 
-function ChallengeRequest({ invitation, onCancel, handleHelper }) {
+function ChallengeReturn({ invitation, onCancel, handleHelper }) {
   const { returnInvitationToSender } = useInvitations();
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -84,4 +84,4 @@ function ChallengeRequest({ invitation, onCancel, handleHelper }) {
   );
 }
 
-export default ChallengeRequest;
+export default ChallengeReturn;
